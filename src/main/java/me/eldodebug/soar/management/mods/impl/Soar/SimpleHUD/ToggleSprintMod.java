@@ -1,4 +1,4 @@
-package me.eldodebug.soar.management.mods.impl.SimpleHUD;
+package me.eldodebug.soar.management.mods.impl.Soar.SimpleHUD;
 
 import org.lwjgl.input.Keyboard;
 

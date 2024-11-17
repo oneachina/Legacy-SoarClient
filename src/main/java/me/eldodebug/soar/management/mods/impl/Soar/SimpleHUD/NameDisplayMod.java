@@ -1,4 +1,4 @@
-package me.eldodebug.soar.management.mods.impl.SimpleHUD;
+package me.eldodebug.soar.management.mods.impl.Soar.SimpleHUD;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,10 +12,10 @@ import me.eldodebug.soar.management.nanovg.font.Icon;
 
 public class NameDisplayMod extends SimpleHUDMod {
 
-	private BooleanSetting iconSetting = new BooleanSetting(TranslateText.ICON, this, true);
+	private final BooleanSetting iconSetting = new BooleanSetting(TranslateText.ICON, this, true);
 	
-	private ComboSetting prefixSetting = new ComboSetting(TranslateText.PREFIX, this, TranslateText.NAME, new ArrayList<Option>(Arrays.asList(
-			new Option(TranslateText.NAME), new Option(TranslateText.IGN))));
+	private final ComboSetting prefixSetting = new ComboSetting(TranslateText.PREFIX, this, TranslateText.NAME, new ArrayList<>(Arrays.asList(
+            new Option(TranslateText.NAME), new Option(TranslateText.IGN))));
 	
 	public NameDisplayMod() {
 		super(TranslateText.NAME_DISPLAY, TranslateText.NAME_DISPLAY_DESCRIPTION);

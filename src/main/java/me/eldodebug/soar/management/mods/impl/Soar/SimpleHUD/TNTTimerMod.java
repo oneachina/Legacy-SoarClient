@@ -1,4 +1,4 @@
-package me.eldodebug.soar.management.mods.impl.SimpleHUD;
+package me.eldodebug.soar.management.mods.impl.Soar.SimpleHUD;
 
 import java.awt.Color;
 import java.text.DecimalFormat;

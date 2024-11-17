@@ -6,7 +6,7 @@ import java.util.Arrays;
 import me.eldodebug.soar.management.mods.impl.Soar.Other.*;
 import me.eldodebug.soar.management.mods.impl.Soar.Player.*;
 import me.eldodebug.soar.management.mods.impl.Soar.Render.*;
-import me.eldodebug.soar.management.mods.impl.SimpleHUD.*;
+import me.eldodebug.soar.management.mods.impl.Soar.SimpleHUD.*;
 import me.eldodebug.soar.management.mods.impl.Soar.SoarHUD.*;
 import me.eldodebug.soar.management.mods.impl.Soar.World.PlayerPredicatorMod;
 import me.eldodebug.soar.management.mods.impl.Soar.World.TimeChangerMod;
