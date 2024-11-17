@@ -23,7 +23,7 @@ public class MicrosoftLoginWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
-	private Runnable afterLogin;
+	private final Runnable afterLogin;
 	
     public MicrosoftLoginWindow(Runnable afterLogin) {
         this.setTitle("Connect with Microsoft");

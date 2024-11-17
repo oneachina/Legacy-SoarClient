@@ -11,6 +11,10 @@ import net.minecraft.client.settings.KeyBinding;
 @Mixin(GameSettings.class)
 public class MixinGameSettings {
 
+    /**
+     * @author
+     * @reason
+     */
     @Overwrite
     public static boolean isKeyDown(KeyBinding key) {
     	
