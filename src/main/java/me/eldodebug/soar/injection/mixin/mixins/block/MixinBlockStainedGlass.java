@@ -2,7 +2,7 @@ package me.eldodebug.soar.injection.mixin.mixins.block;
 
 import org.spongepowered.asm.mixin.Mixin;
 
-import me.eldodebug.soar.management.mods.impl.Render.ClearGlassMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Render.ClearGlassMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStainedGlass;
 import net.minecraft.block.material.Material;

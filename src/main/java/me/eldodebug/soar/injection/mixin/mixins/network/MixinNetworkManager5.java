@@ -11,7 +11,7 @@ import com.viaversion.viaversion.protocol.ProtocolPipelineImpl;
 
 import io.netty.channel.Channel;
 import io.netty.channel.socket.SocketChannel;
-import me.eldodebug.soar.management.mods.impl.Other.ViaVersionMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Other.ViaVersionMod;
 import me.eldodebug.soar.viaversion.MCPVLBPipeline;
 import me.eldodebug.soar.viaversion.ViaLoadingBase;
 import me.eldodebug.soar.viaversion.ViaSoar;

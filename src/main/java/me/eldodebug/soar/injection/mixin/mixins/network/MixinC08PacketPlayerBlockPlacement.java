@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-import me.eldodebug.soar.management.mods.impl.Other.ViaVersionMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Other.ViaVersionMod;
 import me.eldodebug.soar.viaversion.ViaLoadingBase;
 import me.eldodebug.soar.viaversion.protocolinfo.ProtocolInfo;
 import net.minecraft.item.ItemStack;

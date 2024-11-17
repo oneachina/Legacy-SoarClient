@@ -1,6 +1,6 @@
 package me.eldodebug.soar.viaversion.fixes;
 
-import me.eldodebug.soar.management.mods.impl.Other.ViaVersionMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Other.ViaVersionMod;
 import me.eldodebug.soar.viaversion.ViaLoadingBase;
 import me.eldodebug.soar.viaversion.ViaSoar;
 import net.minecraft.block.Block;

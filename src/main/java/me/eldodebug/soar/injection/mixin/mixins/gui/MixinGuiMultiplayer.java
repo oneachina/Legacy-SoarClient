@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import me.eldodebug.soar.gui.GuiFixConnecting;
-import me.eldodebug.soar.management.mods.impl.Other.ViaVersionMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Other.ViaVersionMod;
 import me.eldodebug.soar.viaversion.ViaSoar;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiScreen;

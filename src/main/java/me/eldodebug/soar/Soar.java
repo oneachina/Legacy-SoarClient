@@ -18,7 +18,7 @@ import me.eldodebug.soar.management.event.EventManager;
 import me.eldodebug.soar.management.file.FileManager;
 import me.eldodebug.soar.management.language.LanguageManager;
 import me.eldodebug.soar.management.mods.ModManager;
-import me.eldodebug.soar.management.mods.impl.Other.GlobalSettingsMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Other.GlobalSettingsMod;
 import me.eldodebug.soar.management.music.MusicManager;
 import me.eldodebug.soar.management.nanovg.NanoVGManager;
 import me.eldodebug.soar.management.notification.NotificationManager;

@@ -3,7 +3,7 @@ package me.eldodebug.soar.management.mods.impl.waveycapes.sim;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.eldodebug.soar.management.mods.impl.Render.WaveyCapesMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Render.WaveyCapesMod;
 import me.eldodebug.soar.utils.MathUtils;
 import me.eldodebug.soar.utils.vector.Vector2;
 

@@ -2,7 +2,7 @@ package me.eldodebug.soar.management.mods.impl.waveycapes.layers;
 
 import me.eldodebug.soar.injection.interfaces.IMixinEntityPlayer;
 import me.eldodebug.soar.management.language.TranslateText;
-import me.eldodebug.soar.management.mods.impl.Render.WaveyCapesMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Render.WaveyCapesMod;
 import me.eldodebug.soar.management.mods.impl.waveycapes.sim.StickSimulation;
 import me.eldodebug.soar.utils.MathUtils;
 import me.eldodebug.soar.utils.vector.Matrix4f;

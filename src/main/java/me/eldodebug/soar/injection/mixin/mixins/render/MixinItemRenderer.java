@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import me.eldodebug.soar.management.event.impl.EventFireOverlay;
 import me.eldodebug.soar.management.event.impl.EventRenderItemInFirstPerson;
 import me.eldodebug.soar.management.event.impl.EventWaterOverlay;
-import me.eldodebug.soar.management.mods.impl.Render.OldAnimationsMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Render.OldAnimationsMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;

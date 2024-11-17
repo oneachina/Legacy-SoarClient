@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import io.netty.buffer.Unpooled;
 import me.eldodebug.soar.management.event.impl.EventDamageEntity;
 import me.eldodebug.soar.management.language.TranslateText;
-import me.eldodebug.soar.management.mods.impl.Other.ClientSpooferMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Other.ClientSpooferMod;
 import me.eldodebug.soar.management.mods.settings.impl.ComboSetting;
 import me.eldodebug.soar.management.mods.settings.impl.combo.Option;
 import net.minecraft.client.ClientBrandRetriever;

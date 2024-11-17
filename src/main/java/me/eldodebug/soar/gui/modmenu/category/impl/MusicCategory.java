@@ -10,7 +10,7 @@ import me.eldodebug.soar.management.color.ColorManager;
 import me.eldodebug.soar.management.color.palette.ColorPalette;
 import me.eldodebug.soar.management.color.palette.ColorType;
 import me.eldodebug.soar.management.language.TranslateText;
-import me.eldodebug.soar.management.mods.impl.Other.GlobalSettingsMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Other.GlobalSettingsMod;
 import me.eldodebug.soar.management.music.Music;
 import me.eldodebug.soar.management.music.MusicManager;
 import me.eldodebug.soar.management.music.MusicType;

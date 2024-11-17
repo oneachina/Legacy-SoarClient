@@ -6,7 +6,7 @@ import com.google.common.collect.Sets;
 
 import me.eldodebug.soar.injection.interfaces.IMixinEntityPlayer;
 import me.eldodebug.soar.injection.interfaces.IMixinRenderPlayer;
-import me.eldodebug.soar.management.mods.impl.Render.Skin3DMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Render.Skin3DMod;
 import me.eldodebug.soar.utils.SkinUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;

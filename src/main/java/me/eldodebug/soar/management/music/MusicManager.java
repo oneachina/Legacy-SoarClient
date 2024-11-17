@@ -24,7 +24,7 @@ import javafx.scene.media.MediaPlayer.Status;
 import me.eldodebug.soar.Soar;
 import me.eldodebug.soar.management.file.FileManager;
 import me.eldodebug.soar.management.language.TranslateText;
-import me.eldodebug.soar.management.mods.impl.Other.GlobalSettingsMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Other.GlobalSettingsMod;
 import me.eldodebug.soar.management.mods.impl.SimpleHUD.MusicInfoMod;
 import me.eldodebug.soar.management.mods.settings.impl.ComboSetting;
 import me.eldodebug.soar.management.music.ytdlp.Ytdlp;

@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 
-import me.eldodebug.soar.management.mods.impl.Render.OldAnimationsMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Render.OldAnimationsMod;
 import me.eldodebug.soar.management.mods.settings.impl.BooleanSetting;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;

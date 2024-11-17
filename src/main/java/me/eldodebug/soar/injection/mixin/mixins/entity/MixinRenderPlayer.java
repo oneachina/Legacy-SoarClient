@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import me.eldodebug.soar.injection.interfaces.IMixinEntityPlayer;
 import me.eldodebug.soar.injection.interfaces.IMixinRenderPlayer;
 import me.eldodebug.soar.management.event.impl.EventRenderPlayer;
-import me.eldodebug.soar.management.mods.impl.Render.Skin3DMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Render.Skin3DMod;
 import me.eldodebug.soar.management.mods.impl.skin3d.layers.BodyLayerFeatureRenderer;
 import me.eldodebug.soar.management.mods.impl.skin3d.layers.HeadLayerFeatureRenderer;
 import me.eldodebug.soar.management.mods.impl.waveycapes.layers.CustomCapeRenderLayer;

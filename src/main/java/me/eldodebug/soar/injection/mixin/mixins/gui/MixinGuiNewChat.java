@@ -19,8 +19,8 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import me.eldodebug.soar.hooks.GuiNewChatHook;
-import me.eldodebug.soar.management.mods.impl.Other.ChatMod;
-import me.eldodebug.soar.management.mods.impl.Other.ChatTranslateMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Other.ChatMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Other.ChatTranslateMod;
 import me.eldodebug.soar.utils.MathUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ChatLine;

@@ -1,8 +1,8 @@
 package me.eldodebug.soar.hooks;
 
-import me.eldodebug.soar.management.mods.impl.Render.ItemPhysicsMod;
-import me.eldodebug.soar.management.mods.impl.Render.Items2DMod;
-import me.eldodebug.soar.management.mods.impl.Render.UHCOverlayMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Render.ItemPhysicsMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Render.Items2DMod;
+import me.eldodebug.soar.management.mods.impl.Soar.Render.UHCOverlayMod;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
