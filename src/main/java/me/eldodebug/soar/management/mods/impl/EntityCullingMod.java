@@ -47,8 +47,8 @@ public class EntityCullingMod extends Mod {
     private final boolean SUPPORT_NEW_GL = GLContext.getCapabilities().OpenGL33;
     private int destroyTimer;
     
-    private NumberSetting delaySetting = new NumberSetting(TranslateText.DELAY, this, 2, 1, 3, true);
-    private NumberSetting distanceSetting = new NumberSetting(TranslateText.DISTANCE, this, 45, 10, 150, true);
+    private final NumberSetting delaySetting = new NumberSetting(TranslateText.DELAY, this, 2, 1, 3, true);
+    private final NumberSetting distanceSetting = new NumberSetting(TranslateText.DISTANCE, this, 45, 10, 150, true);
     
 	public EntityCullingMod() {
 		super(TranslateText.ENTITY_CULLING, TranslateText.ENTITY_CULLING_DESCRIPTIONN, ModCategory.OTHER);
@@ -65,7 +65,7 @@ public class EntityCullingMod extends Mod {
         
         boolean armorstand = entity instanceof EntityArmorStand;
         
-        if (entity == mc.thePlayer || entity.worldObj != mc.thePlayer.worldObj || (armorstand && ((EntityArmorStand) entity).hasMarker()) || (entity.isInvisibleToPlayer(mc.thePlayer))) {
+        if (entity == mc.thePlayer || entity.worldObj != mc.thePlayer.worldObj || (armorstand && entity.hasMarker()) || (entity.isInvisibleToPlayer(mc.thePlayer))) {
             return;
         }
 
@@ -80,7 +80,7 @@ public class EntityCullingMod extends Mod {
             double x = event.getX();
             double y = event.getY();
             double z = event.getZ();
-            RendererLivingEntity<EntityLivingBase> renderer = (RendererLivingEntity<EntityLivingBase>) event.getRenderer();
+            RendererLivingEntity<EntityLivingBase> renderer = event.getRenderer();
             
             renderer.renderName(entity, x, y, z);
         }
@@ -266,7 +266,7 @@ public class EntityCullingMod extends Mod {
         }
     }
     
-	private class OcclusionQuery {
+	private static class OcclusionQuery {
 		
 		public final UUID uuid;
 	    public int nextQuery;

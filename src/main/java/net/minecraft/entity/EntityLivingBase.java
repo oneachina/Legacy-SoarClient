@@ -2287,4 +2287,8 @@ public abstract class EntityLivingBase extends Entity
     {
         this.potionsNeedUpdate = true;
     }
+
+    public boolean hasMarker() {
+        return false;
+    }
 }
