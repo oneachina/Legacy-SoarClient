@@ -8,13 +8,26 @@ Download SoarClient.zip from the release page and run start.bat
 Partially Yes, v8.0 is being developed, albeit very slowly  
 I went offline and open source to save on server costs.
 
-### How to setup project
-I only know eclipse because I use eclipse as my main  
-But the method is exactly the same as with Forge  
+## How to setup project
+### Eclipse
 
 ```
 gradlew setupdecompworkspace
 ```
 ```
 gradlew eclipse
+```
+```
+gradlew build
+```
+
+### IntelliJ
+```
+gradlew setupdecompworkspace
+```
+```
+gradlew genIntellijRuns
+```
+```
+gradlew build
 ```
