@@ -1,4 +1,4 @@
-package me.eldodebug.soar.management.mods.impl;
+package me.eldodebug.soar.management.mods.impl.SoarHUD;
 
 import java.awt.Color;
 import java.util.Collection;

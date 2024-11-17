@@ -1,4 +1,4 @@
-package me.eldodebug.soar.management.mods.impl;
+package me.eldodebug.soar.management.mods.impl.Player;
 
 import me.eldodebug.soar.management.language.TranslateText;
 import me.eldodebug.soar.management.mods.Mod;

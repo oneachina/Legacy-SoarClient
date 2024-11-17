@@ -24,7 +24,7 @@ import me.eldodebug.soar.management.event.impl.EventRenderSelectedItem;
 import me.eldodebug.soar.management.event.impl.EventRenderTooltip;
 import me.eldodebug.soar.management.event.impl.EventRenderVisualizer;
 import me.eldodebug.soar.management.mods.impl.Render.OldAnimationsMod;
-import me.eldodebug.soar.management.mods.impl.WebBrowserMod;
+import me.eldodebug.soar.management.mods.impl.SoarHUD.WebBrowserMod;
 import me.eldodebug.soar.mcef.Mcef;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;

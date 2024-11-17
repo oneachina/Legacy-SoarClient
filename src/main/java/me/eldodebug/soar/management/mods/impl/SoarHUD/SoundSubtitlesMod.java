@@ -1,4 +1,4 @@
-package me.eldodebug.soar.management.mods.impl;
+package me.eldodebug.soar.management.mods.impl.SoarHUD;
 
 import java.io.BufferedReader;
 import java.io.IOException;

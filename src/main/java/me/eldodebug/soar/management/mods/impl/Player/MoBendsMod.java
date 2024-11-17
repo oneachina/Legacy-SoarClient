@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import me.eldodebug.soar.management.mods.impl.Skin3DMod;
-import me.eldodebug.soar.management.mods.impl.WaveyCapesMod;
+import me.eldodebug.soar.management.mods.impl.Render.Skin3DMod;
+import me.eldodebug.soar.management.mods.impl.Render.WaveyCapesMod;
 import org.lwjgl.util.vector.Vector3f;
 
 import me.eldodebug.soar.injection.interfaces.IMixinMinecraft;

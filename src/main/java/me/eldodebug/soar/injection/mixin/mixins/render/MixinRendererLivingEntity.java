@@ -14,7 +14,7 @@ import me.eldodebug.soar.injection.interfaces.IMixinRenderPlayer;
 import me.eldodebug.soar.management.event.impl.EventHitOverlay;
 import me.eldodebug.soar.management.event.impl.EventRendererLivingEntity;
 import me.eldodebug.soar.management.mods.impl.Player.NametagMod;
-import me.eldodebug.soar.management.mods.impl.Skin3DMod;
+import me.eldodebug.soar.management.mods.impl.Render.Skin3DMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.FontRenderer;

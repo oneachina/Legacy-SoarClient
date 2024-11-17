@@ -25,7 +25,7 @@ import me.eldodebug.soar.management.mods.impl.Other.EntityCullingMod;
 import me.eldodebug.soar.management.mods.impl.Render.MinimalViewBobbingMod;
 import me.eldodebug.soar.management.mods.impl.Player.MoBendsMod;
 import me.eldodebug.soar.management.mods.impl.Render.OldAnimationsMod;
-import me.eldodebug.soar.management.mods.impl.WeatherChangerMod;
+import me.eldodebug.soar.management.mods.impl.World.WeatherChangerMod;
 import me.eldodebug.soar.management.mods.settings.impl.ComboSetting;
 import me.eldodebug.soar.management.mods.settings.impl.combo.Option;
 import net.minecraft.block.material.Material;

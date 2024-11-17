@@ -1,4 +1,4 @@
-package me.eldodebug.soar.management.mods.impl;
+package me.eldodebug.soar.management.mods.impl.Other;
 
 import me.eldodebug.soar.management.event.EventTarget;
 import me.eldodebug.soar.management.event.impl.EventPlaySound;

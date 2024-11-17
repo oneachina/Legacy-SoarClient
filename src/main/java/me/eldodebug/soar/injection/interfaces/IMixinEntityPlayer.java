@@ -1,6 +1,6 @@
 package me.eldodebug.soar.injection.interfaces;
 
-import me.eldodebug.soar.management.mods.impl.WaveyCapesMod;
+import me.eldodebug.soar.management.mods.impl.Render.WaveyCapesMod;
 import me.eldodebug.soar.management.mods.impl.skin3d.render.CustomizableModelPart;
 import me.eldodebug.soar.management.mods.impl.waveycapes.sim.StickSimulation;
 import me.eldodebug.soar.management.mods.impl.waveycapes.sim.StickSimulation.Point;

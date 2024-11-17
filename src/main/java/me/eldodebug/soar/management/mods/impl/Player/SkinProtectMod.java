@@ -1,4 +1,4 @@
-package me.eldodebug.soar.management.mods.impl;
+package me.eldodebug.soar.management.mods.impl.Player;
 
 import com.mojang.util.UUIDTypeAdapter;
 

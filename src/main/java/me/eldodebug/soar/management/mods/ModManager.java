@@ -3,13 +3,15 @@ package me.eldodebug.soar.management.mods;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import me.eldodebug.soar.management.mods.impl.*;
 import me.eldodebug.soar.management.mods.impl.Other.*;
 import me.eldodebug.soar.management.mods.impl.Player.*;
 import me.eldodebug.soar.management.mods.impl.Render.*;
 import me.eldodebug.soar.management.mods.impl.SimpleHUD.*;
 import me.eldodebug.soar.management.mods.impl.SoarHUD.*;
 import me.eldodebug.soar.management.mods.impl.World.PlayerPredicatorMod;
+import me.eldodebug.soar.management.mods.impl.World.TimeChangerMod;
+import me.eldodebug.soar.management.mods.impl.World.WaypointMod;
+import me.eldodebug.soar.management.mods.impl.World.WeatherChangerMod;
 import me.eldodebug.soar.management.mods.settings.Setting;
 
 public class ModManager {

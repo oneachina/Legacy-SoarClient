@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import me.eldodebug.soar.injection.interfaces.IMixinEntityLivingBase;
 import me.eldodebug.soar.management.event.impl.EventLivingUpdate;
-import me.eldodebug.soar.management.mods.impl.SlowSwingMod;
+import me.eldodebug.soar.management.mods.impl.Player.SlowSwingMod;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

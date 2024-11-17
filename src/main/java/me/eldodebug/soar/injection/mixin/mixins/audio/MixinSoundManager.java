@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import me.eldodebug.soar.management.mods.impl.SoundSubtitlesMod;
+import me.eldodebug.soar.management.mods.impl.SoarHUD.SoundSubtitlesMod;
 import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.SoundManager;
 import paulscode.sound.SoundSystem;

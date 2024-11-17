@@ -33,7 +33,7 @@ import me.eldodebug.soar.management.mods.impl.Other.FPSLimiterMod;
 import me.eldodebug.soar.management.mods.impl.Other.FPSSpooferMod;
 import me.eldodebug.soar.management.mods.impl.Player.HitDelayFixMod;
 import me.eldodebug.soar.management.mods.impl.Render.OldAnimationsMod;
-import me.eldodebug.soar.management.mods.impl.ViaVersionMod;
+import me.eldodebug.soar.management.mods.impl.Other.ViaVersionMod;
 import me.eldodebug.soar.viaversion.fixes.AttackOrder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;

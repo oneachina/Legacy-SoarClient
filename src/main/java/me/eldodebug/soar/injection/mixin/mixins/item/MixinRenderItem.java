@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import me.eldodebug.soar.management.mods.impl.Render.GlintColorMod;
-import me.eldodebug.soar.management.mods.impl.ShinyPotsMod;
+import me.eldodebug.soar.management.mods.impl.Render.ShinyPotsMod;
 import me.eldodebug.soar.utils.EnumFacings;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
