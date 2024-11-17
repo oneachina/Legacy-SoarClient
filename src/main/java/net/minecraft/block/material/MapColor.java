@@ -92,4 +92,8 @@ public class MapColor
         int l = (this.colorValue & 255) * i / 255;
         return -16777216 | j << 16 | k << 8 | l;
     }
+
+    public int getMapColor(int shade) {
+        return shade;
+    }
 }

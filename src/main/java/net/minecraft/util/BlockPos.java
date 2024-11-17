@@ -321,6 +321,10 @@ public class BlockPos extends Vec3i
         };
     }
 
+    public BlockPos set(int x, int y, int z) {
+        return null;
+    }
+
     public static final class MutableBlockPos extends BlockPos
     {
         private int x;
