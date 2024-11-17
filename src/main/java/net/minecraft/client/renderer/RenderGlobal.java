@@ -200,6 +200,9 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
 
     public static void drawSelectionBoundingBox(AxisAlignedBB selectedBox) {}
 
+    public static void drawOutlinedBoundingBox(AxisAlignedBB offsetBox, int red, int green, int blue, int alpha) {
+    }
+
     public void onResourceManagerReload(IResourceManager resourceManager)
     {
         this.updateDestroyBlockIcons();
