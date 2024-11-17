@@ -1,4 +1,4 @@
-package me.eldodebug.soar.management.mods.impl;
+package me.eldodebug.soar.management.mods.impl.Other;
 
 import java.util.ArrayList;
 import java.util.Arrays;

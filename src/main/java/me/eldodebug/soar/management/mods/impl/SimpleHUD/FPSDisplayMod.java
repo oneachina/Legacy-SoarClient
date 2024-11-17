@@ -1,4 +1,4 @@
-package me.eldodebug.soar.management.mods.impl;
+package me.eldodebug.soar.management.mods.impl.SimpleHUD;
 
 import me.eldodebug.soar.management.event.EventTarget;
 import me.eldodebug.soar.management.event.impl.EventRender2D;
@@ -6,15 +6,16 @@ import me.eldodebug.soar.management.language.TranslateText;
 import me.eldodebug.soar.management.mods.SimpleHUDMod;
 import me.eldodebug.soar.management.mods.settings.impl.BooleanSetting;
 import me.eldodebug.soar.management.nanovg.font.Icon;
+import net.minecraft.client.Minecraft;
 
-public class HealthDisplayMod extends SimpleHUDMod {
+public class FPSDisplayMod extends SimpleHUDMod {
 
 	private BooleanSetting iconSetting = new BooleanSetting(TranslateText.ICON, this, true);
 	
-	public HealthDisplayMod() {
-		super(TranslateText.HEALTH_DISPLAY, TranslateText.HEALTH_DISPLAY_DESCRIPTION);
+	public FPSDisplayMod() {
+		super(TranslateText.FPS_DISPLAY, TranslateText.FPS_DISPLAY_DESCRIPTION);
 	}
-
+	
 	@EventTarget
 	public void onRender2D(EventRender2D event) {
 		this.draw();
@@ -22,11 +23,11 @@ public class HealthDisplayMod extends SimpleHUDMod {
 	
 	@Override
 	public String getText() {
-		return (int) mc.thePlayer.getHealth() + " Health";
+		return Minecraft.getDebugFPS() + " FPS";
 	}
 	
 	@Override
 	public String getIcon() {
-		return iconSetting.isToggled() ? Icon.HEART : null;
+		return iconSetting.isToggled() ? Icon.MONITOR : null;
 	}
 }

@@ -21,7 +21,7 @@ import me.eldodebug.soar.management.event.impl.EventRender3D;
 import me.eldodebug.soar.management.event.impl.EventShader;
 import me.eldodebug.soar.management.event.impl.EventZoomFov;
 import me.eldodebug.soar.management.language.TranslateText;
-import me.eldodebug.soar.management.mods.impl.EntityCullingMod;
+import me.eldodebug.soar.management.mods.impl.Other.EntityCullingMod;
 import me.eldodebug.soar.management.mods.impl.MinimalViewBobbingMod;
 import me.eldodebug.soar.management.mods.impl.MoBendsMod;
 import me.eldodebug.soar.management.mods.impl.OldAnimationsMod;
