@@ -1,6 +1,7 @@
 package me.eldodebug.soar;
 
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 
 import javax.imageio.ImageIO;
 
@@ -31,15 +32,15 @@ import net.minecraft.util.ResourceLocation;
 
 public class SoarHandler {
 
-	private Minecraft mc = Minecraft.getMinecraft();
+	private final Minecraft mc = Minecraft.getMinecraft();
 	
-	private Soar instance;
+	private final Soar instance;
 	
 	private String prevOfflineName;
 	private ResourceLocation offlineSkin;
 	
 	public SoarHandler() {
-		instance = Soar.getInstance();
+        instance = Soar.getInstance();
 	}
 	
 	@EventTarget
@@ -104,7 +105,7 @@ public class SoarHandler {
 			
 			if(currentAccount.getType().equals(AccountType.OFFLINE)) {
 				
-				if(prevOfflineName != currentAccount.getName()) {
+				if(!Objects.equals(prevOfflineName, currentAccount.getName())) {
 					
 					if(currentAccount.getSkinFile() != null) {
 						try {

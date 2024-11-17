@@ -8,7 +8,7 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 
 import me.eldodebug.soar.Soar;
-import me.eldodebug.soar.management.mods.impl.AsyncScreenshotMod;
+import me.eldodebug.soar.management.mods.impl.Other.AsyncScreenshotMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.util.ChatComponentText;

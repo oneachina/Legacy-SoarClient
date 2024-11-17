@@ -198,6 +198,8 @@ public class RenderGlobal implements IWorldAccess, IResourceManagerReloadListene
         this.generateSky2();
     }
 
+    public static void drawSelectionBoundingBox(AxisAlignedBB selectedBox) {}
+
     public void onResourceManagerReload(IResourceManager resourceManager)
     {
         this.updateDestroyBlockIcons();

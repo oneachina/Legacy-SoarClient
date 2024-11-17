@@ -34,11 +34,12 @@ import net.minecraft.client.settings.KeyBinding;
 
 public class Soar {
 
-	private static Soar instance = new Soar();
+	private static final Soar instance = new Soar();
 	private Minecraft mc = Minecraft.getMinecraft();
 	private SoarAPI api;
 	
-	private String name, version;
+	private final String name;
+    private final String version;
 	
 	private NanoVGManager nanoVGManager;
 	private FileManager fileManager;

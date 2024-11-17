@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import me.eldodebug.soar.management.mods.impl.AsyncScreenshotMod;
+import me.eldodebug.soar.management.mods.impl.Other.AsyncScreenshotMod;
 import me.eldodebug.soar.management.mods.impl.asyncscreenshot.AsyncScreenshots;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;

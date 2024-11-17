@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import me.eldodebug.soar.hooks.GuiChatHook;
-import me.eldodebug.soar.management.mods.impl.ChatTranslateMod;
+import me.eldodebug.soar.management.mods.impl.Other.ChatTranslateMod;
 import me.eldodebug.soar.utils.Multithreading;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.client.gui.GuiScreen;

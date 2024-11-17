@@ -3,7 +3,7 @@ package me.eldodebug.soar.management.command.impl;
 import me.eldodebug.soar.logger.SoarLogger;
 import me.eldodebug.soar.management.command.Command;
 import me.eldodebug.soar.management.language.TranslateText;
-import me.eldodebug.soar.management.mods.impl.ChatTranslateMod;
+import me.eldodebug.soar.management.mods.impl.Other.ChatTranslateMod;
 import me.eldodebug.soar.management.mods.settings.impl.ComboSetting;
 import me.eldodebug.soar.management.mods.settings.impl.combo.Option;
 import me.eldodebug.soar.utils.Multithreading;

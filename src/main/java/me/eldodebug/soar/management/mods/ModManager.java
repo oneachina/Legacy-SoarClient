@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import me.eldodebug.soar.management.mods.impl.*;
+import me.eldodebug.soar.management.mods.impl.Other.*;
+import me.eldodebug.soar.management.mods.impl.Player.AppleSkinMod;
+import me.eldodebug.soar.management.mods.impl.Player.AutoTextMod;
+import me.eldodebug.soar.management.mods.impl.Player.BowZoomMod;
+import me.eldodebug.soar.management.mods.impl.Player.DamageTiltMod;
+import me.eldodebug.soar.management.mods.impl.Render.*;
+import me.eldodebug.soar.management.mods.impl.SimpleHUD.*;
+import me.eldodebug.soar.management.mods.impl.SoarHUD.*;
 import me.eldodebug.soar.management.mods.settings.Setting;
 
 public class ModManager {

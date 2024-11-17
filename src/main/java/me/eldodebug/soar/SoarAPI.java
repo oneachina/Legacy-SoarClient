@@ -11,7 +11,7 @@ public class SoarAPI {
 	private long launchTime;
 	private GuiModMenu modMenu;
 	private GuiSoarMainMenu mainMenu;
-	private File firstLoginFile;
+	private final File firstLoginFile;
 	
 	public SoarAPI() {
 		
