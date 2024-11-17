@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import me.eldodebug.soar.injection.interfaces.IMixinRenderPlayer;
 import me.eldodebug.soar.management.event.impl.EventHitOverlay;
 import me.eldodebug.soar.management.event.impl.EventRendererLivingEntity;
-import me.eldodebug.soar.management.mods.impl.NametagMod;
+import me.eldodebug.soar.management.mods.impl.Player.NametagMod;
 import me.eldodebug.soar.management.mods.impl.Skin3DMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;

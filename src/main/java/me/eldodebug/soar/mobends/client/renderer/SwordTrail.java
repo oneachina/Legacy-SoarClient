@@ -6,7 +6,7 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector3f;
 
-import me.eldodebug.soar.management.mods.impl.MoBendsMod;
+import me.eldodebug.soar.management.mods.impl.Player.MoBendsMod;
 import me.eldodebug.soar.mobends.client.model.ModelRendererBends;
 import me.eldodebug.soar.mobends.client.model.entity.ModelBendsPlayer;
 import me.eldodebug.soar.mobends.util.MoBendsGUtil;

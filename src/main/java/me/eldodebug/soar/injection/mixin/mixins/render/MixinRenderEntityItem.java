@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 import me.eldodebug.soar.hooks.RenderEntityItemHook;
-import me.eldodebug.soar.management.mods.impl.Items2DMod;
+import me.eldodebug.soar.management.mods.impl.Render.Items2DMod;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.IBakedModel;

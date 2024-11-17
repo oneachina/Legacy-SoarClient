@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import me.eldodebug.soar.management.mods.impl.RawInputMod;
+import me.eldodebug.soar.management.mods.impl.Other.RawInputMod;
 import net.minecraft.util.MouseHelper;
 
 @Mixin(MouseHelper.class)

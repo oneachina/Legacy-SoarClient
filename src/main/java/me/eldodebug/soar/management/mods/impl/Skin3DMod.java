@@ -3,6 +3,7 @@ package me.eldodebug.soar.management.mods.impl;
 import me.eldodebug.soar.management.language.TranslateText;
 import me.eldodebug.soar.management.mods.Mod;
 import me.eldodebug.soar.management.mods.ModCategory;
+import me.eldodebug.soar.management.mods.impl.Player.MoBendsMod;
 
 public class Skin3DMod extends Mod {
 

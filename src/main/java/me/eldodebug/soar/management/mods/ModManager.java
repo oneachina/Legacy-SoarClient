@@ -9,6 +9,7 @@ import me.eldodebug.soar.management.mods.impl.Player.*;
 import me.eldodebug.soar.management.mods.impl.Render.*;
 import me.eldodebug.soar.management.mods.impl.SimpleHUD.*;
 import me.eldodebug.soar.management.mods.impl.SoarHUD.*;
+import me.eldodebug.soar.management.mods.impl.World.PlayerPredicatorMod;
 import me.eldodebug.soar.management.mods.settings.Setting;
 
 public class ModManager {

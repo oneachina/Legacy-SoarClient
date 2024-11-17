@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import me.eldodebug.soar.management.language.TranslateText;
-import me.eldodebug.soar.management.mods.impl.InventoryMod;
+import me.eldodebug.soar.management.mods.impl.Other.InventoryMod;
 import me.eldodebug.soar.management.mods.settings.impl.combo.Option;
 import me.eldodebug.soar.ui.particle.ParticleEngine;
 import me.eldodebug.soar.utils.animation.normal.Animation;

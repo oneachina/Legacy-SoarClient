@@ -508,6 +508,10 @@ public class EnchantmentHelper
         return map;
     }
 
+    public static int getModifierForCreature(ItemStack heldItem, EnumCreatureAttribute creatureAttribute) {
+        return 0;
+    }
+
     static final class DamageIterator implements EnchantmentHelper.IModifier
     {
         public EntityLivingBase user;
