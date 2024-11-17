@@ -1,9 +1,8 @@
 package net.minecraft.util;
 
 import com.google.common.collect.AbstractIterator;
-import net.minecraft.entity.Entity;
-
 import java.util.Iterator;
+import net.minecraft.entity.Entity;
 
 public class BlockPos extends Vec3i
 {
@@ -267,27 +266,27 @@ public class BlockPos extends Vec3i
         };
     }
 
-    public static Iterable<MutableBlockPos> getAllInBoxMutable(BlockPos from, BlockPos to)
+    public static Iterable<BlockPos.MutableBlockPos> getAllInBoxMutable(BlockPos from, BlockPos to)
     {
         final BlockPos blockpos = new BlockPos(Math.min(from.getX(), to.getX()), Math.min(from.getY(), to.getY()), Math.min(from.getZ(), to.getZ()));
         final BlockPos blockpos1 = new BlockPos(Math.max(from.getX(), to.getX()), Math.max(from.getY(), to.getY()), Math.max(from.getZ(), to.getZ()));
-        return new Iterable<MutableBlockPos>()
+        return new Iterable<BlockPos.MutableBlockPos>()
         {
-            public Iterator<MutableBlockPos> iterator()
+            public Iterator<BlockPos.MutableBlockPos> iterator()
             {
-                return new AbstractIterator<MutableBlockPos>()
+                return new AbstractIterator<BlockPos.MutableBlockPos>()
                 {
-                    private MutableBlockPos theBlockPos = null;
-                    protected MutableBlockPos computeNext()
+                    private BlockPos.MutableBlockPos theBlockPos = null;
+                    protected BlockPos.MutableBlockPos computeNext()
                     {
                         if (this.theBlockPos == null)
                         {
-                            this.theBlockPos = new MutableBlockPos(blockpos.getX(), blockpos.getY(), blockpos.getZ());
+                            this.theBlockPos = new BlockPos.MutableBlockPos(blockpos.getX(), blockpos.getY(), blockpos.getZ());
                             return this.theBlockPos;
                         }
                         else if (this.theBlockPos.equals(blockpos1))
                         {
-                            return (MutableBlockPos)this.endOfData();
+                            return (BlockPos.MutableBlockPos)this.endOfData();
                         }
                         else
                         {
@@ -356,7 +355,7 @@ public class BlockPos extends Vec3i
             return this.z;
         }
 
-        public MutableBlockPos func_181079_c(int p_181079_1_, int p_181079_2_, int p_181079_3_)
+        public BlockPos.MutableBlockPos func_181079_c(int p_181079_1_, int p_181079_2_, int p_181079_3_)
         {
             this.x = p_181079_1_;
             this.y = p_181079_2_;

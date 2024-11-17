@@ -1,7 +1,16 @@
 package net.minecraft.world.gen.structure;
 
 import com.google.common.collect.Lists;
-import net.minecraft.block.*;
+import java.util.List;
+import java.util.Random;
+import net.minecraft.block.BlockFlowerPot;
+import net.minecraft.block.BlockLever;
+import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.BlockSandStone;
+import net.minecraft.block.BlockStoneBrick;
+import net.minecraft.block.BlockStoneSlab;
+import net.minecraft.block.BlockTripWire;
+import net.minecraft.block.BlockTripWireHook;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.init.Blocks;
@@ -13,19 +22,16 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 
-import java.util.List;
-import java.util.Random;
-
 public class ComponentScatteredFeaturePieces
 {
     public static void registerScatteredFeaturePieces()
     {
-        MapGenStructureIO.registerStructureComponent(DesertPyramid.class, "TeDP");
-        MapGenStructureIO.registerStructureComponent(JunglePyramid.class, "TeJP");
-        MapGenStructureIO.registerStructureComponent(SwampHut.class, "TeSH");
+        MapGenStructureIO.registerStructureComponent(ComponentScatteredFeaturePieces.DesertPyramid.class, "TeDP");
+        MapGenStructureIO.registerStructureComponent(ComponentScatteredFeaturePieces.JunglePyramid.class, "TeJP");
+        MapGenStructureIO.registerStructureComponent(ComponentScatteredFeaturePieces.SwampHut.class, "TeSH");
     }
 
-    public static class DesertPyramid extends Feature
+    public static class DesertPyramid extends ComponentScatteredFeaturePieces.Feature
     {
         private boolean[] field_74940_h = new boolean[4];
         private static final List<WeightedRandomChestContent> itemsToGenerateInTemple = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 3), new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 5, 10), new WeightedRandomChestContent(Items.gold_ingot, 0, 2, 7, 15), new WeightedRandomChestContent(Items.emerald, 0, 1, 3, 2), new WeightedRandomChestContent(Items.bone, 0, 4, 6, 20), new WeightedRandomChestContent(Items.rotten_flesh, 0, 3, 7, 16), new WeightedRandomChestContent(Items.saddle, 0, 1, 1, 3), new WeightedRandomChestContent(Items.iron_horse_armor, 0, 1, 1, 1), new WeightedRandomChestContent(Items.golden_horse_armor, 0, 1, 1, 1), new WeightedRandomChestContent(Items.diamond_horse_armor, 0, 1, 1, 1)});
@@ -246,10 +252,8 @@ public class ComponentScatteredFeaturePieces
             this.setBlockState(worldIn, Blocks.sandstone.getStateFromMeta(BlockSandStone.EnumType.CHISELED.getMetadata()), 10, -10, 13, structureBoundingBoxIn);
             this.setBlockState(worldIn, Blocks.sandstone.getStateFromMeta(BlockSandStone.EnumType.SMOOTH.getMetadata()), 10, -11, 13, structureBoundingBoxIn);
 
-            for (Object enumfacing0 : EnumFacing.Plane.HORIZONTAL)
+            for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
             {
-                EnumFacing enumfacing = (EnumFacing) enumfacing0;
-
                 if (!this.field_74940_h[enumfacing.getHorizontalIndex()])
                 {
                     int l1 = enumfacing.getFrontOffsetX() * 2;
@@ -349,7 +353,7 @@ public class ComponentScatteredFeaturePieces
         }
     }
 
-    public static class JunglePyramid extends Feature
+    public static class JunglePyramid extends ComponentScatteredFeaturePieces.Feature
     {
         private boolean field_74947_h;
         private boolean field_74948_i;
@@ -357,7 +361,7 @@ public class ComponentScatteredFeaturePieces
         private boolean field_74946_k;
         private static final List<WeightedRandomChestContent> field_175816_i = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(Items.diamond, 0, 1, 3, 3), new WeightedRandomChestContent(Items.iron_ingot, 0, 1, 5, 10), new WeightedRandomChestContent(Items.gold_ingot, 0, 2, 7, 15), new WeightedRandomChestContent(Items.emerald, 0, 1, 3, 2), new WeightedRandomChestContent(Items.bone, 0, 4, 6, 20), new WeightedRandomChestContent(Items.rotten_flesh, 0, 3, 7, 16), new WeightedRandomChestContent(Items.saddle, 0, 1, 1, 3), new WeightedRandomChestContent(Items.iron_horse_armor, 0, 1, 1, 1), new WeightedRandomChestContent(Items.golden_horse_armor, 0, 1, 1, 1), new WeightedRandomChestContent(Items.diamond_horse_armor, 0, 1, 1, 1)});
         private static final List<WeightedRandomChestContent> field_175815_j = Lists.newArrayList(new WeightedRandomChestContent[] {new WeightedRandomChestContent(Items.arrow, 0, 2, 7, 30)});
-        private static Stones junglePyramidsRandomScatteredStones = new Stones();
+        private static ComponentScatteredFeaturePieces.JunglePyramid.Stones junglePyramidsRandomScatteredStones = new ComponentScatteredFeaturePieces.JunglePyramid.Stones();
 
         public JunglePyramid()
         {
@@ -582,7 +586,7 @@ public class ComponentScatteredFeaturePieces
             }
         }
 
-        static class Stones extends BlockSelector
+        static class Stones extends StructureComponent.BlockSelector
         {
             private Stones()
             {
@@ -602,7 +606,7 @@ public class ComponentScatteredFeaturePieces
         }
     }
 
-    public static class SwampHut extends Feature
+    public static class SwampHut extends ComponentScatteredFeaturePieces.Feature
     {
         private boolean hasWitch;
 

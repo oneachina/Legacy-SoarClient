@@ -3,6 +3,12 @@ package net.minecraft.world.chunk;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Queues;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -12,7 +18,12 @@ import net.minecraft.crash.CrashReportCategory;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.ClassInheritanceMultiMap;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ReportedException;
 import net.minecraft.world.ChunkCoordIntPair;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
@@ -23,13 +34,6 @@ import net.minecraft.world.chunk.storage.ExtendedBlockStorage;
 import net.minecraft.world.gen.ChunkProviderDebug;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Chunk
 {
@@ -333,16 +337,16 @@ public class Chunk
                         int i1 = this.zPosition * 16 + j;
                         int j1 = Integer.MAX_VALUE;
 
-                        for (Object enumfacing : EnumFacing.Plane.HORIZONTAL)
+                        for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
                         {
-                            j1 = Math.min(j1, this.worldObj.getChunksLowestHorizon(l + ((EnumFacing) enumfacing).getFrontOffsetX(), i1 + ((EnumFacing) enumfacing).getFrontOffsetZ()));
+                            j1 = Math.min(j1, this.worldObj.getChunksLowestHorizon(l + enumfacing.getFrontOffsetX(), i1 + enumfacing.getFrontOffsetZ()));
                         }
 
                         this.checkSkylightNeighborHeight(l, i1, j1);
 
-                        for (Object enumfacing1 : EnumFacing.Plane.HORIZONTAL)
+                        for (EnumFacing enumfacing1 : EnumFacing.Plane.HORIZONTAL)
                         {
-                            this.checkSkylightNeighborHeight(l + ((EnumFacing) enumfacing1).getFrontOffsetX(), i1 + ((EnumFacing) enumfacing1).getFrontOffsetZ(), k);
+                            this.checkSkylightNeighborHeight(l + enumfacing1.getFrontOffsetX(), i1 + enumfacing1.getFrontOffsetZ(), k);
                         }
 
                         if (p_150803_1_)
@@ -489,9 +493,9 @@ public class Chunk
 
             if (!this.worldObj.provider.getHasNoSky())
             {
-                for (Object enumfacing : EnumFacing.Plane.HORIZONTAL)
+                for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
                 {
-                    this.updateSkylightNeighborHeight(k + ((EnumFacing) enumfacing).getFrontOffsetX(), l + ((EnumFacing) enumfacing).getFrontOffsetZ(), j2, k2);
+                    this.updateSkylightNeighborHeight(k + enumfacing.getFrontOffsetX(), l + enumfacing.getFrontOffsetZ(), j2, k2);
                 }
 
                 this.updateSkylightNeighborHeight(k, l, j2, k2);
@@ -739,7 +743,7 @@ public class Chunk
 
                 if (block1 instanceof ITileEntityProvider)
                 {
-                    TileEntity tileentity = this.getTileEntity(pos, EnumCreateEntityType.CHECK);
+                    TileEntity tileentity = this.getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK);
 
                     if (tileentity != null)
                     {
@@ -754,7 +758,7 @@ public class Chunk
 
                 if (block instanceof ITileEntityProvider)
                 {
-                    TileEntity tileentity1 = this.getTileEntity(pos, EnumCreateEntityType.CHECK);
+                    TileEntity tileentity1 = this.getTileEntity(pos, Chunk.EnumCreateEntityType.CHECK);
 
                     if (tileentity1 == null)
                     {
@@ -911,18 +915,18 @@ public class Chunk
         return !block.hasTileEntity() ? null : ((ITileEntityProvider)block).createNewTileEntity(this.worldObj, this.getBlockMetadata(pos));
     }
 
-    public TileEntity getTileEntity(BlockPos pos, EnumCreateEntityType p_177424_2_)
+    public TileEntity getTileEntity(BlockPos pos, Chunk.EnumCreateEntityType p_177424_2_)
     {
         TileEntity tileentity = (TileEntity)this.chunkTileEntityMap.get(pos);
 
         if (tileentity == null)
         {
-            if (p_177424_2_ == EnumCreateEntityType.IMMEDIATE)
+            if (p_177424_2_ == Chunk.EnumCreateEntityType.IMMEDIATE)
             {
                 tileentity = this.createNewTileEntity(pos);
                 this.worldObj.setTileEntity(pos, tileentity);
             }
-            else if (p_177424_2_ == EnumCreateEntityType.QUEUED)
+            else if (p_177424_2_ == Chunk.EnumCreateEntityType.QUEUED)
             {
                 this.tileEntityPosQueue.add(pos);
             }
@@ -1231,7 +1235,7 @@ public class Chunk
         {
             BlockPos blockpos = (BlockPos)this.tileEntityPosQueue.poll();
 
-            if (this.getTileEntity(blockpos, EnumCreateEntityType.CHECK) == null && this.getBlock(blockpos).hasTileEntity())
+            if (this.getTileEntity(blockpos, Chunk.EnumCreateEntityType.CHECK) == null && this.getBlock(blockpos).hasTileEntity())
             {
                 TileEntity tileentity = this.createNewTileEntity(blockpos);
                 this.worldObj.setTileEntity(blockpos, tileentity);
@@ -1497,10 +1501,10 @@ public class Chunk
 
                 if (this.isLightPopulated)
                 {
-                    for (Object enumfacing : EnumFacing.Plane.HORIZONTAL)
+                    for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
                     {
-                        int k = ((EnumFacing) enumfacing).getAxisDirection() == EnumFacing.AxisDirection.POSITIVE ? 16 : 1;
-                        this.worldObj.getChunkFromBlockCoords(blockpos.offset((EnumFacing) enumfacing, k)).func_180700_a(((EnumFacing) enumfacing).getOpposite());
+                        int k = enumfacing.getAxisDirection() == EnumFacing.AxisDirection.POSITIVE ? 16 : 1;
+                        this.worldObj.getChunkFromBlockCoords(blockpos.offset(enumfacing, k)).func_180700_a(enumfacing.getOpposite());
                     }
 
                     this.func_177441_y();

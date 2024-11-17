@@ -27,9 +27,9 @@ public class EntityMinecartTNT extends EntityMinecart
         super(worldIn, p_i1728_2_, p_i1728_4_, p_i1728_6_);
     }
 
-    public EnumMinecartType getMinecartType()
+    public EntityMinecart.EnumMinecartType getMinecartType()
     {
-        return EnumMinecartType.TNT;
+        return EntityMinecart.EnumMinecartType.TNT;
     }
 
     public IBlockState getDefaultDisplayTile()

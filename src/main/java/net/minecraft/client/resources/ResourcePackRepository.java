@@ -56,8 +56,8 @@ public class ResourcePackRepository
     private IResourcePack resourcePackInstance;
     private final ReentrantLock lock = new ReentrantLock();
     private ListenableFuture<Object> field_177322_i;
-    private List<Entry> repositoryEntriesAll = Lists.<Entry>newArrayList();
-    private List<Entry> repositoryEntries = Lists.<Entry>newArrayList();
+    private List<ResourcePackRepository.Entry> repositoryEntriesAll = Lists.<ResourcePackRepository.Entry>newArrayList();
+    private List<ResourcePackRepository.Entry> repositoryEntries = Lists.<ResourcePackRepository.Entry>newArrayList();
 
     public ResourcePackRepository(File dirResourcepacksIn, File dirServerResourcepacksIn, IResourcePack rprDefaultResourcePackIn, IMetadataSerializer rprMetadataSerializerIn, GameSettings settings)
     {
@@ -73,7 +73,7 @@ public class ResourcePackRepository
         {
             String s = (String)iterator.next();
 
-            for (Entry resourcepackrepository$entry : this.repositoryEntriesAll)
+            for (ResourcePackRepository.Entry resourcepackrepository$entry : this.repositoryEntriesAll)
             {
                 if (resourcepackrepository$entry.getResourcePackName().equals(s))
                 {
@@ -112,11 +112,11 @@ public class ResourcePackRepository
 
     public void updateRepositoryEntriesAll()
     {
-        List<Entry> list = Lists.<Entry>newArrayList();
+        List<ResourcePackRepository.Entry> list = Lists.<ResourcePackRepository.Entry>newArrayList();
 
         for (File file1 : this.getResourcePackFiles())
         {
-            Entry resourcepackrepository$entry = new Entry(file1);
+            ResourcePackRepository.Entry resourcepackrepository$entry = new ResourcePackRepository.Entry(file1);
 
             if (!this.repositoryEntriesAll.contains(resourcepackrepository$entry))
             {
@@ -143,7 +143,7 @@ public class ResourcePackRepository
 
         this.repositoryEntriesAll.removeAll(list);
 
-        for (Entry resourcepackrepository$entry1 : this.repositoryEntriesAll)
+        for (ResourcePackRepository.Entry resourcepackrepository$entry1 : this.repositoryEntriesAll)
         {
             resourcepackrepository$entry1.closeResourcePack();
         }
@@ -151,17 +151,17 @@ public class ResourcePackRepository
         this.repositoryEntriesAll = list;
     }
 
-    public List<Entry> getRepositoryEntriesAll()
+    public List<ResourcePackRepository.Entry> getRepositoryEntriesAll()
     {
         return ImmutableList.copyOf(this.repositoryEntriesAll);
     }
 
-    public List<Entry> getRepositoryEntries()
+    public List<ResourcePackRepository.Entry> getRepositoryEntries()
     {
         return ImmutableList.copyOf(this.repositoryEntries);
     }
 
-    public void setRepositories(List<Entry> p_148527_1_)
+    public void setRepositories(List<ResourcePackRepository.Entry> p_148527_1_)
     {
         this.repositoryEntries.clear();
         this.repositoryEntries.addAll(p_148527_1_);
@@ -378,7 +378,7 @@ public class ResourcePackRepository
 
         public boolean equals(Object p_equals_1_)
         {
-            return this == p_equals_1_ ? true : (p_equals_1_ instanceof Entry ? this.toString().equals(p_equals_1_.toString()) : false);
+            return this == p_equals_1_ ? true : (p_equals_1_ instanceof ResourcePackRepository.Entry ? this.toString().equals(p_equals_1_.toString()) : false);
         }
 
         public int hashCode()

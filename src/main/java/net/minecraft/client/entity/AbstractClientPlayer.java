@@ -17,30 +17,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StringUtils;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldSettings;
-import optifine.CapeUtils;
-import optifine.Config;
-import optifine.PlayerConfigurations;
-import optifine.Reflector;
 
 public abstract class AbstractClientPlayer extends EntityPlayer
 {
     private NetworkPlayerInfo playerInfo;
-    private ResourceLocation locationOfCape = null;
-    private String nameClear = null;
-    private static final String __OBFID = "CL_00000935";
 
     public AbstractClientPlayer(World worldIn, GameProfile playerProfile)
     {
         super(worldIn, playerProfile);
-        this.nameClear = playerProfile.getName();
-
-        if (this.nameClear != null && !this.nameClear.isEmpty())
-        {
-            this.nameClear = StringUtils.stripControlCodes(this.nameClear);
-        }
-
-        CapeUtils.downloadCape(this);
-        PlayerConfigurations.getPlayerConfiguration(this);
     }
 
     /**
@@ -90,33 +74,22 @@ public abstract class AbstractClientPlayer extends EntityPlayer
 
     public ResourceLocation getLocationCape()
     {
-        if (!Config.isShowCapes())
-        {
-            return null;
-        }
-        else if (this.locationOfCape != null)
-        {
-            return this.locationOfCape;
-        }
-        else
-        {
-            NetworkPlayerInfo networkplayerinfo = this.getPlayerInfo();
-            return networkplayerinfo == null ? null : networkplayerinfo.getLocationCape();
-        }
+        NetworkPlayerInfo networkplayerinfo = this.getPlayerInfo();
+        return networkplayerinfo == null ? null : networkplayerinfo.getLocationCape();
     }
 
     public static ThreadDownloadImageData getDownloadImageSkin(ResourceLocation resourceLocationIn, String username)
     {
         TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
-        Object object = texturemanager.getTexture(resourceLocationIn);
+        ITextureObject itextureobject = texturemanager.getTexture(resourceLocationIn);
 
-        if (object == null)
+        if (itextureobject == null)
         {
-            object = new ThreadDownloadImageData((File)null, String.format("http://skins.minecraft.net/MinecraftSkins/%s.png", new Object[] {StringUtils.stripControlCodes(username)}), DefaultPlayerSkin.getDefaultSkin(getOfflineUUID(username)), new ImageBufferDownload());
-            texturemanager.loadTexture(resourceLocationIn, (ITextureObject)object);
+            itextureobject = new ThreadDownloadImageData((File)null, String.format("http://skins.minecraft.net/MinecraftSkins/%s.png", new Object[] {StringUtils.stripControlCodes(username)}), DefaultPlayerSkin.getDefaultSkin(getOfflineUUID(username)), new ImageBufferDownload());
+            texturemanager.loadTexture(resourceLocationIn, itextureobject);
         }
 
-        return (ThreadDownloadImageData)object;
+        return (ThreadDownloadImageData)itextureobject;
     }
 
     /**
@@ -167,21 +140,6 @@ public abstract class AbstractClientPlayer extends EntityPlayer
             f *= 1.0F - f1 * 0.15F;
         }
 
-        return Reflector.ForgeHooksClient_getOffsetFOV.exists() ? Reflector.callFloat(Reflector.ForgeHooksClient_getOffsetFOV, new Object[] {this, Float.valueOf(f)}): f;
-    }
-
-    public String getNameClear()
-    {
-        return this.nameClear;
-    }
-
-    public ResourceLocation getLocationOfCape()
-    {
-        return this.locationOfCape;
-    }
-
-    public void setLocationOfCape(ResourceLocation p_setLocationOfCape_1_)
-    {
-        this.locationOfCape = p_setLocationOfCape_1_;
+        return f;
     }
 }

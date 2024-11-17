@@ -3,6 +3,9 @@ package net.minecraft.entity.player;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.mojang.authlib.GameProfile;
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockDirectional;
@@ -10,7 +13,14 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.command.server.CommandBlockLogic;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.IEntityMultiPart;
+import net.minecraft.entity.IMerchant;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.boss.EntityDragonPart;
 import net.minecraft.entity.item.EntityBoat;
@@ -29,23 +39,41 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryEnderChest;
-import net.minecraft.item.*;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.play.server.S12PacketEntityVelocity;
 import net.minecraft.potion.Potion;
-import net.minecraft.scoreboard.*;
+import net.minecraft.scoreboard.IScoreObjectiveCriteria;
+import net.minecraft.scoreboard.Score;
+import net.minecraft.scoreboard.ScoreObjective;
+import net.minecraft.scoreboard.ScorePlayerTeam;
+import net.minecraft.scoreboard.Scoreboard;
+import net.minecraft.scoreboard.Team;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatBase;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntitySign;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.FoodStats;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
+import net.minecraft.world.EnumDifficulty;
+import net.minecraft.world.IInteractionObject;
+import net.minecraft.world.LockCode;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldSettings;
 
 @SuppressWarnings("incomplete-switch")
 public abstract class EntityPlayer extends EntityLivingBase
@@ -1463,28 +1491,28 @@ public abstract class EntityPlayer extends EntityLivingBase
         return this.gameProfile;
     }
 
-    public EnumStatus trySleep(BlockPos bedLocation)
+    public EntityPlayer.EnumStatus trySleep(BlockPos bedLocation)
     {
         if (!this.worldObj.isRemote)
         {
             if (this.isPlayerSleeping() || !this.isEntityAlive())
             {
-                return EnumStatus.OTHER_PROBLEM;
+                return EntityPlayer.EnumStatus.OTHER_PROBLEM;
             }
 
             if (!this.worldObj.provider.isSurfaceWorld())
             {
-                return EnumStatus.NOT_POSSIBLE_HERE;
+                return EntityPlayer.EnumStatus.NOT_POSSIBLE_HERE;
             }
 
             if (this.worldObj.isDaytime())
             {
-                return EnumStatus.NOT_POSSIBLE_NOW;
+                return EntityPlayer.EnumStatus.NOT_POSSIBLE_NOW;
             }
 
             if (Math.abs(this.posX - (double)bedLocation.getX()) > 3.0D || Math.abs(this.posY - (double)bedLocation.getY()) > 2.0D || Math.abs(this.posZ - (double)bedLocation.getZ()) > 3.0D)
             {
-                return EnumStatus.TOO_FAR_AWAY;
+                return EntityPlayer.EnumStatus.TOO_FAR_AWAY;
             }
 
             double d0 = 8.0D;
@@ -1493,7 +1521,7 @@ public abstract class EntityPlayer extends EntityLivingBase
 
             if (!list.isEmpty())
             {
-                return EnumStatus.NOT_SAFE;
+                return EntityPlayer.EnumStatus.NOT_SAFE;
             }
         }
 
@@ -1546,7 +1574,7 @@ public abstract class EntityPlayer extends EntityLivingBase
             this.worldObj.updateAllPlayersSleepingFlag();
         }
 
-        return EnumStatus.OK;
+        return EntityPlayer.EnumStatus.OK;
     }
 
     private void func_175139_a(EnumFacing p_175139_1_)
@@ -2445,7 +2473,7 @@ public abstract class EntityPlayer extends EntityLivingBase
         SYSTEM(1, "options.chat.visibility.system"),
         HIDDEN(2, "options.chat.visibility.hidden");
 
-        private static final EnumChatVisibility[] ID_LOOKUP = new EnumChatVisibility[values().length];
+        private static final EntityPlayer.EnumChatVisibility[] ID_LOOKUP = new EntityPlayer.EnumChatVisibility[values().length];
         private final int chatVisibility;
         private final String resourceKey;
 
@@ -2460,7 +2488,7 @@ public abstract class EntityPlayer extends EntityLivingBase
             return this.chatVisibility;
         }
 
-        public static EnumChatVisibility getEnumChatVisibility(int id)
+        public static EntityPlayer.EnumChatVisibility getEnumChatVisibility(int id)
         {
             return ID_LOOKUP[id % ID_LOOKUP.length];
         }
@@ -2471,7 +2499,7 @@ public abstract class EntityPlayer extends EntityLivingBase
         }
 
         static {
-            for (EnumChatVisibility entityplayer$enumchatvisibility : values())
+            for (EntityPlayer.EnumChatVisibility entityplayer$enumchatvisibility : values())
             {
                 ID_LOOKUP[entityplayer$enumchatvisibility.chatVisibility] = entityplayer$enumchatvisibility;
             }

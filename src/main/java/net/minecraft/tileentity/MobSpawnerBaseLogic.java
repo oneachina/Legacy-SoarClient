@@ -1,23 +1,30 @@
 package net.minecraft.tileentity;
 
 import com.google.common.collect.Lists;
-import net.minecraft.entity.*;
+import java.util.List;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.StringUtils;
+import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public abstract class MobSpawnerBaseLogic
 {
     /** The delay to spawn. */
     private int spawnDelay = 20;
     private String mobID = "Pig";
-    private final List<WeightedRandomMinecart> minecartToSpawn = Lists.<WeightedRandomMinecart>newArrayList();
-    private WeightedRandomMinecart randomEntity;
+    private final List<MobSpawnerBaseLogic.WeightedRandomMinecart> minecartToSpawn = Lists.<MobSpawnerBaseLogic.WeightedRandomMinecart>newArrayList();
+    private MobSpawnerBaseLogic.WeightedRandomMinecart randomEntity;
 
     /** The rotation of the mob inside the mob spawner */
     private double mobRotation;
@@ -233,7 +240,7 @@ public abstract class MobSpawnerBaseLogic
 
         if (this.minecartToSpawn.size() > 0)
         {
-            this.setRandomEntity((WeightedRandomMinecart)WeightedRandom.getRandomItem(this.getSpawnerWorld().rand, this.minecartToSpawn));
+            this.setRandomEntity((MobSpawnerBaseLogic.WeightedRandomMinecart)WeightedRandom.getRandomItem(this.getSpawnerWorld().rand, this.minecartToSpawn));
         }
 
         this.func_98267_a(1);
@@ -251,17 +258,17 @@ public abstract class MobSpawnerBaseLogic
 
             for (int i = 0; i < nbttaglist.tagCount(); ++i)
             {
-                this.minecartToSpawn.add(new WeightedRandomMinecart(nbttaglist.getCompoundTagAt(i)));
+                this.minecartToSpawn.add(new MobSpawnerBaseLogic.WeightedRandomMinecart(nbttaglist.getCompoundTagAt(i)));
             }
         }
 
         if (nbt.hasKey("SpawnData", 10))
         {
-            this.setRandomEntity(new WeightedRandomMinecart(nbt.getCompoundTag("SpawnData"), this.mobID));
+            this.setRandomEntity(new MobSpawnerBaseLogic.WeightedRandomMinecart(nbt.getCompoundTag("SpawnData"), this.mobID));
         }
         else
         {
-            this.setRandomEntity((WeightedRandomMinecart)null);
+            this.setRandomEntity((MobSpawnerBaseLogic.WeightedRandomMinecart)null);
         }
 
         if (nbt.hasKey("MinSpawnDelay", 99))
@@ -314,7 +321,7 @@ public abstract class MobSpawnerBaseLogic
 
                 if (this.minecartToSpawn.size() > 0)
                 {
-                    for (WeightedRandomMinecart mobspawnerbaselogic$weightedrandomminecart : this.minecartToSpawn)
+                    for (MobSpawnerBaseLogic.WeightedRandomMinecart mobspawnerbaselogic$weightedrandomminecart : this.minecartToSpawn)
                     {
                         nbttaglist.appendTag(mobspawnerbaselogic$weightedrandomminecart.toNBT());
                     }
@@ -361,12 +368,12 @@ public abstract class MobSpawnerBaseLogic
         }
     }
 
-    private WeightedRandomMinecart getRandomEntity()
+    private MobSpawnerBaseLogic.WeightedRandomMinecart getRandomEntity()
     {
         return this.randomEntity;
     }
 
-    public void setRandomEntity(WeightedRandomMinecart p_98277_1_)
+    public void setRandomEntity(MobSpawnerBaseLogic.WeightedRandomMinecart p_98277_1_)
     {
         this.randomEntity = p_98277_1_;
     }

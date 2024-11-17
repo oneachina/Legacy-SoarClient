@@ -59,7 +59,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
 
     public GuiContainerCreative(EntityPlayer p_i1088_1_)
     {
-        super(new ContainerCreative(p_i1088_1_));
+        super(new GuiContainerCreative.ContainerCreative(p_i1088_1_));
         p_i1088_1_.openContainer = this.inventorySlots;
         this.allowUserInput = true;
         this.ySize = 136;
@@ -141,7 +141,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
             }
             else
             {
-                this.mc.thePlayer.inventoryContainer.slotClick(slotIn == null ? slotId : ((CreativeSlot)slotIn).slot.slotNumber, clickedButton, clickType, this.mc.thePlayer);
+                this.mc.thePlayer.inventoryContainer.slotClick(slotIn == null ? slotId : ((GuiContainerCreative.CreativeSlot)slotIn).slot.slotNumber, clickedButton, clickType, this.mc.thePlayer);
                 this.mc.thePlayer.inventoryContainer.detectAndSendChanges();
             }
         }
@@ -340,7 +340,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
 
     private void updateCreativeSearch()
     {
-        ContainerCreative guicontainercreative$containercreative = (ContainerCreative)this.inventorySlots;
+        GuiContainerCreative.ContainerCreative guicontainercreative$containercreative = (GuiContainerCreative.ContainerCreative)this.inventorySlots;
         guicontainercreative$containercreative.itemList.clear();
 
         for (Item item : Item.itemRegistry)
@@ -450,14 +450,14 @@ public class GuiContainerCreative extends InventoryEffectRenderer
      */
     private boolean needsScrollBars()
     {
-        return selectedTabIndex != CreativeTabs.tabInventory.getTabIndex() && CreativeTabs.creativeTabArray[selectedTabIndex].shouldHidePlayerInventory() && ((ContainerCreative)this.inventorySlots).func_148328_e();
+        return selectedTabIndex != CreativeTabs.tabInventory.getTabIndex() && CreativeTabs.creativeTabArray[selectedTabIndex].shouldHidePlayerInventory() && ((GuiContainerCreative.ContainerCreative)this.inventorySlots).func_148328_e();
     }
 
     private void setCurrentCreativeTab(CreativeTabs p_147050_1_)
     {
         int i = selectedTabIndex;
         selectedTabIndex = p_147050_1_.getTabIndex();
-        ContainerCreative guicontainercreative$containercreative = (ContainerCreative)this.inventorySlots;
+        GuiContainerCreative.ContainerCreative guicontainercreative$containercreative = (GuiContainerCreative.ContainerCreative)this.inventorySlots;
         this.dragSplittingSlots.clear();
         guicontainercreative$containercreative.itemList.clear();
         p_147050_1_.displayAllReleventItems(guicontainercreative$containercreative.itemList);
@@ -475,7 +475,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
 
             for (int j = 0; j < container.inventorySlots.size(); ++j)
             {
-                Slot slot = new CreativeSlot((Slot)container.inventorySlots.get(j), j);
+                Slot slot = new GuiContainerCreative.CreativeSlot((Slot)container.inventorySlots.get(j), j);
                 guicontainercreative$containercreative.inventorySlots.add(slot);
 
                 if (j >= 5 && j < 9)
@@ -550,7 +550,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
 
         if (i != 0 && this.needsScrollBars())
         {
-            int j = ((ContainerCreative)this.inventorySlots).itemList.size() / 9 - 5;
+            int j = ((GuiContainerCreative.ContainerCreative)this.inventorySlots).itemList.size() / 9 - 5;
 
             if (i > 0)
             {
@@ -564,7 +564,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
 
             this.currentScroll = (float)((double)this.currentScroll - (double)i / (double)j);
             this.currentScroll = MathHelper.clamp_float(this.currentScroll, 0.0F, 1.0F);
-            ((ContainerCreative)this.inventorySlots).scrollTo(this.currentScroll);
+            ((GuiContainerCreative.ContainerCreative)this.inventorySlots).scrollTo(this.currentScroll);
         }
     }
 
@@ -597,7 +597,7 @@ public class GuiContainerCreative extends InventoryEffectRenderer
         {
             this.currentScroll = ((float)(mouseY - l) - 7.5F) / ((float)(j1 - l) - 15.0F);
             this.currentScroll = MathHelper.clamp_float(this.currentScroll, 0.0F, 1.0F);
-            ((ContainerCreative)this.inventorySlots).scrollTo(this.currentScroll);
+            ((GuiContainerCreative.ContainerCreative)this.inventorySlots).scrollTo(this.currentScroll);
         }
 
         super.drawScreen(mouseX, mouseY, partialTicks);

@@ -1,6 +1,9 @@
 package net.minecraft.world;
 
 import com.google.common.collect.Lists;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 import net.minecraft.block.BlockPortal;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockPattern;
@@ -11,17 +14,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.LongHashMap;
 import net.minecraft.util.MathHelper;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-
 public class Teleporter
 {
     private final WorldServer worldServerInstance;
 
     /** A private Random() function in Teleporter */
     private final Random random;
-    private final LongHashMap destinationCoordinateCache = new LongHashMap();
+    private final LongHashMap<Teleporter.PortalPosition> destinationCoordinateCache = new LongHashMap();
     private final List<Long> destinationCoordinateKeys = Lists.<Long>newArrayList();
 
     public Teleporter(WorldServer worldIn)
@@ -80,7 +79,7 @@ public class Teleporter
 
         if (this.destinationCoordinateCache.containsItem(l))
         {
-            PortalPosition teleporter$portalposition = (PortalPosition)this.destinationCoordinateCache.getValueByKey(l);
+            Teleporter.PortalPosition teleporter$portalposition = (Teleporter.PortalPosition)this.destinationCoordinateCache.getValueByKey(l);
             d0 = 0.0D;
             blockpos = teleporter$portalposition;
             teleporter$portalposition.lastUpdateTime = this.worldServerInstance.getTotalWorldTime();
@@ -124,7 +123,7 @@ public class Teleporter
         {
             if (flag)
             {
-                this.destinationCoordinateCache.add(l, new PortalPosition(blockpos, this.worldServerInstance.getTotalWorldTime()));
+                this.destinationCoordinateCache.add(l, new Teleporter.PortalPosition(blockpos, this.worldServerInstance.getTotalWorldTime()));
                 this.destinationCoordinateKeys.add(Long.valueOf(l));
             }
 
@@ -407,7 +406,7 @@ public class Teleporter
             while (iterator.hasNext())
             {
                 Long olong = (Long)iterator.next();
-                PortalPosition teleporter$portalposition = (PortalPosition)this.destinationCoordinateCache.getValueByKey(olong.longValue());
+                Teleporter.PortalPosition teleporter$portalposition = (Teleporter.PortalPosition)this.destinationCoordinateCache.getValueByKey(olong.longValue());
 
                 if (teleporter$portalposition == null || teleporter$portalposition.lastUpdateTime < i)
                 {

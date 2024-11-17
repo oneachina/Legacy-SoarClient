@@ -1,6 +1,7 @@
 package net.minecraft.client.gui;
 
 import com.google.common.collect.Maps;
+import java.util.Map;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -12,13 +13,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Vec4b;
 import net.minecraft.world.storage.MapData;
 
-import java.util.Map;
-
 public class MapItemRenderer
 {
     private static final ResourceLocation mapIcons = new ResourceLocation("textures/map/map_icons.png");
     private final TextureManager textureManager;
-    private final Map<String, Instance> loadedMaps = Maps.<String, Instance>newHashMap();
+    private final Map<String, MapItemRenderer.Instance> loadedMaps = Maps.<String, MapItemRenderer.Instance>newHashMap();
 
     public MapItemRenderer(TextureManager textureManagerIn)
     {
@@ -39,15 +38,15 @@ public class MapItemRenderer
     }
 
     /**
-     * Returns {@link Instance MapItemRenderer.Instance} with given map data
+     * Returns {@link net.minecraft.client.gui.MapItemRenderer.Instance MapItemRenderer.Instance} with given map data
      */
-    private Instance getMapRendererInstance(MapData mapdataIn)
+    private MapItemRenderer.Instance getMapRendererInstance(MapData mapdataIn)
     {
-        Instance mapitemrenderer$instance = (Instance)this.loadedMaps.get(mapdataIn.mapName);
+        MapItemRenderer.Instance mapitemrenderer$instance = (MapItemRenderer.Instance)this.loadedMaps.get(mapdataIn.mapName);
 
         if (mapitemrenderer$instance == null)
         {
-            mapitemrenderer$instance = new Instance(mapdataIn);
+            mapitemrenderer$instance = new MapItemRenderer.Instance(mapdataIn);
             this.loadedMaps.put(mapdataIn.mapName, mapitemrenderer$instance);
         }
 
@@ -59,7 +58,7 @@ public class MapItemRenderer
      */
     public void clearLoadedMaps()
     {
-        for (Instance mapitemrenderer$instance : this.loadedMaps.values())
+        for (MapItemRenderer.Instance mapitemrenderer$instance : this.loadedMaps.values())
         {
             this.textureManager.deleteTexture(mapitemrenderer$instance.location);
         }

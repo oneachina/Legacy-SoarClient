@@ -1,5 +1,7 @@
 package net.minecraft.entity.ai;
 
+import java.util.List;
+import java.util.Random;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.passive.EntityAnimal;
@@ -9,9 +11,6 @@ import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
-
-import java.util.List;
-import java.util.Random;
 
 public class EntityAIMate extends EntityAIBase
 {

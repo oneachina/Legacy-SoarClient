@@ -1,6 +1,7 @@
 package net.minecraft.client.gui;
 
 import io.netty.buffer.Unpooled;
+import java.io.IOException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -20,8 +21,6 @@ import net.minecraft.world.World;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
-
 public class GuiMerchant extends GuiContainer
 {
     private static final Logger logger = LogManager.getLogger();
@@ -33,10 +32,10 @@ public class GuiMerchant extends GuiContainer
     private IMerchant merchant;
 
     /** The button which proceeds to the next available merchant recipe. */
-    private MerchantButton nextButton;
+    private GuiMerchant.MerchantButton nextButton;
 
     /** Returns to the previous Merchant recipe if one is applicable. */
-    private MerchantButton previousButton;
+    private GuiMerchant.MerchantButton previousButton;
 
     /**
      * The integer value corresponding to the currently selected merchant recipe.
@@ -62,8 +61,8 @@ public class GuiMerchant extends GuiContainer
         super.initGui();
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
-        this.buttonList.add(this.nextButton = new MerchantButton(1, i + 120 + 27, j + 24 - 1, true));
-        this.buttonList.add(this.previousButton = new MerchantButton(2, i + 36 - 19, j + 24 - 1, false));
+        this.buttonList.add(this.nextButton = new GuiMerchant.MerchantButton(1, i + 120 + 27, j + 24 - 1, true));
+        this.buttonList.add(this.previousButton = new GuiMerchant.MerchantButton(2, i + 36 - 19, j + 24 - 1, false));
         this.nextButton.enabled = false;
         this.previousButton.enabled = false;
     }

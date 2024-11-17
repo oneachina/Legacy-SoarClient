@@ -19,9 +19,9 @@ public class ItemTool extends Item
     private float damageVsEntity;
 
     /** The material this tool is made from. */
-    protected ToolMaterial toolMaterial;
+    protected Item.ToolMaterial toolMaterial;
 
-    protected ItemTool(float attackDamage, ToolMaterial material, Set<Block> effectiveBlocks)
+    protected ItemTool(float attackDamage, Item.ToolMaterial material, Set<Block> effectiveBlocks)
     {
         this.toolMaterial = material;
         this.effectiveBlocks = effectiveBlocks;
@@ -68,7 +68,7 @@ public class ItemTool extends Item
         return true;
     }
 
-    public ToolMaterial getToolMaterial()
+    public Item.ToolMaterial getToolMaterial()
     {
         return this.toolMaterial;
     }

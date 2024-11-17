@@ -1,7 +1,6 @@
 package net.minecraft.world.chunk.storage;
 
 import com.google.common.collect.Maps;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -43,7 +42,6 @@ public class RegionFileCache
     /**
      * clears region file references
      */
-
     public static synchronized void clearRegionFileReferences()
     {
         for (RegionFile regionfile : regionsByFilename.values())

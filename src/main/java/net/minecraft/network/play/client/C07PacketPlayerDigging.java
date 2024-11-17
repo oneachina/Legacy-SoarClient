@@ -13,13 +13,13 @@ public class C07PacketPlayerDigging implements Packet<INetHandlerPlayServer>
     private EnumFacing facing;
 
     /** Status of the digging (started, ongoing, broken). */
-    private Action status;
+    private C07PacketPlayerDigging.Action status;
 
     public C07PacketPlayerDigging()
     {
     }
 
-    public C07PacketPlayerDigging(Action statusIn, BlockPos posIn, EnumFacing facingIn)
+    public C07PacketPlayerDigging(C07PacketPlayerDigging.Action statusIn, BlockPos posIn, EnumFacing facingIn)
     {
         this.status = statusIn;
         this.position = posIn;
@@ -31,7 +31,7 @@ public class C07PacketPlayerDigging implements Packet<INetHandlerPlayServer>
      */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
-        this.status = (Action)buf.readEnumValue(Action.class);
+        this.status = (C07PacketPlayerDigging.Action)buf.readEnumValue(C07PacketPlayerDigging.Action.class);
         this.position = buf.readBlockPos();
         this.facing = EnumFacing.getFront(buf.readUnsignedByte());
     }
@@ -64,7 +64,7 @@ public class C07PacketPlayerDigging implements Packet<INetHandlerPlayServer>
         return this.facing;
     }
 
-    public Action getStatus()
+    public C07PacketPlayerDigging.Action getStatus()
     {
         return this.status;
     }

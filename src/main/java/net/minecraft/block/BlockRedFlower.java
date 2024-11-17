@@ -5,8 +5,8 @@ public class BlockRedFlower extends BlockFlower
     /**
      * Get the Type of this flower (Yellow/Red)
      */
-    public EnumFlowerColor getBlockType()
+    public BlockFlower.EnumFlowerColor getBlockType()
     {
-        return EnumFlowerColor.RED;
+        return BlockFlower.EnumFlowerColor.RED;
     }
 }

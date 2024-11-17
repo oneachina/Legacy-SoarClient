@@ -23,13 +23,13 @@ import net.minecraft.world.World;
 public class BlockPistonExtension extends Block
 {
     public static final PropertyDirection FACING = PropertyDirection.create("facing");
-    public static final PropertyEnum<EnumPistonType> TYPE = PropertyEnum.<EnumPistonType>create("type", EnumPistonType.class);
+    public static final PropertyEnum<BlockPistonExtension.EnumPistonType> TYPE = PropertyEnum.<BlockPistonExtension.EnumPistonType>create("type", BlockPistonExtension.EnumPistonType.class);
     public static final PropertyBool SHORT = PropertyBool.create("short");
 
     public BlockPistonExtension()
     {
         super(Material.piston);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(TYPE, EnumPistonType.DEFAULT).withProperty(SHORT, Boolean.valueOf(false)));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(TYPE, BlockPistonExtension.EnumPistonType.DEFAULT).withProperty(SHORT, Boolean.valueOf(false)));
         this.setStepSound(soundTypePiston);
         this.setHardness(0.5F);
     }
@@ -222,7 +222,7 @@ public class BlockPistonExtension extends Block
 
     public Item getItem(World worldIn, BlockPos pos)
     {
-        return worldIn.getBlockState(pos).getValue(TYPE) == EnumPistonType.STICKY ? Item.getItemFromBlock(Blocks.sticky_piston) : Item.getItemFromBlock(Blocks.piston);
+        return worldIn.getBlockState(pos).getValue(TYPE) == BlockPistonExtension.EnumPistonType.STICKY ? Item.getItemFromBlock(Blocks.sticky_piston) : Item.getItemFromBlock(Blocks.piston);
     }
 
     /**
@@ -230,7 +230,7 @@ public class BlockPistonExtension extends Block
      */
     public IBlockState getStateFromMeta(int meta)
     {
-        return this.getDefaultState().withProperty(FACING, getFacing(meta)).withProperty(TYPE, (meta & 8) > 0 ? EnumPistonType.STICKY : EnumPistonType.DEFAULT);
+        return this.getDefaultState().withProperty(FACING, getFacing(meta)).withProperty(TYPE, (meta & 8) > 0 ? BlockPistonExtension.EnumPistonType.STICKY : BlockPistonExtension.EnumPistonType.DEFAULT);
     }
 
     /**
@@ -241,7 +241,7 @@ public class BlockPistonExtension extends Block
         int i = 0;
         i = i | ((EnumFacing)state.getValue(FACING)).getIndex();
 
-        if (state.getValue(TYPE) == EnumPistonType.STICKY)
+        if (state.getValue(TYPE) == BlockPistonExtension.EnumPistonType.STICKY)
         {
             i |= 8;
         }

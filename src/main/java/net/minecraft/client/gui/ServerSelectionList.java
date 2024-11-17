@@ -11,7 +11,7 @@ public class ServerSelectionList extends GuiListExtended
     private final GuiMultiplayer owner;
     private final List<ServerListEntryNormal> field_148198_l = Lists.<ServerListEntryNormal>newArrayList();
     private final List<ServerListEntryLanDetected> field_148199_m = Lists.<ServerListEntryLanDetected>newArrayList();
-    private final IGuiListEntry lanScanEntry = new ServerListEntryLanScan();
+    private final GuiListExtended.IGuiListEntry lanScanEntry = new ServerListEntryLanScan();
     private int selectedSlotIndex = -1;
 
     public ServerSelectionList(GuiMultiplayer ownerIn, Minecraft mcIn, int widthIn, int heightIn, int topIn, int bottomIn, int slotHeightIn)
@@ -23,11 +23,11 @@ public class ServerSelectionList extends GuiListExtended
     /**
      * Gets the IGuiListEntry object for the given index
      */
-    public IGuiListEntry getListEntry(int index)
+    public GuiListExtended.IGuiListEntry getListEntry(int index)
     {
         if (index < this.field_148198_l.size())
         {
-            return (IGuiListEntry)this.field_148198_l.get(index);
+            return (GuiListExtended.IGuiListEntry)this.field_148198_l.get(index);
         }
         else
         {
@@ -40,7 +40,7 @@ public class ServerSelectionList extends GuiListExtended
             else
             {
                 --index;
-                return (IGuiListEntry)this.field_148199_m.get(index);
+                return (GuiListExtended.IGuiListEntry)this.field_148199_m.get(index);
             }
         }
     }

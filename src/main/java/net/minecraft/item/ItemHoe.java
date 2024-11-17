@@ -13,9 +13,9 @@ import net.minecraft.world.World;
 
 public class ItemHoe extends Item
 {
-    protected ToolMaterial theToolMaterial;
+    protected Item.ToolMaterial theToolMaterial;
 
-    public ItemHoe(ToolMaterial material)
+    public ItemHoe(Item.ToolMaterial material)
     {
         this.theToolMaterial = material;
         this.maxStackSize = 1;

@@ -54,7 +54,7 @@ public class EntityGuardian extends EntityMob
         super(worldIn);
         this.experienceValue = 10;
         this.setSize(0.85F, 0.85F);
-        this.tasks.addTask(4, new AIGuardianAttack(this));
+        this.tasks.addTask(4, new EntityGuardian.AIGuardianAttack(this));
         EntityAIMoveTowardsRestriction entityaimovetowardsrestriction;
         this.tasks.addTask(5, entityaimovetowardsrestriction = new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, this.wander = new EntityAIWander(this, 1.0D, 80));
@@ -63,8 +63,8 @@ public class EntityGuardian extends EntityMob
         this.tasks.addTask(9, new EntityAILookIdle(this));
         this.wander.setMutexBits(3);
         entityaimovetowardsrestriction.setMutexBits(3);
-        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 10, true, false, new GuardianTargetSelector(this)));
-        this.moveHelper = new GuardianMoveHelper(this);
+        this.targetTasks.addTask(1, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, 10, true, false, new EntityGuardian.GuardianTargetSelector(this)));
+        this.moveHelper = new EntityGuardian.GuardianMoveHelper(this);
         this.field_175484_c = this.field_175482_b = this.rand.nextFloat();
     }
 

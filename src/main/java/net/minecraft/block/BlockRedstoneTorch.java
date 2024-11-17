@@ -17,28 +17,28 @@ import net.minecraft.world.World;
 
 public class BlockRedstoneTorch extends BlockTorch
 {
-    private static Map<World, List<Toggle>> toggles = Maps.<World, List<Toggle>>newHashMap();
+    private static Map<World, List<BlockRedstoneTorch.Toggle>> toggles = Maps.<World, List<BlockRedstoneTorch.Toggle>>newHashMap();
     private final boolean isOn;
 
     private boolean isBurnedOut(World worldIn, BlockPos pos, boolean turnOff)
     {
         if (!toggles.containsKey(worldIn))
         {
-            toggles.put(worldIn, Lists.<Toggle>newArrayList());
+            toggles.put(worldIn, Lists.<BlockRedstoneTorch.Toggle>newArrayList());
         }
 
-        List<Toggle> list = (List)toggles.get(worldIn);
+        List<BlockRedstoneTorch.Toggle> list = (List)toggles.get(worldIn);
 
         if (turnOff)
         {
-            list.add(new Toggle(pos, worldIn.getTotalWorldTime()));
+            list.add(new BlockRedstoneTorch.Toggle(pos, worldIn.getTotalWorldTime()));
         }
 
         int i = 0;
 
         for (int j = 0; j < list.size(); ++j)
         {
-            Toggle blockredstonetorch$toggle = (Toggle)list.get(j);
+            BlockRedstoneTorch.Toggle blockredstonetorch$toggle = (BlockRedstoneTorch.Toggle)list.get(j);
 
             if (blockredstonetorch$toggle.pos.equals(pos))
             {
@@ -112,9 +112,9 @@ public class BlockRedstoneTorch extends BlockTorch
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
         boolean flag = this.shouldBeOff(worldIn, pos, state);
-        List<Toggle> list = (List)toggles.get(worldIn);
+        List<BlockRedstoneTorch.Toggle> list = (List)toggles.get(worldIn);
 
-        while (list != null && !list.isEmpty() && worldIn.getTotalWorldTime() - ((Toggle)list.get(0)).time > 60L)
+        while (list != null && !list.isEmpty() && worldIn.getTotalWorldTime() - ((BlockRedstoneTorch.Toggle)list.get(0)).time > 60L)
         {
             list.remove(0);
         }

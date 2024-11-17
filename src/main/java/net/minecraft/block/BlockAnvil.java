@@ -65,7 +65,7 @@ public class BlockAnvil extends BlockFalling
     {
         if (!worldIn.isRemote)
         {
-            playerIn.displayGui(new Anvil(worldIn, pos));
+            playerIn.displayGui(new BlockAnvil.Anvil(worldIn, pos));
         }
 
         return true;

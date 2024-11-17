@@ -184,7 +184,6 @@ import org.lwjgl.opengl.GLContext;
 import org.lwjgl.opengl.OpenGLException;
 import org.lwjgl.opengl.PixelFormat;
 import org.lwjgl.util.glu.GLU;
-import org.onea.MoreClient;
 
 public class Minecraft implements IThreadListener, IPlayerUsage
 {
@@ -590,8 +589,6 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         }
 
         this.renderGlobal.makeEntityOutlineShader();
-
-        MoreClient.init();
     }
 
     private void registerMetadataSerializers()
@@ -619,7 +616,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
     private void createDisplay() throws LWJGLException
     {
         Display.setResizable(true);
-        Display.setTitle("More Client | loading...");
+        Display.setTitle("Minecraft 1.8.8");
 
         try
         {
@@ -1500,7 +1497,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
         }
     }
 
-    public void clickMouse()
+    private void clickMouse()
     {
         if (this.leftClickCounter <= 0)
         {
@@ -2699,7 +2696,7 @@ public class Minecraft implements IThreadListener, IPlayerUsage
             {
                 StringBuilder stringbuilder = new StringBuilder();
 
-                for (Object s : Minecraft.this.gameSettings.resourcePacks)
+                for (String s : Minecraft.this.gameSettings.resourcePacks)
                 {
                     if (stringbuilder.length() > 0)
                     {

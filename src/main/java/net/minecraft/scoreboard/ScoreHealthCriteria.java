@@ -1,9 +1,8 @@
 package net.minecraft.scoreboard;
 
+import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
-
-import java.util.List;
 
 public class ScoreHealthCriteria extends ScoreDummyCriteria
 {
@@ -34,8 +33,8 @@ public class ScoreHealthCriteria extends ScoreDummyCriteria
         return true;
     }
 
-    public EnumRenderType getRenderType()
+    public IScoreObjectiveCriteria.EnumRenderType getRenderType()
     {
-        return EnumRenderType.HEARTS;
+        return IScoreObjectiveCriteria.EnumRenderType.HEARTS;
     }
 }

@@ -53,7 +53,7 @@ public class UserList<K, V extends UserListEntry<K>>
     {
         this.saveFile = saveFile;
         GsonBuilder gsonbuilder = (new GsonBuilder()).setPrettyPrinting();
-        gsonbuilder.registerTypeHierarchyAdapter(UserListEntry.class, new Serializer());
+        gsonbuilder.registerTypeHierarchyAdapter(UserListEntry.class, new UserList.Serializer());
         this.gson = gsonbuilder.create();
     }
 

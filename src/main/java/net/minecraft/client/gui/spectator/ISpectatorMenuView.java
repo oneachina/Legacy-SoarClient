@@ -1,8 +1,7 @@
 package net.minecraft.client.gui.spectator;
 
-import net.minecraft.util.IChatComponent;
-
 import java.util.List;
+import net.minecraft.util.IChatComponent;
 
 public interface ISpectatorMenuView
 {

@@ -1,10 +1,9 @@
 package net.minecraft.command;
 
+import java.util.List;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.WorldServer;
-
-import java.util.List;
 
 public class CommandTime extends CommandBase
 {

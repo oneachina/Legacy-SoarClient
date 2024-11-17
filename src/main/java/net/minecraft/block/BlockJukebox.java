@@ -50,9 +50,9 @@ public class BlockJukebox extends BlockContainer
         {
             TileEntity tileentity = worldIn.getTileEntity(pos);
 
-            if (tileentity instanceof TileEntityJukebox)
+            if (tileentity instanceof BlockJukebox.TileEntityJukebox)
             {
-                ((TileEntityJukebox)tileentity).setRecord(new ItemStack(recordStack.getItem(), 1, recordStack.getMetadata()));
+                ((BlockJukebox.TileEntityJukebox)tileentity).setRecord(new ItemStack(recordStack.getItem(), 1, recordStack.getMetadata()));
                 worldIn.setBlockState(pos, state.withProperty(HAS_RECORD, Boolean.valueOf(true)), 2);
             }
         }
@@ -64,9 +64,9 @@ public class BlockJukebox extends BlockContainer
         {
             TileEntity tileentity = worldIn.getTileEntity(pos);
 
-            if (tileentity instanceof TileEntityJukebox)
+            if (tileentity instanceof BlockJukebox.TileEntityJukebox)
             {
-                TileEntityJukebox blockjukebox$tileentityjukebox = (TileEntityJukebox)tileentity;
+                BlockJukebox.TileEntityJukebox blockjukebox$tileentityjukebox = (BlockJukebox.TileEntityJukebox)tileentity;
                 ItemStack itemstack = blockjukebox$tileentityjukebox.getRecord();
 
                 if (itemstack != null)
@@ -109,7 +109,7 @@ public class BlockJukebox extends BlockContainer
      */
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
-        return new TileEntityJukebox();
+        return new BlockJukebox.TileEntityJukebox();
     }
 
     public boolean hasComparatorInputOverride()
@@ -121,9 +121,9 @@ public class BlockJukebox extends BlockContainer
     {
         TileEntity tileentity = worldIn.getTileEntity(pos);
 
-        if (tileentity instanceof TileEntityJukebox)
+        if (tileentity instanceof BlockJukebox.TileEntityJukebox)
         {
-            ItemStack itemstack = ((TileEntityJukebox)tileentity).getRecord();
+            ItemStack itemstack = ((BlockJukebox.TileEntityJukebox)tileentity).getRecord();
 
             if (itemstack != null)
             {

@@ -1,11 +1,10 @@
 package net.minecraft.scoreboard;
 
 import com.google.common.collect.Maps;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumChatFormatting;
-
 import java.util.List;
 import java.util.Map;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumChatFormatting;
 
 public interface IScoreObjectiveCriteria
 {
@@ -25,14 +24,14 @@ public interface IScoreObjectiveCriteria
 
     boolean isReadOnly();
 
-    EnumRenderType getRenderType();
+    IScoreObjectiveCriteria.EnumRenderType getRenderType();
 
     public static enum EnumRenderType
     {
         INTEGER("integer"),
         HEARTS("hearts");
 
-        private static final Map<String, EnumRenderType> field_178801_c = Maps.<String, EnumRenderType>newHashMap();
+        private static final Map<String, IScoreObjectiveCriteria.EnumRenderType> field_178801_c = Maps.<String, IScoreObjectiveCriteria.EnumRenderType>newHashMap();
         private final String field_178798_d;
 
         private EnumRenderType(String p_i45548_3_)
@@ -45,14 +44,14 @@ public interface IScoreObjectiveCriteria
             return this.field_178798_d;
         }
 
-        public static EnumRenderType func_178795_a(String p_178795_0_)
+        public static IScoreObjectiveCriteria.EnumRenderType func_178795_a(String p_178795_0_)
         {
-            EnumRenderType iscoreobjectivecriteria$enumrendertype = (EnumRenderType)field_178801_c.get(p_178795_0_);
+            IScoreObjectiveCriteria.EnumRenderType iscoreobjectivecriteria$enumrendertype = (IScoreObjectiveCriteria.EnumRenderType)field_178801_c.get(p_178795_0_);
             return iscoreobjectivecriteria$enumrendertype == null ? INTEGER : iscoreobjectivecriteria$enumrendertype;
         }
 
         static {
-            for (EnumRenderType iscoreobjectivecriteria$enumrendertype : values())
+            for (IScoreObjectiveCriteria.EnumRenderType iscoreobjectivecriteria$enumrendertype : values())
             {
                 field_178801_c.put(iscoreobjectivecriteria$enumrendertype.func_178796_a(), iscoreobjectivecriteria$enumrendertype);
             }

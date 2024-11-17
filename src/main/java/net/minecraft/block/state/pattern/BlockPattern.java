@@ -55,7 +55,7 @@ public class BlockPattern
     /**
      * checks that the given pattern & rotation is at the block co-ordinates.
      */
-    private PatternHelper checkPatternAt(BlockPos pos, EnumFacing finger, EnumFacing thumb, LoadingCache<BlockPos, BlockWorldState> lcache)
+    private BlockPattern.PatternHelper checkPatternAt(BlockPos pos, EnumFacing finger, EnumFacing thumb, LoadingCache<BlockPos, BlockWorldState> lcache)
     {
         for (int i = 0; i < this.palmLength; ++i)
         {
@@ -71,14 +71,14 @@ public class BlockPattern
             }
         }
 
-        return new PatternHelper(pos, finger, thumb, lcache, this.palmLength, this.thumbLength, this.fingerLength);
+        return new BlockPattern.PatternHelper(pos, finger, thumb, lcache, this.palmLength, this.thumbLength, this.fingerLength);
     }
 
     /**
      * Calculates whether the given world position matches the pattern. Warning, fairly heavy function. @return a
      * BlockPattern.PatternHelper if found, null otherwise.
      */
-    public PatternHelper match(World worldIn, BlockPos pos)
+    public BlockPattern.PatternHelper match(World worldIn, BlockPos pos)
     {
         LoadingCache<BlockPos, BlockWorldState> loadingcache = func_181627_a(worldIn, false);
         int i = Math.max(Math.max(this.palmLength, this.thumbLength), this.fingerLength);
@@ -91,7 +91,7 @@ public class BlockPattern
                 {
                     if (enumfacing1 != enumfacing && enumfacing1 != enumfacing.getOpposite())
                     {
-                        PatternHelper blockpattern$patternhelper = this.checkPatternAt(blockpos, enumfacing, enumfacing1, loadingcache);
+                        BlockPattern.PatternHelper blockpattern$patternhelper = this.checkPatternAt(blockpos, enumfacing, enumfacing1, loadingcache);
 
                         if (blockpattern$patternhelper != null)
                         {
@@ -107,7 +107,7 @@ public class BlockPattern
 
     public static LoadingCache<BlockPos, BlockWorldState> func_181627_a(World p_181627_0_, boolean p_181627_1_)
     {
-        return CacheBuilder.newBuilder().<BlockPos, BlockWorldState>build(new CacheLoader(p_181627_0_, p_181627_1_));
+        return CacheBuilder.newBuilder().<BlockPos, BlockWorldState>build(new BlockPattern.CacheLoader(p_181627_0_, p_181627_1_));
     }
 
     /**

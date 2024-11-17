@@ -44,7 +44,7 @@ public class Village
     /** Timestamp of tick count when villager last bred */
     private int noBreedTicks;
     private TreeMap<String, Integer> playerReputation = new TreeMap();
-    private List<VillageAggressor> villageAgressors = Lists.<VillageAggressor>newArrayList();
+    private List<Village.VillageAggressor> villageAgressors = Lists.<Village.VillageAggressor>newArrayList();
     private int numIronGolems;
 
     public Village()
@@ -216,7 +216,7 @@ public class Village
     }
 
     /**
-     * Returns {@link VillageDoorInfo VillageDoorInfo} from given block position
+     * Returns {@link net.minecraft.village.VillageDoorInfo VillageDoorInfo} from given block position
      */
     public VillageDoorInfo getDoorInfo(BlockPos pos)
     {
@@ -287,7 +287,7 @@ public class Village
 
     public void addOrRenewAgressor(EntityLivingBase entitylivingbaseIn)
     {
-        for (VillageAggressor village$villageaggressor : this.villageAgressors)
+        for (Village.VillageAggressor village$villageaggressor : this.villageAgressors)
         {
             if (village$villageaggressor.agressor == entitylivingbaseIn)
             {
@@ -296,17 +296,17 @@ public class Village
             }
         }
 
-        this.villageAgressors.add(new VillageAggressor(entitylivingbaseIn, this.tickCounter));
+        this.villageAgressors.add(new Village.VillageAggressor(entitylivingbaseIn, this.tickCounter));
     }
 
     public EntityLivingBase findNearestVillageAggressor(EntityLivingBase entitylivingbaseIn)
     {
         double d0 = Double.MAX_VALUE;
-        VillageAggressor village$villageaggressor = null;
+        Village.VillageAggressor village$villageaggressor = null;
 
         for (int i = 0; i < this.villageAgressors.size(); ++i)
         {
-            VillageAggressor village$villageaggressor1 = (VillageAggressor)this.villageAgressors.get(i);
+            Village.VillageAggressor village$villageaggressor1 = (Village.VillageAggressor)this.villageAgressors.get(i);
             double d1 = village$villageaggressor1.agressor.getDistanceSqToEntity(entitylivingbaseIn);
 
             if (d1 <= d0)
@@ -348,11 +348,11 @@ public class Village
 
     private void removeDeadAndOldAgressors()
     {
-        Iterator<VillageAggressor> iterator = this.villageAgressors.iterator();
+        Iterator<Village.VillageAggressor> iterator = this.villageAgressors.iterator();
 
         while (iterator.hasNext())
         {
-            VillageAggressor village$villageaggressor = (VillageAggressor)iterator.next();
+            Village.VillageAggressor village$villageaggressor = (Village.VillageAggressor)iterator.next();
 
             if (!village$villageaggressor.agressor.isEntityAlive() || Math.abs(this.tickCounter - village$villageaggressor.agressionTime) > 300)
             {

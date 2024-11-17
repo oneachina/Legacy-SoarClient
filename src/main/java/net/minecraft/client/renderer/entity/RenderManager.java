@@ -1,13 +1,28 @@
 package net.minecraft.client.renderer.entity;
 
 import com.google.common.collect.Maps;
+import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.model.*;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.model.ModelChicken;
+import net.minecraft.client.model.ModelCow;
+import net.minecraft.client.model.ModelHorse;
+import net.minecraft.client.model.ModelOcelot;
+import net.minecraft.client.model.ModelPig;
+import net.minecraft.client.model.ModelRabbit;
+import net.minecraft.client.model.ModelSheep2;
+import net.minecraft.client.model.ModelSlime;
+import net.minecraft.client.model.ModelSquid;
+import net.minecraft.client.model.ModelWolf;
+import net.minecraft.client.model.ModelZombie;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderGlobal;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.culling.ICamera;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.RenderEnderCrystal;
@@ -24,29 +39,72 @@ import net.minecraft.entity.ai.EntityMinecartMobSpawner;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.boss.EntityWither;
 import net.minecraft.entity.effect.EntityLightningBolt;
-import net.minecraft.entity.item.*;
-import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.*;
-import net.minecraft.entity.projectile.*;
+import net.minecraft.entity.item.EntityArmorStand;
+import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.item.EntityEnderCrystal;
+import net.minecraft.entity.item.EntityEnderEye;
+import net.minecraft.entity.item.EntityEnderPearl;
+import net.minecraft.entity.item.EntityExpBottle;
+import net.minecraft.entity.item.EntityFallingBlock;
+import net.minecraft.entity.item.EntityFireworkRocket;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityItemFrame;
+import net.minecraft.entity.item.EntityMinecart;
+import net.minecraft.entity.item.EntityMinecartTNT;
+import net.minecraft.entity.item.EntityPainting;
+import net.minecraft.entity.item.EntityTNTPrimed;
+import net.minecraft.entity.item.EntityXPOrb;
+import net.minecraft.entity.monster.EntityBlaze;
+import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityEnderman;
+import net.minecraft.entity.monster.EntityEndermite;
+import net.minecraft.entity.monster.EntityGhast;
+import net.minecraft.entity.monster.EntityGiantZombie;
+import net.minecraft.entity.monster.EntityGuardian;
+import net.minecraft.entity.monster.EntityIronGolem;
+import net.minecraft.entity.monster.EntityMagmaCube;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.monster.EntitySilverfish;
+import net.minecraft.entity.monster.EntitySkeleton;
+import net.minecraft.entity.monster.EntitySlime;
+import net.minecraft.entity.monster.EntitySnowman;
+import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.monster.EntityWitch;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityBat;
+import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.passive.EntityCow;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.passive.EntityMooshroom;
+import net.minecraft.entity.passive.EntityOcelot;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.passive.EntityRabbit;
+import net.minecraft.entity.passive.EntitySheep;
+import net.minecraft.entity.passive.EntitySquid;
+import net.minecraft.entity.passive.EntityVillager;
+import net.minecraft.entity.passive.EntityWolf;
+import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityEgg;
+import net.minecraft.entity.projectile.EntityFishHook;
+import net.minecraft.entity.projectile.EntityLargeFireball;
+import net.minecraft.entity.projectile.EntityPotion;
+import net.minecraft.entity.projectile.EntitySmallFireball;
+import net.minecraft.entity.projectile.EntitySnowball;
+import net.minecraft.entity.projectile.EntityWitherSkull;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.util.*;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ReportedException;
+import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import optifine.PlayerItemsLayer;
-import optifine.Reflector;
-
-import java.util.Collections;
-import java.util.Map;
 
 public class RenderManager
 {
-    /** A map of entity classes and the associated renderer. */
-    private Map entityRenderMap = Maps.newHashMap();
-
-    /**
-     * lists the various player skin types with their associated Renderer class instances.
-     */
-    private Map skinMap = Maps.newHashMap();
+    private Map < Class <? extends Entity > , Render <? extends Entity >> entityRenderMap = Maps. < Class <? extends Entity > , Render <? extends Entity >> newHashMap();
+    private Map<String, RenderPlayer> skinMap = Maps.<String, RenderPlayer>newHashMap();
     private RenderPlayer playerRenderer;
 
     /** Renders fonts */
@@ -75,7 +133,6 @@ public class RenderManager
 
     /** whether bounding box should be rendered or not */
     private boolean debugBoundingBox = false;
-    private static final String __OBFID = "CL_00000991";
 
     public RenderManager(TextureManager renderEngineIn, RenderItem itemRendererIn)
     {
@@ -142,12 +199,6 @@ public class RenderManager
         this.playerRenderer = new RenderPlayer(this);
         this.skinMap.put("default", this.playerRenderer);
         this.skinMap.put("slim", new RenderPlayer(this, true));
-        PlayerItemsLayer.register(this.skinMap);
-
-        if (Reflector.RenderingRegistry_loadEntityRenderers.exists())
-        {
-            Reflector.call(Reflector.RenderingRegistry_loadEntityRenderers, new Object[] {this.entityRenderMap});
-        }
     }
 
     public void setRenderPosition(double renderPosXIn, double renderPosYIn, double renderPosZIn)
@@ -157,30 +208,30 @@ public class RenderManager
         this.renderPosZ = renderPosZIn;
     }
 
-    public Render getEntityClassRenderObject(Class p_78715_1_)
+    public <T extends Entity> Render<T> getEntityClassRenderObject(Class <? extends Entity > p_78715_1_)
     {
-        Render render = (Render)this.entityRenderMap.get(p_78715_1_);
+        Render <? extends Entity > render = (Render)this.entityRenderMap.get(p_78715_1_);
 
         if (render == null && p_78715_1_ != Entity.class)
         {
-            render = this.getEntityClassRenderObject(p_78715_1_.getSuperclass());
+            render = this.<Entity>getEntityClassRenderObject((Class <? extends Entity >)p_78715_1_.getSuperclass());
             this.entityRenderMap.put(p_78715_1_, render);
         }
 
-        return render;
+        return (Render<T>)render;
     }
 
-    public Render getEntityRenderObject(Entity entityIn)
+    public <T extends Entity> Render<T> getEntityRenderObject(Entity entityIn)
     {
         if (entityIn instanceof AbstractClientPlayer)
         {
             String s = ((AbstractClientPlayer)entityIn).getSkinType();
             RenderPlayer renderplayer = (RenderPlayer)this.skinMap.get(s);
-            return renderplayer != null ? renderplayer : this.playerRenderer;
+            return (Render<T>)(renderplayer != null ? renderplayer : this.playerRenderer);
         }
         else
         {
-            return this.getEntityClassRenderObject(entityIn.getClass());
+            return this.<T>getEntityClassRenderObject(entityIn.getClass());
         }
     }
 
@@ -197,17 +248,10 @@ public class RenderManager
             IBlockState iblockstate = worldIn.getBlockState(new BlockPos(livingPlayerIn));
             Block block = iblockstate.getBlock();
 
-            if (Reflector.callBoolean(Reflector.ForgeBlock_isBed, new Object[] {worldIn, new BlockPos(livingPlayerIn), (EntityLivingBase)livingPlayerIn}))
+            if (block == Blocks.bed)
             {
-                EnumFacing enumfacing = (EnumFacing)Reflector.call(block, Reflector.ForgeBlock_getBedDirection, new Object[] {worldIn, new BlockPos(livingPlayerIn)});
-                int i = enumfacing.getHorizontalIndex();
+                int i = ((EnumFacing)iblockstate.getValue(BlockBed.FACING)).getHorizontalIndex();
                 this.playerViewY = (float)(i * 90 + 180);
-                this.playerViewX = 0.0F;
-            }
-            else if (block == Blocks.bed)
-            {
-                int j = ((EnumFacing)iblockstate.getValue(BlockBed.FACING)).getHorizontalIndex();
-                this.playerViewY = (float)(j * 90 + 180);
                 this.playerViewX = 0.0F;
             }
         }
@@ -259,7 +303,7 @@ public class RenderManager
 
     public boolean shouldRender(Entity entityIn, ICamera camera, double camX, double camY, double camZ)
     {
-        Render render = this.getEntityRenderObject(entityIn);
+        Render<Entity> render = this.<Entity>getEntityRenderObject(entityIn);
         return render != null && render.shouldRender(entityIn, camera, camX, camY, camZ);
     }
 
@@ -295,7 +339,7 @@ public class RenderManager
         double d0 = entityIn.lastTickPosX + (entityIn.posX - entityIn.lastTickPosX) * (double)partialTicks;
         double d1 = entityIn.lastTickPosY + (entityIn.posY - entityIn.lastTickPosY) * (double)partialTicks;
         double d2 = entityIn.lastTickPosZ + (entityIn.posZ - entityIn.lastTickPosZ) * (double)partialTicks;
-        Render render = this.getEntityRenderObject(entityIn);
+        Render<Entity> render = this.<Entity>getEntityRenderObject(entityIn);
 
         if (render != null && this.renderEngine != null)
         {
@@ -315,11 +359,11 @@ public class RenderManager
 
     public boolean doRenderEntity(Entity entity, double x, double y, double z, float entityYaw, float partialTicks, boolean p_147939_10_)
     {
-        Render render = null;
+        Render<Entity> render = null;
 
         try
         {
-            render = this.getEntityRenderObject(entity);
+            render = this.<Entity>getEntityRenderObject(entity);
 
             if (render != null && this.renderEngine != null)
             {
@@ -444,20 +488,5 @@ public class RenderManager
     public void setRenderOutlines(boolean renderOutlinesIn)
     {
         this.renderOutlines = renderOutlinesIn;
-    }
-
-    public Map getEntityRenderMap()
-    {
-        return this.entityRenderMap;
-    }
-
-    public void setEntityRenderMap(Map p_setEntityRenderMap_1_)
-    {
-        this.entityRenderMap = p_setEntityRenderMap_1_;
-    }
-
-    public Map<String, RenderPlayer> getSkinMap()
-    {
-        return Collections.<String, RenderPlayer>unmodifiableMap(this.skinMap);
     }
 }

@@ -1,5 +1,6 @@
 package net.minecraft.world.biome;
 
+import java.util.Random;
 import net.minecraft.block.BlockSilverfish;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
@@ -9,8 +10,6 @@ import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraft.world.gen.feature.WorldGenTaiga2;
 import net.minecraft.world.gen.feature.WorldGenerator;
-
-import java.util.Random;
 
 public class BiomeGenHills extends BiomeGenBase
 {
@@ -92,7 +91,7 @@ public class BiomeGenHills extends BiomeGenBase
         this.field_150638_aH = this.field_150637_aG;
         this.func_150557_a(p_150633_1_.color, true);
         this.setBiomeName(p_150633_1_.biomeName + " M");
-        this.setHeight(new Height(p_150633_1_.minHeight, p_150633_1_.maxHeight));
+        this.setHeight(new BiomeGenBase.Height(p_150633_1_.minHeight, p_150633_1_.maxHeight));
         this.setTemperatureRainfall(p_150633_1_.temperature, p_150633_1_.rainfall);
         return this;
     }

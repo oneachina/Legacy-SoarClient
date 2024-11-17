@@ -31,7 +31,7 @@ public class TileEntityBeacon extends TileEntityLockable implements ITickable, I
 {
     /** List of effects that Beacon can apply */
     public static final Potion[][] effectsList = new Potion[][] {{Potion.moveSpeed, Potion.digSpeed}, {Potion.resistance, Potion.jump}, {Potion.damageBoost}, {Potion.regeneration}};
-    private final List<BeamSegment> beamSegments = Lists.<BeamSegment>newArrayList();
+    private final List<TileEntityBeacon.BeamSegment> beamSegments = Lists.<TileEntityBeacon.BeamSegment>newArrayList();
     private long beamRenderCounter;
     private float field_146014_j;
     private boolean isComplete;
@@ -108,7 +108,7 @@ public class TileEntityBeacon extends TileEntityLockable implements ITickable, I
         this.levels = 0;
         this.beamSegments.clear();
         this.isComplete = true;
-        BeamSegment tileentitybeacon$beamsegment = new BeamSegment(EntitySheep.func_175513_a(EnumDyeColor.WHITE));
+        TileEntityBeacon.BeamSegment tileentitybeacon$beamsegment = new TileEntityBeacon.BeamSegment(EntitySheep.func_175513_a(EnumDyeColor.WHITE));
         this.beamSegments.add(tileentitybeacon$beamsegment);
         boolean flag = true;
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
@@ -151,7 +151,7 @@ public class TileEntityBeacon extends TileEntityLockable implements ITickable, I
             }
             else
             {
-                tileentitybeacon$beamsegment = new BeamSegment(afloat);
+                tileentitybeacon$beamsegment = new TileEntityBeacon.BeamSegment(afloat);
                 this.beamSegments.add(tileentitybeacon$beamsegment);
             }
 
@@ -206,7 +206,7 @@ public class TileEntityBeacon extends TileEntityLockable implements ITickable, I
         }
     }
 
-    public List<BeamSegment> getBeamSegments()
+    public List<TileEntityBeacon.BeamSegment> getBeamSegments()
     {
         return this.beamSegments;
     }

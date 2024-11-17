@@ -1,15 +1,14 @@
 package net.minecraft.network.play.server;
 
+import java.io.IOException;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.INetHandlerPlayClient;
 import net.minecraft.world.border.WorldBorder;
 
-import java.io.IOException;
-
 public class S44PacketWorldBorder implements Packet<INetHandlerPlayClient>
 {
-    private Action action;
+    private S44PacketWorldBorder.Action action;
     private int size;
     private double centerX;
     private double centerZ;
@@ -23,7 +22,7 @@ public class S44PacketWorldBorder implements Packet<INetHandlerPlayClient>
     {
     }
 
-    public S44PacketWorldBorder(WorldBorder border, Action actionIn)
+    public S44PacketWorldBorder(WorldBorder border, S44PacketWorldBorder.Action actionIn)
     {
         this.action = actionIn;
         this.centerX = border.getCenterX();
@@ -41,7 +40,7 @@ public class S44PacketWorldBorder implements Packet<INetHandlerPlayClient>
      */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
-        this.action = (Action)buf.readEnumValue(Action.class);
+        this.action = (S44PacketWorldBorder.Action)buf.readEnumValue(S44PacketWorldBorder.Action.class);
 
         switch (this.action)
         {

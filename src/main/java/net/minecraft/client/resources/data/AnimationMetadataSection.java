@@ -1,7 +1,6 @@
 package net.minecraft.client.resources.data;
 
 import com.google.common.collect.Sets;
-
 import java.util.List;
 import java.util.Set;
 

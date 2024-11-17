@@ -1,9 +1,8 @@
 package net.minecraft.entity.ai;
 
+import java.util.List;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.passive.EntityVillager;
-
-import java.util.List;
 
 public class EntityAIFollowGolem extends EntityAIBase
 {

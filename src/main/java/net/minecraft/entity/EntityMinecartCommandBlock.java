@@ -87,9 +87,9 @@ public class EntityMinecartCommandBlock extends EntityMinecart
         this.commandBlockLogic.writeDataToNBT(tagCompound);
     }
 
-    public EnumMinecartType getMinecartType()
+    public EntityMinecart.EnumMinecartType getMinecartType()
     {
-        return EnumMinecartType.COMMAND_BLOCK;
+        return EntityMinecart.EnumMinecartType.COMMAND_BLOCK;
     }
 
     public IBlockState getDefaultDisplayTile()

@@ -11,12 +11,12 @@ public class ContainerBeacon extends Container
     /**
      * This beacon's slot where you put in Emerald, Diamond, Gold or Iron Ingot.
      */
-    private final BeaconSlot beaconSlot;
+    private final ContainerBeacon.BeaconSlot beaconSlot;
 
     public ContainerBeacon(IInventory playerInventory, IInventory tileBeaconIn)
     {
         this.tileBeacon = tileBeaconIn;
-        this.addSlotToContainer(this.beaconSlot = new BeaconSlot(tileBeaconIn, 0, 136, 110));
+        this.addSlotToContainer(this.beaconSlot = new ContainerBeacon.BeaconSlot(tileBeaconIn, 0, 136, 110));
         int i = 36;
         int j = 137;
 

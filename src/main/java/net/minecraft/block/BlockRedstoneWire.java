@@ -27,10 +27,10 @@ import net.minecraft.world.World;
 
 public class BlockRedstoneWire extends Block
 {
-    public static final PropertyEnum<EnumAttachPosition> NORTH = PropertyEnum.<EnumAttachPosition>create("north", EnumAttachPosition.class);
-    public static final PropertyEnum<EnumAttachPosition> EAST = PropertyEnum.<EnumAttachPosition>create("east", EnumAttachPosition.class);
-    public static final PropertyEnum<EnumAttachPosition> SOUTH = PropertyEnum.<EnumAttachPosition>create("south", EnumAttachPosition.class);
-    public static final PropertyEnum<EnumAttachPosition> WEST = PropertyEnum.<EnumAttachPosition>create("west", EnumAttachPosition.class);
+    public static final PropertyEnum<BlockRedstoneWire.EnumAttachPosition> NORTH = PropertyEnum.<BlockRedstoneWire.EnumAttachPosition>create("north", BlockRedstoneWire.EnumAttachPosition.class);
+    public static final PropertyEnum<BlockRedstoneWire.EnumAttachPosition> EAST = PropertyEnum.<BlockRedstoneWire.EnumAttachPosition>create("east", BlockRedstoneWire.EnumAttachPosition.class);
+    public static final PropertyEnum<BlockRedstoneWire.EnumAttachPosition> SOUTH = PropertyEnum.<BlockRedstoneWire.EnumAttachPosition>create("south", BlockRedstoneWire.EnumAttachPosition.class);
+    public static final PropertyEnum<BlockRedstoneWire.EnumAttachPosition> WEST = PropertyEnum.<BlockRedstoneWire.EnumAttachPosition>create("west", BlockRedstoneWire.EnumAttachPosition.class);
     public static final PropertyInteger POWER = PropertyInteger.create("power", 0, 15);
     private boolean canProvidePower = true;
     private final Set<BlockPos> blocksNeedingUpdate = Sets.<BlockPos>newHashSet();
@@ -38,7 +38,7 @@ public class BlockRedstoneWire extends Block
     public BlockRedstoneWire()
     {
         super(Material.circuits);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, EnumAttachPosition.NONE).withProperty(EAST, EnumAttachPosition.NONE).withProperty(SOUTH, EnumAttachPosition.NONE).withProperty(WEST, EnumAttachPosition.NONE).withProperty(POWER, Integer.valueOf(0)));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, BlockRedstoneWire.EnumAttachPosition.NONE).withProperty(EAST, BlockRedstoneWire.EnumAttachPosition.NONE).withProperty(SOUTH, BlockRedstoneWire.EnumAttachPosition.NONE).withProperty(WEST, BlockRedstoneWire.EnumAttachPosition.NONE).withProperty(POWER, Integer.valueOf(0)));
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0625F, 1.0F);
     }
 
@@ -55,7 +55,7 @@ public class BlockRedstoneWire extends Block
         return state;
     }
 
-    private EnumAttachPosition getAttachPosition(IBlockAccess worldIn, BlockPos pos, EnumFacing direction)
+    private BlockRedstoneWire.EnumAttachPosition getAttachPosition(IBlockAccess worldIn, BlockPos pos, EnumFacing direction)
     {
         BlockPos blockpos = pos.offset(direction);
         Block block = worldIn.getBlockState(pos.offset(direction)).getBlock();
@@ -63,11 +63,11 @@ public class BlockRedstoneWire extends Block
         if (!canConnectTo(worldIn.getBlockState(blockpos), direction) && (block.isBlockNormalCube() || !canConnectUpwardsTo(worldIn.getBlockState(blockpos.down()))))
         {
             Block block1 = worldIn.getBlockState(pos.up()).getBlock();
-            return !block1.isBlockNormalCube() && block.isBlockNormalCube() && canConnectUpwardsTo(worldIn.getBlockState(blockpos.up())) ? EnumAttachPosition.UP : EnumAttachPosition.NONE;
+            return !block1.isBlockNormalCube() && block.isBlockNormalCube() && canConnectUpwardsTo(worldIn.getBlockState(blockpos.up())) ? BlockRedstoneWire.EnumAttachPosition.UP : BlockRedstoneWire.EnumAttachPosition.NONE;
         }
         else
         {
-            return EnumAttachPosition.SIDE;
+            return BlockRedstoneWire.EnumAttachPosition.SIDE;
         }
     }
 
@@ -131,9 +131,9 @@ public class BlockRedstoneWire extends Block
 
         int l = 0;
 
-        for (Object enumfacing : EnumFacing.Plane.HORIZONTAL)
+        for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
         {
-            BlockPos blockpos = pos1.offset((EnumFacing) enumfacing);
+            BlockPos blockpos = pos1.offset(enumfacing);
             boolean flag = blockpos.getX() != pos2.getX() || blockpos.getZ() != pos2.getZ();
 
             if (flag)
@@ -215,20 +215,18 @@ public class BlockRedstoneWire extends Block
         {
             this.updateSurroundingRedstone(worldIn, pos, state);
 
-            for (Object enumfacing : EnumFacing.Plane.VERTICAL)
+            for (EnumFacing enumfacing : EnumFacing.Plane.VERTICAL)
             {
-                worldIn.notifyNeighborsOfStateChange(pos.offset((EnumFacing) enumfacing), this);
+                worldIn.notifyNeighborsOfStateChange(pos.offset(enumfacing), this);
             }
 
-            for (Object enumfacing10 : EnumFacing.Plane.HORIZONTAL)
+            for (EnumFacing enumfacing1 : EnumFacing.Plane.HORIZONTAL)
             {
-                EnumFacing enumfacing1 = (EnumFacing) enumfacing10;
                 this.notifyWireNeighborsOfStateChange(worldIn, pos.offset(enumfacing1));
             }
 
-            for (Object enumfacing20 : EnumFacing.Plane.HORIZONTAL)
+            for (EnumFacing enumfacing2 : EnumFacing.Plane.HORIZONTAL)
             {
-                EnumFacing enumfacing2 = (EnumFacing) enumfacing20;
                 BlockPos blockpos = pos.offset(enumfacing2);
 
                 if (worldIn.getBlockState(blockpos).getBlock().isNormalCube())
@@ -256,14 +254,14 @@ public class BlockRedstoneWire extends Block
 
             this.updateSurroundingRedstone(worldIn, pos, state);
 
-            for (Object enumfacing1 : EnumFacing.Plane.HORIZONTAL)
+            for (EnumFacing enumfacing1 : EnumFacing.Plane.HORIZONTAL)
             {
-                this.notifyWireNeighborsOfStateChange(worldIn, pos.offset((EnumFacing) enumfacing1));
+                this.notifyWireNeighborsOfStateChange(worldIn, pos.offset(enumfacing1));
             }
 
-            for (Object enumfacing2 : EnumFacing.Plane.HORIZONTAL)
+            for (EnumFacing enumfacing2 : EnumFacing.Plane.HORIZONTAL)
             {
-                BlockPos blockpos = pos.offset((EnumFacing) enumfacing2);
+                BlockPos blockpos = pos.offset(enumfacing2);
 
                 if (worldIn.getBlockState(blockpos).getBlock().isNormalCube())
                 {
@@ -344,11 +342,11 @@ public class BlockRedstoneWire extends Block
             {
                 EnumSet<EnumFacing> enumset = EnumSet.<EnumFacing>noneOf(EnumFacing.class);
 
-                for (Object enumfacing : EnumFacing.Plane.HORIZONTAL)
+                for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
                 {
-                    if (this.func_176339_d(worldIn, pos, (EnumFacing) enumfacing))
+                    if (this.func_176339_d(worldIn, pos, enumfacing))
                     {
-                        enumset.add((EnumFacing) enumfacing);
+                        enumset.add(enumfacing);
                     }
                 }
 

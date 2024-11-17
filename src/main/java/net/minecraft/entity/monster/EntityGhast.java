@@ -32,10 +32,10 @@ public class EntityGhast extends EntityFlying implements IMob
         this.setSize(4.0F, 4.0F);
         this.isImmuneToFire = true;
         this.experienceValue = 5;
-        this.moveHelper = new GhastMoveHelper(this);
-        this.tasks.addTask(5, new AIRandomFly(this));
-        this.tasks.addTask(7, new AILookAround(this));
-        this.tasks.addTask(7, new AIFireballAttack(this));
+        this.moveHelper = new EntityGhast.GhastMoveHelper(this);
+        this.tasks.addTask(5, new EntityGhast.AIRandomFly(this));
+        this.tasks.addTask(7, new EntityGhast.AILookAround(this));
+        this.tasks.addTask(7, new EntityGhast.AIFireballAttack(this));
         this.targetTasks.addTask(1, new EntityAIFindEntityNearestPlayer(this));
     }
 

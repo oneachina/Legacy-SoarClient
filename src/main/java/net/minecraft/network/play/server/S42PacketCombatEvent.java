@@ -1,16 +1,15 @@
 package net.minecraft.network.play.server;
 
+import java.io.IOException;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.INetHandlerPlayClient;
 import net.minecraft.util.CombatTracker;
 
-import java.io.IOException;
-
 public class S42PacketCombatEvent implements Packet<INetHandlerPlayClient>
 {
-    public Event eventType;
+    public S42PacketCombatEvent.Event eventType;
     public int field_179774_b;
     public int field_179775_c;
     public int field_179772_d;
@@ -21,7 +20,7 @@ public class S42PacketCombatEvent implements Packet<INetHandlerPlayClient>
     }
 
     @SuppressWarnings("incomplete-switch")
-    public S42PacketCombatEvent(CombatTracker combatTrackerIn, Event combatEventType)
+    public S42PacketCombatEvent(CombatTracker combatTrackerIn, S42PacketCombatEvent.Event combatEventType)
     {
         this.eventType = combatEventType;
         EntityLivingBase entitylivingbase = combatTrackerIn.func_94550_c();
@@ -45,14 +44,14 @@ public class S42PacketCombatEvent implements Packet<INetHandlerPlayClient>
      */
     public void readPacketData(PacketBuffer buf) throws IOException
     {
-        this.eventType = (Event)buf.readEnumValue(Event.class);
+        this.eventType = (S42PacketCombatEvent.Event)buf.readEnumValue(S42PacketCombatEvent.Event.class);
 
-        if (this.eventType == Event.END_COMBAT)
+        if (this.eventType == S42PacketCombatEvent.Event.END_COMBAT)
         {
             this.field_179772_d = buf.readVarIntFromBuffer();
             this.field_179775_c = buf.readInt();
         }
-        else if (this.eventType == Event.ENTITY_DIED)
+        else if (this.eventType == S42PacketCombatEvent.Event.ENTITY_DIED)
         {
             this.field_179774_b = buf.readVarIntFromBuffer();
             this.field_179775_c = buf.readInt();
@@ -67,12 +66,12 @@ public class S42PacketCombatEvent implements Packet<INetHandlerPlayClient>
     {
         buf.writeEnumValue(this.eventType);
 
-        if (this.eventType == Event.END_COMBAT)
+        if (this.eventType == S42PacketCombatEvent.Event.END_COMBAT)
         {
             buf.writeVarIntToBuffer(this.field_179772_d);
             buf.writeInt(this.field_179775_c);
         }
-        else if (this.eventType == Event.ENTITY_DIED)
+        else if (this.eventType == S42PacketCombatEvent.Event.ENTITY_DIED)
         {
             buf.writeVarIntToBuffer(this.field_179774_b);
             buf.writeInt(this.field_179775_c);

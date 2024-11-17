@@ -3,8 +3,19 @@ package net.minecraft.entity.passive;
 import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.*;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAIRunAroundLikeCrazy;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
@@ -21,7 +32,11 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.potion.Potion;
 import net.minecraft.server.management.PreYggdrasilConverter;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 
@@ -1603,10 +1618,10 @@ public class EntityHorse extends EntityAnimal implements IInvBasic
         int i = 0;
         int j = 0;
 
-        if (livingdata instanceof GroupData)
+        if (livingdata instanceof EntityHorse.GroupData)
         {
-            i = ((GroupData)livingdata).horseType;
-            j = ((GroupData)livingdata).horseVariant & 255 | this.rand.nextInt(5) << 8;
+            i = ((EntityHorse.GroupData)livingdata).horseType;
+            j = ((EntityHorse.GroupData)livingdata).horseVariant & 255 | this.rand.nextInt(5) << 8;
         }
         else
         {
@@ -1622,7 +1637,7 @@ public class EntityHorse extends EntityAnimal implements IInvBasic
                 j = k | l << 8;
             }
 
-            livingdata = new GroupData(i, j);
+            livingdata = new EntityHorse.GroupData(i, j);
         }
 
         this.setHorseType(i);

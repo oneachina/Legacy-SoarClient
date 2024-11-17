@@ -7,16 +7,8 @@ import com.google.common.collect.Maps;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.InsecureTextureException;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.IImageBuffer;
-import net.minecraft.client.renderer.ImageBufferDownload;
-import net.minecraft.client.renderer.ThreadDownloadImageData;
-import net.minecraft.client.renderer.texture.ITextureObject;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.util.ResourceLocation;
-
+import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Map;
@@ -24,6 +16,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.IImageBuffer;
+import net.minecraft.client.renderer.ImageBufferDownload;
+import net.minecraft.client.renderer.ThreadDownloadImageData;
+import net.minecraft.client.renderer.texture.ITextureObject;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.util.ResourceLocation;
 
 public class SkinManager
 {
@@ -52,13 +51,13 @@ public class SkinManager
      */
     public ResourceLocation loadSkin(MinecraftProfileTexture profileTexture, Type p_152792_2_)
     {
-        return this.loadSkin(profileTexture, p_152792_2_, (SkinAvailableCallback)null);
+        return this.loadSkin(profileTexture, p_152792_2_, (SkinManager.SkinAvailableCallback)null);
     }
 
     /**
      * May download the skin if its not in the cache, can be passed a SkinManager#SkinAvailableCallback for handling
      */
-    public ResourceLocation loadSkin(final MinecraftProfileTexture profileTexture, final Type p_152789_2_, final SkinAvailableCallback skinAvailableCallback)
+    public ResourceLocation loadSkin(final MinecraftProfileTexture profileTexture, final Type p_152789_2_, final SkinManager.SkinAvailableCallback skinAvailableCallback)
     {
         final ResourceLocation resourcelocation = new ResourceLocation("skins/" + profileTexture.getHash());
         ITextureObject itextureobject = this.textureManager.getTexture(resourcelocation);
@@ -105,7 +104,7 @@ public class SkinManager
         return resourcelocation;
     }
 
-    public void loadProfileTextures(final GameProfile profile, final SkinAvailableCallback skinAvailableCallback, final boolean requireSecure)
+    public void loadProfileTextures(final GameProfile profile, final SkinManager.SkinAvailableCallback skinAvailableCallback, final boolean requireSecure)
     {
         THREAD_POOL.submit(new Runnable()
         {

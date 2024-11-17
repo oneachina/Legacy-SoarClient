@@ -1,14 +1,13 @@
 package net.minecraft.client.resources.model;
 
 import com.google.common.collect.Lists;
+import java.util.List;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BreakingFour;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ModelBlock;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
-
-import java.util.List;
 
 public class SimpleBakedModel implements IBakedModel
 {
@@ -122,19 +121,19 @@ public class SimpleBakedModel implements IBakedModel
             this.builderCameraTransforms = p_i46076_3_;
         }
 
-        public Builder addFaceQuad(EnumFacing p_177650_1_, BakedQuad p_177650_2_)
+        public SimpleBakedModel.Builder addFaceQuad(EnumFacing p_177650_1_, BakedQuad p_177650_2_)
         {
             ((List)this.builderFaceQuads.get(p_177650_1_.ordinal())).add(p_177650_2_);
             return this;
         }
 
-        public Builder addGeneralQuad(BakedQuad p_177648_1_)
+        public SimpleBakedModel.Builder addGeneralQuad(BakedQuad p_177648_1_)
         {
             this.builderGeneralQuads.add(p_177648_1_);
             return this;
         }
 
-        public Builder setTexture(TextureAtlasSprite p_177646_1_)
+        public SimpleBakedModel.Builder setTexture(TextureAtlasSprite p_177646_1_)
         {
             this.builderTexture = p_177646_1_;
             return this;

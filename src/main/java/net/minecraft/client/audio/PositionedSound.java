@@ -14,7 +14,7 @@ public abstract class PositionedSound implements ISound
 
     /** The number of ticks between repeating the sound */
     protected int repeatDelay = 0;
-    protected AttenuationType attenuationType = AttenuationType.LINEAR;
+    protected ISound.AttenuationType attenuationType = ISound.AttenuationType.LINEAR;
 
     protected PositionedSound(ResourceLocation soundResource)
     {
@@ -61,7 +61,7 @@ public abstract class PositionedSound implements ISound
         return this.zPosF;
     }
 
-    public AttenuationType getAttenuationType()
+    public ISound.AttenuationType getAttenuationType()
     {
         return this.attenuationType;
     }

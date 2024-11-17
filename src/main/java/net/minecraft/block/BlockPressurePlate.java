@@ -15,9 +15,9 @@ import net.minecraft.world.World;
 public class BlockPressurePlate extends BlockBasePressurePlate
 {
     public static final PropertyBool POWERED = PropertyBool.create("powered");
-    private final Sensitivity sensitivity;
+    private final BlockPressurePlate.Sensitivity sensitivity;
 
-    protected BlockPressurePlate(Material materialIn, Sensitivity sensitivityIn)
+    protected BlockPressurePlate(Material materialIn, BlockPressurePlate.Sensitivity sensitivityIn)
     {
         super(materialIn);
         this.setDefaultState(this.blockState.getBaseState().withProperty(POWERED, Boolean.valueOf(false)));

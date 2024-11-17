@@ -1,5 +1,6 @@
 package net.minecraft.block;
 
+import java.util.Random;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -11,8 +12,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class BlockOre extends Block
 {

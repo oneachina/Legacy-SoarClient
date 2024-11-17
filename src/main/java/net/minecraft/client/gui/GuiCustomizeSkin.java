@@ -1,9 +1,8 @@
 package net.minecraft.client.gui;
 
+import java.io.IOException;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EnumPlayerModelParts;
-
-import java.io.IOException;
 
 public class GuiCustomizeSkin extends GuiScreen
 {
@@ -29,7 +28,7 @@ public class GuiCustomizeSkin extends GuiScreen
 
         for (EnumPlayerModelParts enumplayermodelparts : EnumPlayerModelParts.values())
         {
-            this.buttonList.add(new ButtonPart(enumplayermodelparts.getPartId(), this.width / 2 - 155 + i % 2 * 160, this.height / 6 + 24 * (i >> 1), 150, 20, enumplayermodelparts));
+            this.buttonList.add(new GuiCustomizeSkin.ButtonPart(enumplayermodelparts.getPartId(), this.width / 2 - 155 + i % 2 * 160, this.height / 6 + 24 * (i >> 1), 150, 20, enumplayermodelparts));
             ++i;
         }
 
@@ -53,9 +52,9 @@ public class GuiCustomizeSkin extends GuiScreen
                 this.mc.gameSettings.saveOptions();
                 this.mc.displayGuiScreen(this.parentScreen);
             }
-            else if (button instanceof ButtonPart)
+            else if (button instanceof GuiCustomizeSkin.ButtonPart)
             {
-                EnumPlayerModelParts enumplayermodelparts = ((ButtonPart)button).playerModelParts;
+                EnumPlayerModelParts enumplayermodelparts = ((GuiCustomizeSkin.ButtonPart)button).playerModelParts;
                 this.mc.gameSettings.switchModelPartEnabled(enumplayermodelparts);
                 button.displayString = this.func_175358_a(enumplayermodelparts);
             }

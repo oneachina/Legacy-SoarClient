@@ -30,8 +30,8 @@ public class WalkNodeProcessor extends NodeProcessor
 
     /**
      * This method is called when all nodes have been processed and PathEntity is created.
-     *  {@link WalkNodeProcessor WalkNodeProcessor} uses this to change its field {@link
-     * WalkNodeProcessor#avoidsWater avoidsWater}
+     *  {@link net.minecraft.world.pathfinder.WalkNodeProcessor WalkNodeProcessor} uses this to change its field {@link
+     * net.minecraft.world.pathfinder.WalkNodeProcessor#avoidsWater avoidsWater}
      */
     public void postProcess()
     {

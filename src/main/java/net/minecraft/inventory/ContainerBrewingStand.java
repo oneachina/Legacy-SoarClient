@@ -17,10 +17,10 @@ public class ContainerBrewingStand extends Container
     public ContainerBrewingStand(InventoryPlayer playerInventory, IInventory tileBrewingStandIn)
     {
         this.tileBrewingStand = tileBrewingStandIn;
-        this.addSlotToContainer(new Potion(playerInventory.player, tileBrewingStandIn, 0, 56, 46));
-        this.addSlotToContainer(new Potion(playerInventory.player, tileBrewingStandIn, 1, 79, 53));
-        this.addSlotToContainer(new Potion(playerInventory.player, tileBrewingStandIn, 2, 102, 46));
-        this.theSlot = this.addSlotToContainer(new Ingredient(tileBrewingStandIn, 3, 79, 17));
+        this.addSlotToContainer(new ContainerBrewingStand.Potion(playerInventory.player, tileBrewingStandIn, 0, 56, 46));
+        this.addSlotToContainer(new ContainerBrewingStand.Potion(playerInventory.player, tileBrewingStandIn, 1, 79, 53));
+        this.addSlotToContainer(new ContainerBrewingStand.Potion(playerInventory.player, tileBrewingStandIn, 2, 102, 46));
+        this.theSlot = this.addSlotToContainer(new ContainerBrewingStand.Ingredient(tileBrewingStandIn, 3, 79, 17));
 
         for (int i = 0; i < 3; ++i)
         {
@@ -94,7 +94,7 @@ public class ContainerBrewingStand extends Container
                         return null;
                     }
                 }
-                else if (Potion.canHoldPotion(itemstack))
+                else if (ContainerBrewingStand.Potion.canHoldPotion(itemstack))
                 {
                     if (!this.mergeItemStack(itemstack1, 0, 3, false))
                     {

@@ -1,6 +1,8 @@
 package net.minecraft.command.server;
 
 import com.mojang.authlib.GameProfile;
+import java.util.Date;
+import java.util.List;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -9,9 +11,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.management.UserListBansEntry;
 import net.minecraft.util.BlockPos;
-
-import java.util.Date;
-import java.util.List;
 
 public class CommandBanPlayer extends CommandBase
 {

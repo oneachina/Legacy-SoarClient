@@ -9,19 +9,19 @@ import net.minecraft.network.play.INetHandlerPlayServer;
 public class C0BPacketEntityAction implements Packet<INetHandlerPlayServer>
 {
     private int entityID;
-    private Action action;
+    private C0BPacketEntityAction.Action action;
     private int auxData;
 
     public C0BPacketEntityAction()
     {
     }
 
-    public C0BPacketEntityAction(Entity entity, Action action)
+    public C0BPacketEntityAction(Entity entity, C0BPacketEntityAction.Action action)
     {
         this(entity, action, 0);
     }
 
-    public C0BPacketEntityAction(Entity entity, Action action, int auxData)
+    public C0BPacketEntityAction(Entity entity, C0BPacketEntityAction.Action action, int auxData)
     {
         this.entityID = entity.getEntityId();
         this.action = action;
@@ -34,7 +34,7 @@ public class C0BPacketEntityAction implements Packet<INetHandlerPlayServer>
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.entityID = buf.readVarIntFromBuffer();
-        this.action = (Action)buf.readEnumValue(Action.class);
+        this.action = (C0BPacketEntityAction.Action)buf.readEnumValue(C0BPacketEntityAction.Action.class);
         this.auxData = buf.readVarIntFromBuffer();
     }
 
@@ -56,7 +56,7 @@ public class C0BPacketEntityAction implements Packet<INetHandlerPlayServer>
         handler.processEntityAction(this);
     }
 
-    public Action getAction()
+    public C0BPacketEntityAction.Action getAction()
     {
         return this.action;
     }

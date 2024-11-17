@@ -11,14 +11,14 @@ import net.minecraft.world.World;
 public class C02PacketUseEntity implements Packet<INetHandlerPlayServer>
 {
     private int entityId;
-    private Action action;
+    private C02PacketUseEntity.Action action;
     private Vec3 hitVec;
 
     public C02PacketUseEntity()
     {
     }
 
-    public C02PacketUseEntity(Entity entity, Action action)
+    public C02PacketUseEntity(Entity entity, C02PacketUseEntity.Action action)
     {
         this.entityId = entity.getEntityId();
         this.action = action;
@@ -26,7 +26,7 @@ public class C02PacketUseEntity implements Packet<INetHandlerPlayServer>
 
     public C02PacketUseEntity(Entity entity, Vec3 hitVec)
     {
-        this(entity, Action.INTERACT_AT);
+        this(entity, C02PacketUseEntity.Action.INTERACT_AT);
         this.hitVec = hitVec;
     }
 
@@ -36,9 +36,9 @@ public class C02PacketUseEntity implements Packet<INetHandlerPlayServer>
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.entityId = buf.readVarIntFromBuffer();
-        this.action = (Action)buf.readEnumValue(Action.class);
+        this.action = (C02PacketUseEntity.Action)buf.readEnumValue(C02PacketUseEntity.Action.class);
 
-        if (this.action == Action.INTERACT_AT)
+        if (this.action == C02PacketUseEntity.Action.INTERACT_AT)
         {
             this.hitVec = new Vec3((double)buf.readFloat(), (double)buf.readFloat(), (double)buf.readFloat());
         }
@@ -52,7 +52,7 @@ public class C02PacketUseEntity implements Packet<INetHandlerPlayServer>
         buf.writeVarIntToBuffer(this.entityId);
         buf.writeEnumValue(this.action);
 
-        if (this.action == Action.INTERACT_AT)
+        if (this.action == C02PacketUseEntity.Action.INTERACT_AT)
         {
             buf.writeFloat((float)this.hitVec.xCoord);
             buf.writeFloat((float)this.hitVec.yCoord);
@@ -73,7 +73,7 @@ public class C02PacketUseEntity implements Packet<INetHandlerPlayServer>
         return worldIn.getEntityByID(this.entityId);
     }
 
-    public Action getAction()
+    public C02PacketUseEntity.Action getAction()
     {
         return this.action;
     }

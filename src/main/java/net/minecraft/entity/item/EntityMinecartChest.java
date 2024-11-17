@@ -42,9 +42,9 @@ public class EntityMinecartChest extends EntityMinecartContainer
         return 27;
     }
 
-    public EnumMinecartType getMinecartType()
+    public EntityMinecart.EnumMinecartType getMinecartType()
     {
-        return EnumMinecartType.CHEST;
+        return EntityMinecart.EnumMinecartType.CHEST;
     }
 
     public IBlockState getDefaultDisplayTile()

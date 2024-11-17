@@ -27,12 +27,12 @@ import net.minecraft.world.World;
 public class BlockFlowerPot extends BlockContainer
 {
     public static final PropertyInteger LEGACY_DATA = PropertyInteger.create("legacy_data", 0, 15);
-    public static final PropertyEnum<EnumFlowerType> CONTENTS = PropertyEnum.<EnumFlowerType>create("contents", EnumFlowerType.class);
+    public static final PropertyEnum<BlockFlowerPot.EnumFlowerType> CONTENTS = PropertyEnum.<BlockFlowerPot.EnumFlowerType>create("contents", BlockFlowerPot.EnumFlowerType.class);
 
     public BlockFlowerPot()
     {
         super(Material.circuits);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(CONTENTS, EnumFlowerType.EMPTY).withProperty(LEGACY_DATA, Integer.valueOf(0)));
+        this.setDefaultState(this.blockState.getBaseState().withProperty(CONTENTS, BlockFlowerPot.EnumFlowerType.EMPTY).withProperty(LEGACY_DATA, Integer.valueOf(0)));
         this.setBlockBoundsForItemRender();
     }
 
@@ -313,7 +313,7 @@ public class BlockFlowerPot extends BlockContainer
      */
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
-        EnumFlowerType blockflowerpot$enumflowertype = EnumFlowerType.EMPTY;
+        BlockFlowerPot.EnumFlowerType blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.EMPTY;
         TileEntity tileentity = worldIn.getTileEntity(pos);
 
         if (tileentity instanceof TileEntityFlowerPot)
@@ -331,31 +331,31 @@ public class BlockFlowerPot extends BlockContainer
                     switch (BlockPlanks.EnumType.byMetadata(i))
                     {
                         case OAK:
-                            blockflowerpot$enumflowertype = EnumFlowerType.OAK_SAPLING;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.OAK_SAPLING;
                             break;
 
                         case SPRUCE:
-                            blockflowerpot$enumflowertype = EnumFlowerType.SPRUCE_SAPLING;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.SPRUCE_SAPLING;
                             break;
 
                         case BIRCH:
-                            blockflowerpot$enumflowertype = EnumFlowerType.BIRCH_SAPLING;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.BIRCH_SAPLING;
                             break;
 
                         case JUNGLE:
-                            blockflowerpot$enumflowertype = EnumFlowerType.JUNGLE_SAPLING;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.JUNGLE_SAPLING;
                             break;
 
                         case ACACIA:
-                            blockflowerpot$enumflowertype = EnumFlowerType.ACACIA_SAPLING;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.ACACIA_SAPLING;
                             break;
 
                         case DARK_OAK:
-                            blockflowerpot$enumflowertype = EnumFlowerType.DARK_OAK_SAPLING;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.DARK_OAK_SAPLING;
                             break;
 
                         default:
-                            blockflowerpot$enumflowertype = EnumFlowerType.EMPTY;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.EMPTY;
                     }
                 }
                 else if (block == Blocks.tallgrass)
@@ -363,80 +363,80 @@ public class BlockFlowerPot extends BlockContainer
                     switch (i)
                     {
                         case 0:
-                            blockflowerpot$enumflowertype = EnumFlowerType.DEAD_BUSH;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.DEAD_BUSH;
                             break;
 
                         case 2:
-                            blockflowerpot$enumflowertype = EnumFlowerType.FERN;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.FERN;
                             break;
 
                         default:
-                            blockflowerpot$enumflowertype = EnumFlowerType.EMPTY;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.EMPTY;
                     }
                 }
                 else if (block == Blocks.yellow_flower)
                 {
-                    blockflowerpot$enumflowertype = EnumFlowerType.DANDELION;
+                    blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.DANDELION;
                 }
                 else if (block == Blocks.red_flower)
                 {
                     switch (BlockFlower.EnumFlowerType.getType(BlockFlower.EnumFlowerColor.RED, i))
                     {
                         case POPPY:
-                            blockflowerpot$enumflowertype = EnumFlowerType.POPPY;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.POPPY;
                             break;
 
                         case BLUE_ORCHID:
-                            blockflowerpot$enumflowertype = EnumFlowerType.BLUE_ORCHID;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.BLUE_ORCHID;
                             break;
 
                         case ALLIUM:
-                            blockflowerpot$enumflowertype = EnumFlowerType.ALLIUM;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.ALLIUM;
                             break;
 
                         case HOUSTONIA:
-                            blockflowerpot$enumflowertype = EnumFlowerType.HOUSTONIA;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.HOUSTONIA;
                             break;
 
                         case RED_TULIP:
-                            blockflowerpot$enumflowertype = EnumFlowerType.RED_TULIP;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.RED_TULIP;
                             break;
 
                         case ORANGE_TULIP:
-                            blockflowerpot$enumflowertype = EnumFlowerType.ORANGE_TULIP;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.ORANGE_TULIP;
                             break;
 
                         case WHITE_TULIP:
-                            blockflowerpot$enumflowertype = EnumFlowerType.WHITE_TULIP;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.WHITE_TULIP;
                             break;
 
                         case PINK_TULIP:
-                            blockflowerpot$enumflowertype = EnumFlowerType.PINK_TULIP;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.PINK_TULIP;
                             break;
 
                         case OXEYE_DAISY:
-                            blockflowerpot$enumflowertype = EnumFlowerType.OXEYE_DAISY;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.OXEYE_DAISY;
                             break;
 
                         default:
-                            blockflowerpot$enumflowertype = EnumFlowerType.EMPTY;
+                            blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.EMPTY;
                     }
                 }
                 else if (block == Blocks.red_mushroom)
                 {
-                    blockflowerpot$enumflowertype = EnumFlowerType.MUSHROOM_RED;
+                    blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.MUSHROOM_RED;
                 }
                 else if (block == Blocks.brown_mushroom)
                 {
-                    blockflowerpot$enumflowertype = EnumFlowerType.MUSHROOM_BROWN;
+                    blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.MUSHROOM_BROWN;
                 }
                 else if (block == Blocks.deadbush)
                 {
-                    blockflowerpot$enumflowertype = EnumFlowerType.DEAD_BUSH;
+                    blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.DEAD_BUSH;
                 }
                 else if (block == Blocks.cactus)
                 {
-                    blockflowerpot$enumflowertype = EnumFlowerType.CACTUS;
+                    blockflowerpot$enumflowertype = BlockFlowerPot.EnumFlowerType.CACTUS;
                 }
             }
         }

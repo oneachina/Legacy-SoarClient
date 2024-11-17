@@ -77,7 +77,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
         }
     };
     private final EnumPacketDirection direction;
-    private final Queue<InboundHandlerTuplePacketListener> outboundPacketsQueue = Queues.<InboundHandlerTuplePacketListener>newConcurrentLinkedQueue();
+    private final Queue<NetworkManager.InboundHandlerTuplePacketListener> outboundPacketsQueue = Queues.<NetworkManager.InboundHandlerTuplePacketListener>newConcurrentLinkedQueue();
     private final ReentrantReadWriteLock field_181680_j = new ReentrantReadWriteLock();
 
     /** The active channel */
@@ -185,7 +185,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
 
             try
             {
-                this.outboundPacketsQueue.add(new InboundHandlerTuplePacketListener(packetIn, (GenericFutureListener[])null));
+                this.outboundPacketsQueue.add(new NetworkManager.InboundHandlerTuplePacketListener(packetIn, (GenericFutureListener[])null));
             }
             finally
             {
@@ -207,7 +207,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
 
             try
             {
-                this.outboundPacketsQueue.add(new InboundHandlerTuplePacketListener(packetIn, (GenericFutureListener[])ArrayUtils.add(listeners, 0, listener)));
+                this.outboundPacketsQueue.add(new NetworkManager.InboundHandlerTuplePacketListener(packetIn, (GenericFutureListener[])ArrayUtils.add(listeners, 0, listener)));
             }
             finally
             {
@@ -284,7 +284,7 @@ public class NetworkManager extends SimpleChannelInboundHandler<Packet>
             {
                 while (!this.outboundPacketsQueue.isEmpty())
                 {
-                    InboundHandlerTuplePacketListener networkmanager$inboundhandlertuplepacketlistener = (InboundHandlerTuplePacketListener)this.outboundPacketsQueue.poll();
+                    NetworkManager.InboundHandlerTuplePacketListener networkmanager$inboundhandlertuplepacketlistener = (NetworkManager.InboundHandlerTuplePacketListener)this.outboundPacketsQueue.poll();
                     this.dispatchPacket(networkmanager$inboundhandlertuplepacketlistener.packet, networkmanager$inboundhandlertuplepacketlistener.futureListeners);
                 }
             }

@@ -3,6 +3,7 @@ package net.minecraft.command.server;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
+import java.util.List;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -14,8 +15,6 @@ import net.minecraft.stats.AchievementList;
 import net.minecraft.stats.StatBase;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.BlockPos;
-
-import java.util.List;
 
 public class CommandAchievement extends CommandBase
 {

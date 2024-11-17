@@ -1,13 +1,19 @@
 package net.minecraft.world.chunk.storage;
 
 import com.google.common.collect.Lists;
-import net.minecraft.server.MinecraftServer;
-
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.List;
 import java.util.zip.DeflaterOutputStream;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.InflaterInputStream;
+import net.minecraft.server.MinecraftServer;
 
 public class RegionFile
 {
@@ -100,7 +106,6 @@ public class RegionFile
     /**
      * Returns an uncompressed chunk stream from the region file.
      */
-
     public synchronized DataInputStream getChunkDataInputStream(int x, int z)
     {
         if (this.outOfBounds(x, z))
@@ -175,13 +180,12 @@ public class RegionFile
      */
     public DataOutputStream getChunkDataOutputStream(int x, int z)
     {
-        return this.outOfBounds(x, z) ? null : new DataOutputStream(new DeflaterOutputStream(new ChunkBuffer(x, z)));
+        return this.outOfBounds(x, z) ? null : new DataOutputStream(new DeflaterOutputStream(new RegionFile.ChunkBuffer(x, z)));
     }
 
     /**
      * args: x, z, data, length - write chunk data at (x, z) to disk
      */
-
     protected synchronized void write(int x, int z, byte[] data, int length)
     {
         try

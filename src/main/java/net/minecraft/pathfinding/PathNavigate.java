@@ -275,7 +275,7 @@ public abstract class PathNavigate
 
     /**
      * Checks if entity haven't been moved when last checked and if so, clears current {@link
-     * PathEntity}
+     * net.minecraft.pathfinding.PathEntity}
      */
     protected void checkForStuck(Vec3 positionVec3)
     {

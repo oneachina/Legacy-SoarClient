@@ -15,9 +15,9 @@ import net.minecraft.world.World;
 public class ItemSword extends Item
 {
     private float attackDamage;
-    private final ToolMaterial material;
+    private final Item.ToolMaterial material;
 
-    public ItemSword(ToolMaterial material)
+    public ItemSword(Item.ToolMaterial material)
     {
         this.material = material;
         this.maxStackSize = 1;

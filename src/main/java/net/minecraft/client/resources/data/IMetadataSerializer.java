@@ -12,7 +12,7 @@ import net.minecraft.util.RegistrySimple;
 
 public class IMetadataSerializer
 {
-    private final IRegistry < String, Registration <? extends IMetadataSection >> metadataSectionSerializerRegistry = new RegistrySimple();
+    private final IRegistry < String, IMetadataSerializer.Registration <? extends IMetadataSection >> metadataSectionSerializerRegistry = new RegistrySimple();
     private final GsonBuilder gsonBuilder = new GsonBuilder();
 
     /**
@@ -29,7 +29,7 @@ public class IMetadataSerializer
 
     public <T extends IMetadataSection> void registerMetadataSectionType(IMetadataSectionSerializer<T> p_110504_1_, Class<T> p_110504_2_)
     {
-        this.metadataSectionSerializerRegistry.putObject(p_110504_1_.getSectionName(), new Registration(p_110504_1_, p_110504_2_));
+        this.metadataSectionSerializerRegistry.putObject(p_110504_1_.getSectionName(), new IMetadataSerializer.Registration(p_110504_1_, p_110504_2_));
         this.gsonBuilder.registerTypeAdapter(p_110504_2_, p_110504_1_);
         this.gson = null;
     }
@@ -50,7 +50,7 @@ public class IMetadataSerializer
         }
         else
         {
-            Registration<?> registration = (Registration)this.metadataSectionSerializerRegistry.getObject(p_110503_1_);
+            IMetadataSerializer.Registration<?> registration = (IMetadataSerializer.Registration)this.metadataSectionSerializerRegistry.getObject(p_110503_1_);
 
             if (registration == null)
             {

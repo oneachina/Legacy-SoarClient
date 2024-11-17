@@ -1,24 +1,25 @@
 package net.minecraft.client.resources;
 
 import com.google.common.collect.ImmutableSet;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
+import java.util.Set;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.client.resources.data.IMetadataSection;
 import net.minecraft.client.resources.data.IMetadataSerializer;
 import net.minecraft.util.ResourceLocation;
-import optifine.ReflectorForge;
-
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.util.Map;
-import java.util.Set;
 
 public class DefaultResourcePack implements IResourcePack
 {
-    public static final Set defaultResourceDomains = ImmutableSet.of("minecraft", "realms");
-    private final Map mapAssets;
-    private static final String __OBFID = "CL_00001073";
+    public static final Set<String> defaultResourceDomains = ImmutableSet.<String>of("minecraft", "realms");
+    private final Map<String, File> mapAssets;
 
-    public DefaultResourcePack(Map mapAssetsIn)
+    public DefaultResourcePack(Map<String, File> mapAssetsIn)
     {
         this.mapAssets = mapAssetsIn;
     }
@@ -54,9 +55,7 @@ public class DefaultResourcePack implements IResourcePack
 
     private InputStream getResourceStream(ResourceLocation location)
     {
-        String s = "/assets/" + location.getResourceDomain() + "/" + location.getResourcePath();
-        InputStream inputstream = ReflectorForge.getOptiFineResourceStream(s);
-        return inputstream != null ? inputstream : DefaultResourcePack.class.getResourceAsStream("/assets/" + location.getResourceDomain() + "/" + location.getResourcePath());
+        return DefaultResourcePack.class.getResourceAsStream("/assets/" + location.getResourceDomain() + "/" + location.getResourcePath());
     }
 
     public boolean resourceExists(ResourceLocation location)
@@ -64,25 +63,25 @@ public class DefaultResourcePack implements IResourcePack
         return this.getResourceStream(location) != null || this.mapAssets.containsKey(location.toString());
     }
 
-    public Set getResourceDomains()
+    public Set<String> getResourceDomains()
     {
         return defaultResourceDomains;
     }
 
-    public IMetadataSection getPackMetadata(IMetadataSerializer p_135058_1_, String p_135058_2_) throws IOException
+    public <T extends IMetadataSection> T getPackMetadata(IMetadataSerializer p_135058_1_, String p_135058_2_) throws IOException
     {
         try
         {
-            FileInputStream fileinputstream = new FileInputStream((File)this.mapAssets.get("pack.mcmeta"));
-            return AbstractResourcePack.readMetadata(p_135058_1_, fileinputstream, p_135058_2_);
+            InputStream inputstream = new FileInputStream((File)this.mapAssets.get("pack.mcmeta"));
+            return AbstractResourcePack.readMetadata(p_135058_1_, inputstream, p_135058_2_);
         }
         catch (RuntimeException var4)
         {
-            return null;
+            return (T)null;
         }
         catch (FileNotFoundException var5)
         {
-            return null;
+            return (T)null;
         }
     }
 

@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class CommandResultStats
 {
     /** The number of result command result types that are possible. */
-    private static final int NUM_RESULT_TYPES = Type.values().length;
+    private static final int NUM_RESULT_TYPES = CommandResultStats.Type.values().length;
     private static final String[] STRING_RESULT_TYPES = new String[NUM_RESULT_TYPES];
     private String[] field_179675_c;
     private String[] field_179673_d;
@@ -24,7 +24,7 @@ public class CommandResultStats
         this.field_179673_d = STRING_RESULT_TYPES;
     }
 
-    public void func_179672_a(final ICommandSender sender, Type resultTypeIn, int p_179672_3_)
+    public void func_179672_a(final ICommandSender sender, CommandResultStats.Type resultTypeIn, int p_179672_3_)
     {
         String s = this.field_179675_c[resultTypeIn.getTypeID()];
 
@@ -68,7 +68,7 @@ public class CommandResultStats
                 {
                     return sender.sendCommandFeedback();
                 }
-                public void setCommandStat(Type type, int amount)
+                public void setCommandStat(CommandResultStats.Type type, int amount)
                 {
                     sender.setCommandStat(type, amount);
                 }
@@ -109,7 +109,7 @@ public class CommandResultStats
         {
             NBTTagCompound nbttagcompound = tagcompound.getCompoundTag("CommandStats");
 
-            for (Type commandresultstats$type : Type.values())
+            for (CommandResultStats.Type commandresultstats$type : CommandResultStats.Type.values())
             {
                 String s = commandresultstats$type.getTypeName() + "Name";
                 String s1 = commandresultstats$type.getTypeName() + "Objective";
@@ -128,7 +128,7 @@ public class CommandResultStats
     {
         NBTTagCompound nbttagcompound = new NBTTagCompound();
 
-        for (Type commandresultstats$type : Type.values())
+        for (CommandResultStats.Type commandresultstats$type : CommandResultStats.Type.values())
         {
             String s = this.field_179675_c[commandresultstats$type.getTypeID()];
             String s1 = this.field_179673_d[commandresultstats$type.getTypeID()];
@@ -146,7 +146,7 @@ public class CommandResultStats
         }
     }
 
-    public static void func_179667_a(CommandResultStats stats, Type resultType, String p_179667_2_, String p_179667_3_)
+    public static void func_179667_a(CommandResultStats stats, CommandResultStats.Type resultType, String p_179667_2_, String p_179667_3_)
     {
         if (p_179667_2_ != null && p_179667_2_.length() != 0 && p_179667_3_ != null && p_179667_3_.length() != 0)
         {
@@ -165,7 +165,7 @@ public class CommandResultStats
         }
     }
 
-    private static void func_179669_a(CommandResultStats resultStatsIn, Type resultTypeIn)
+    private static void func_179669_a(CommandResultStats resultStatsIn, CommandResultStats.Type resultTypeIn)
     {
         if (resultStatsIn.field_179675_c != STRING_RESULT_TYPES && resultStatsIn.field_179673_d != STRING_RESULT_TYPES)
         {
@@ -173,7 +173,7 @@ public class CommandResultStats
             resultStatsIn.field_179673_d[resultTypeIn.getTypeID()] = null;
             boolean flag = true;
 
-            for (Type commandresultstats$type : Type.values())
+            for (CommandResultStats.Type commandresultstats$type : CommandResultStats.Type.values())
             {
                 if (resultStatsIn.field_179675_c[commandresultstats$type.getTypeID()] != null && resultStatsIn.field_179673_d[commandresultstats$type.getTypeID()] != null)
                 {
@@ -192,7 +192,7 @@ public class CommandResultStats
 
     public void func_179671_a(CommandResultStats resultStatsIn)
     {
-        for (Type commandresultstats$type : Type.values())
+        for (CommandResultStats.Type commandresultstats$type : CommandResultStats.Type.values())
         {
             func_179667_a(this, commandresultstats$type, resultStatsIn.field_179675_c[commandresultstats$type.getTypeID()], resultStatsIn.field_179673_d[commandresultstats$type.getTypeID()]);
         }
@@ -230,7 +230,7 @@ public class CommandResultStats
             String[] astring = new String[values().length];
             int i = 0;
 
-            for (Type commandresultstats$type : values())
+            for (CommandResultStats.Type commandresultstats$type : values())
             {
                 astring[i++] = commandresultstats$type.getTypeName();
             }
@@ -238,9 +238,9 @@ public class CommandResultStats
             return astring;
         }
 
-        public static Type getTypeByName(String name)
+        public static CommandResultStats.Type getTypeByName(String name)
         {
-            for (Type commandresultstats$type : values())
+            for (CommandResultStats.Type commandresultstats$type : values())
             {
                 if (commandresultstats$type.getTypeName().equals(name))
                 {

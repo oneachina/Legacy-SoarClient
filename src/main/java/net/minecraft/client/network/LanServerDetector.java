@@ -1,11 +1,6 @@
 package net.minecraft.client.network;
 
 import com.google.common.collect.Lists;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ThreadLanServerPing;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
@@ -14,6 +9,10 @@ import java.net.SocketTimeoutException;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ThreadLanServerPing;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class LanServerDetector
 {
@@ -51,7 +50,7 @@ public class LanServerDetector
 
     public static class LanServerList
     {
-        private List<LanServer> listOfLanServers = Lists.<LanServer>newArrayList();
+        private List<LanServerDetector.LanServer> listOfLanServers = Lists.<LanServerDetector.LanServer>newArrayList();
         boolean wasUpdated;
 
         public synchronized boolean getWasUpdated()
@@ -64,9 +63,9 @@ public class LanServerDetector
             this.wasUpdated = false;
         }
 
-        public synchronized List<LanServer> getLanServers()
+        public synchronized List<LanServerDetector.LanServer> getLanServers()
         {
-            return Collections.<LanServer>unmodifiableList(this.listOfLanServers);
+            return Collections.<LanServerDetector.LanServer>unmodifiableList(this.listOfLanServers);
         }
 
         public synchronized void func_77551_a(String p_77551_1_, InetAddress p_77551_2_)
@@ -79,7 +78,7 @@ public class LanServerDetector
                 s1 = p_77551_2_.getHostAddress() + ":" + s1;
                 boolean flag = false;
 
-                for (LanServer lanserverdetector$lanserver : this.listOfLanServers)
+                for (LanServerDetector.LanServer lanserverdetector$lanserver : this.listOfLanServers)
                 {
                     if (lanserverdetector$lanserver.getServerIpPort().equals(s1))
                     {
@@ -91,7 +90,7 @@ public class LanServerDetector
 
                 if (!flag)
                 {
-                    this.listOfLanServers.add(new LanServer(s, s1));
+                    this.listOfLanServers.add(new LanServerDetector.LanServer(s, s1));
                     this.wasUpdated = true;
                 }
             }
@@ -100,11 +99,11 @@ public class LanServerDetector
 
     public static class ThreadLanServerFind extends Thread
     {
-        private final LanServerList localServerList;
+        private final LanServerDetector.LanServerList localServerList;
         private final InetAddress broadcastAddress;
         private final MulticastSocket socket;
 
-        public ThreadLanServerFind(LanServerList p_i1320_1_) throws IOException
+        public ThreadLanServerFind(LanServerDetector.LanServerList p_i1320_1_) throws IOException
         {
             super("LanServerDetector #" + LanServerDetector.field_148551_a.incrementAndGet());
             this.localServerList = p_i1320_1_;

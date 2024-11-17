@@ -213,7 +213,7 @@ public class NBTTagCompound extends NBTBase
     {
         try
         {
-            return !this.hasKey(key, 99) ? 0 : ((NBTPrimitive)this.tagMap.get(key)).getByte();
+            return !this.hasKey(key, 99) ? 0 : ((NBTBase.NBTPrimitive)this.tagMap.get(key)).getByte();
         }
         catch (ClassCastException var3)
         {
@@ -228,7 +228,7 @@ public class NBTTagCompound extends NBTBase
     {
         try
         {
-            return !this.hasKey(key, 99) ? 0 : ((NBTPrimitive)this.tagMap.get(key)).getShort();
+            return !this.hasKey(key, 99) ? 0 : ((NBTBase.NBTPrimitive)this.tagMap.get(key)).getShort();
         }
         catch (ClassCastException var3)
         {
@@ -243,7 +243,7 @@ public class NBTTagCompound extends NBTBase
     {
         try
         {
-            return !this.hasKey(key, 99) ? 0 : ((NBTPrimitive)this.tagMap.get(key)).getInt();
+            return !this.hasKey(key, 99) ? 0 : ((NBTBase.NBTPrimitive)this.tagMap.get(key)).getInt();
         }
         catch (ClassCastException var3)
         {
@@ -258,7 +258,7 @@ public class NBTTagCompound extends NBTBase
     {
         try
         {
-            return !this.hasKey(key, 99) ? 0L : ((NBTPrimitive)this.tagMap.get(key)).getLong();
+            return !this.hasKey(key, 99) ? 0L : ((NBTBase.NBTPrimitive)this.tagMap.get(key)).getLong();
         }
         catch (ClassCastException var3)
         {
@@ -273,7 +273,7 @@ public class NBTTagCompound extends NBTBase
     {
         try
         {
-            return !this.hasKey(key, 99) ? 0.0F : ((NBTPrimitive)this.tagMap.get(key)).getFloat();
+            return !this.hasKey(key, 99) ? 0.0F : ((NBTBase.NBTPrimitive)this.tagMap.get(key)).getFloat();
         }
         catch (ClassCastException var3)
         {
@@ -288,7 +288,7 @@ public class NBTTagCompound extends NBTBase
     {
         try
         {
-            return !this.hasKey(key, 99) ? 0.0D : ((NBTPrimitive)this.tagMap.get(key)).getDouble();
+            return !this.hasKey(key, 99) ? 0.0D : ((NBTBase.NBTPrimitive)this.tagMap.get(key)).getDouble();
         }
         catch (ClassCastException var3)
         {

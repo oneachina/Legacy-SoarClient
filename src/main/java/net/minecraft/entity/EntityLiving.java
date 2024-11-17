@@ -1,17 +1,26 @@
 package net.minecraft.entity;
 
+import java.util.UUID;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.EntityAITasks;
+import net.minecraft.entity.ai.EntityJumpHelper;
+import net.minecraft.entity.ai.EntityLookHelper;
+import net.minecraft.entity.ai.EntityMoveHelper;
+import net.minecraft.entity.ai.EntitySenses;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityGhast;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityTameable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagFloat;
 import net.minecraft.nbt.NBTTagList;
@@ -26,12 +35,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraft.world.biome.BiomeGenBase;
-import optifine.BlockPosM;
-import optifine.Config;
-import optifine.Reflector;
-
-import java.util.UUID;
 
 public abstract class EntityLiving extends EntityLivingBase
 {
@@ -72,10 +75,6 @@ public abstract class EntityLiving extends EntityLivingBase
     private boolean isLeashed;
     private Entity leashedToEntity;
     private NBTTagCompound leashNBTTag;
-    private static final String __OBFID = "CL_00001550";
-    public int randomMobsId = 0;
-    public BiomeGenBase spawnBiome = null;
-    public BlockPos spawnPosition = null;
 
     public EntityLiving(World worldIn)
     {
@@ -93,10 +92,6 @@ public abstract class EntityLiving extends EntityLivingBase
         {
             this.equipmentDropChances[i] = 0.085F;
         }
-
-        UUID uuid = this.getUniqueID();
-        long j = uuid.getLeastSignificantBits();
-        this.randomMobsId = (int)(j & 2147483647L);
     }
 
     protected void applyEntityAttributes()
@@ -155,13 +150,12 @@ public abstract class EntityLiving extends EntityLivingBase
     public void setAttackTarget(EntityLivingBase entitylivingbaseIn)
     {
         this.attackTarget = entitylivingbaseIn;
-        Reflector.callVoid(Reflector.ForgeHooks_onLivingSetAttackTarget, new Object[] {this, entitylivingbaseIn});
     }
 
     /**
      * Returns true if this entity can attack entities of the specified class.
      */
-    public boolean canAttackClass(Class cls)
+    public boolean canAttackClass(Class <? extends EntityLivingBase > cls)
     {
         return cls != EntityGhast.class;
     }
@@ -283,18 +277,11 @@ public abstract class EntityLiving extends EntityLivingBase
      */
     public void onUpdate()
     {
-        if (Config.isSmoothWorld() && this.canSkipUpdate())
-        {
-            this.onUpdateMinimal();
-        }
-        else
-        {
-            super.onUpdate();
+        super.onUpdate();
 
-            if (!this.worldObj.isRemote)
-            {
-                this.updateLeashedState();
-            }
+        if (!this.worldObj.isRemote)
+        {
+            this.updateLeashedState();
         }
     }
 
@@ -593,34 +580,19 @@ public abstract class EntityLiving extends EntityLivingBase
      */
     protected void despawnEntity()
     {
-        Object object = null;
-        Object object1 = Reflector.getFieldValue(Reflector.Event_Result_DEFAULT);
-        Object object2 = Reflector.getFieldValue(Reflector.Event_Result_DENY);
-
         if (this.persistenceRequired)
         {
             this.entityAge = 0;
         }
-        else if ((this.entityAge & 31) == 31 && (object = Reflector.call(Reflector.ForgeEventFactory_canEntityDespawn, new Object[] {this})) != object1)
-        {
-            if (object == object2)
-            {
-                this.entityAge = 0;
-            }
-            else
-            {
-                this.setDead();
-            }
-        }
         else
         {
-            EntityPlayer entityplayer = this.worldObj.getClosestPlayerToEntity(this, -1.0D);
+            Entity entity = this.worldObj.getClosestPlayerToEntity(this, -1.0D);
 
-            if (entityplayer != null)
+            if (entity != null)
             {
-                double d0 = entityplayer.posX - this.posX;
-                double d1 = entityplayer.posY - this.posY;
-                double d2 = entityplayer.posZ - this.posZ;
+                double d0 = entity.posX - this.posX;
+                double d1 = entity.posY - this.posY;
+                double d2 = entity.posZ - this.posZ;
                 double d3 = d0 * d0 + d1 * d1 + d2 * d2;
 
                 if (this.canDespawn() && d3 > 16384.0D)
@@ -691,22 +663,22 @@ public abstract class EntityLiving extends EntityLivingBase
     public void faceEntity(Entity entityIn, float p_70625_2_, float p_70625_3_)
     {
         double d0 = entityIn.posX - this.posX;
-        double d1 = entityIn.posZ - this.posZ;
-        double d2;
+        double d2 = entityIn.posZ - this.posZ;
+        double d1;
 
         if (entityIn instanceof EntityLivingBase)
         {
             EntityLivingBase entitylivingbase = (EntityLivingBase)entityIn;
-            d2 = entitylivingbase.posY + (double)entitylivingbase.getEyeHeight() - (this.posY + (double)this.getEyeHeight());
+            d1 = entitylivingbase.posY + (double)entitylivingbase.getEyeHeight() - (this.posY + (double)this.getEyeHeight());
         }
         else
         {
-            d2 = (entityIn.getEntityBoundingBox().minY + entityIn.getEntityBoundingBox().maxY) / 2.0D - (this.posY + (double)this.getEyeHeight());
+            d1 = (entityIn.getEntityBoundingBox().minY + entityIn.getEntityBoundingBox().maxY) / 2.0D - (this.posY + (double)this.getEyeHeight());
         }
 
-        double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d1 * d1);
-        float f = (float)(MathHelper.func_181159_b(d1, d0) * 180.0D / Math.PI) - 90.0F;
-        float f1 = (float)(-(MathHelper.func_181159_b(d2, d3) * 180.0D / Math.PI));
+        double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+        float f = (float)(MathHelper.func_181159_b(d2, d0) * 180.0D / Math.PI) - 90.0F;
+        float f1 = (float)(-(MathHelper.func_181159_b(d1, d3) * 180.0D / Math.PI));
         this.rotationPitch = this.updateRotation(this.rotationPitch, f1, p_70625_3_);
         this.rotationYaw = this.updateRotation(this.rotationYaw, f, p_70625_2_);
     }
@@ -1136,7 +1108,14 @@ public abstract class EntityLiving extends EntityLivingBase
                 }
             }
 
-            return this.interact(playerIn) ? true : super.interactFirst(playerIn);
+            if (this.interact(playerIn))
+            {
+                return true;
+            }
+            else
+            {
+                return super.interactFirst(playerIn);
+            }
         }
     }
 
@@ -1279,14 +1258,14 @@ public abstract class EntityLiving extends EntityLivingBase
             }
         }
 
-        if (itemStackIn == null || getArmorPosition(itemStackIn) == i || i == 4 && itemStackIn.getItem() instanceof ItemBlock)
+        if (itemStackIn != null && getArmorPosition(itemStackIn) != i && (i != 4 || !(itemStackIn.getItem() instanceof ItemBlock)))
         {
-            this.setCurrentItemOrArmor(i, itemStackIn);
-            return true;
+            return false;
         }
         else
         {
-            return false;
+            this.setCurrentItemOrArmor(i, itemStackIn);
+            return true;
         }
     }
 
@@ -1314,101 +1293,10 @@ public abstract class EntityLiving extends EntityLivingBase
         return this.dataWatcher.getWatchableObjectByte(15) != 0;
     }
 
-    /**
-     * Checks if this entity is inside of an opaque block
-     */
-    public boolean isEntityInsideOpaqueBlock()
-    {
-        if (this.noClip)
-        {
-            return false;
-        }
-        else
-        {
-            BlockPosM blockposm = new BlockPosM(0, 0, 0);
-
-            for (int i = 0; i < 8; ++i)
-            {
-                double d0 = this.posX + (double)(((float)((i >> 0) % 2) - 0.5F) * this.width * 0.8F);
-                double d1 = this.posY + (double)(((float)((i >> 1) % 2) - 0.5F) * 0.1F);
-                double d2 = this.posZ + (double)(((float)((i >> 2) % 2) - 0.5F) * this.width * 0.8F);
-                blockposm.setXyz(d0, d1 + (double)this.getEyeHeight(), d2);
-
-                if (this.worldObj.getBlockState(blockposm).getBlock().isVisuallyOpaque())
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-    }
-
-    private boolean canSkipUpdate()
-    {
-        if (this.isChild())
-        {
-            return false;
-        }
-        else if (this.hurtTime > 0)
-        {
-            return false;
-        }
-        else if (this.ticksExisted < 20)
-        {
-            return false;
-        }
-        else
-        {
-            World world = this.getEntityWorld();
-
-            if (world == null)
-            {
-                return false;
-            }
-            else if (world.playerEntities.size() != 1)
-            {
-                return false;
-            }
-            else
-            {
-                Entity entity = (Entity)world.playerEntities.get(0);
-                double d0 = Math.max(Math.abs(this.posX - entity.posX) - 16.0D, 0.0D);
-                double d1 = Math.max(Math.abs(this.posZ - entity.posZ) - 16.0D, 0.0D);
-                double d2 = d0 * d0 + d1 * d1;
-                return !this.isInRangeToRenderDist(d2);
-            }
-        }
-    }
-
-    private void onUpdateMinimal()
-    {
-        ++this.entityAge;
-
-        if (this instanceof EntityMob)
-        {
-            float f = this.getBrightness(1.0F);
-
-            if (f > 0.5F)
-            {
-                this.entityAge += 2;
-            }
-        }
-
-        this.despawnEntity();
-    }
-
     public static enum SpawnPlacementType
     {
-        ON_GROUND("ON_GROUND", 0),
-        IN_AIR("IN_AIR", 1),
-        IN_WATER("IN_WATER", 2);
-
-        private static final SpawnPlacementType[] $VALUES = new SpawnPlacementType[]{ON_GROUND, IN_AIR, IN_WATER};
-        private static final String __OBFID = "CL_00002255";
-
-        private SpawnPlacementType(String p_i18_3_, int p_i18_4_)
-        {
-        }
+        ON_GROUND,
+        IN_AIR,
+        IN_WATER;
     }
 }

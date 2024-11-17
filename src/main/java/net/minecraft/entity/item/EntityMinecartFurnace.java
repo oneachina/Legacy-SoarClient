@@ -30,9 +30,9 @@ public class EntityMinecartFurnace extends EntityMinecart
         super(worldIn, p_i1719_2_, p_i1719_4_, p_i1719_6_);
     }
 
-    public EnumMinecartType getMinecartType()
+    public EntityMinecart.EnumMinecartType getMinecartType()
     {
-        return EnumMinecartType.FURNACE;
+        return EntityMinecart.EnumMinecartType.FURNACE;
     }
 
     protected void entityInit()

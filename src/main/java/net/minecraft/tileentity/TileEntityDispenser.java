@@ -1,5 +1,6 @@
 package net.minecraft.tileentity;
 
+import java.util.Random;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -8,8 +9,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-
-import java.util.Random;
 
 public class TileEntityDispenser extends TileEntityLockable implements IInventory
 {

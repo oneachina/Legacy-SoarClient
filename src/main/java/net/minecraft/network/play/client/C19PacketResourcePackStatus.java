@@ -8,13 +8,13 @@ import net.minecraft.network.play.INetHandlerPlayServer;
 public class C19PacketResourcePackStatus implements Packet<INetHandlerPlayServer>
 {
     private String hash;
-    private Action status;
+    private C19PacketResourcePackStatus.Action status;
 
     public C19PacketResourcePackStatus()
     {
     }
 
-    public C19PacketResourcePackStatus(String hashIn, Action statusIn)
+    public C19PacketResourcePackStatus(String hashIn, C19PacketResourcePackStatus.Action statusIn)
     {
         if (hashIn.length() > 40)
         {
@@ -31,7 +31,7 @@ public class C19PacketResourcePackStatus implements Packet<INetHandlerPlayServer
     public void readPacketData(PacketBuffer buf) throws IOException
     {
         this.hash = buf.readStringFromBuffer(40);
-        this.status = (Action)buf.readEnumValue(Action.class);
+        this.status = (C19PacketResourcePackStatus.Action)buf.readEnumValue(C19PacketResourcePackStatus.Action.class);
     }
 
     /**

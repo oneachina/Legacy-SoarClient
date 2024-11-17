@@ -1,6 +1,7 @@
 package net.minecraft.client.multiplayer;
 
 import com.google.common.collect.Lists;
+import java.util.List;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.IProgressUpdate;
@@ -14,8 +15,6 @@ import net.minecraft.world.chunk.IChunkProvider;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.List;
-
 public class ChunkProviderClient implements IChunkProvider
 {
     private static final Logger logger = LogManager.getLogger();
@@ -25,7 +24,7 @@ public class ChunkProviderClient implements IChunkProvider
      * coordinates.
      */
     private Chunk blankChunk;
-    private LongHashMap chunkMapping = new LongHashMap();
+    private LongHashMap<Chunk> chunkMapping = new LongHashMap();
     private List<Chunk> chunkListing = Lists.<Chunk>newArrayList();
 
     /** Reference to the World object. */

@@ -1,6 +1,7 @@
 package net.minecraft.world.gen.feature;
 
 import com.google.common.base.Predicates;
+import java.util.Random;
 import net.minecraft.block.BlockSand;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockStoneSlab;
@@ -10,8 +11,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class WorldGenDesertWells extends WorldGenerator
 {
@@ -57,9 +56,9 @@ public class WorldGenDesertWells extends WorldGenerator
 
             worldIn.setBlockState(position, this.field_175910_d, 2);
 
-            for (Object enumfacing : EnumFacing.Plane.HORIZONTAL)
+            for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
             {
-                worldIn.setBlockState(position.offset((EnumFacing) enumfacing), this.field_175910_d, 2);
+                worldIn.setBlockState(position.offset(enumfacing), this.field_175910_d, 2);
             }
 
             for (int i1 = -2; i1 <= 2; ++i1)

@@ -4,6 +4,10 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.mojang.authlib.GameProfile;
 import io.netty.buffer.Unpooled;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
@@ -18,7 +22,13 @@ import net.minecraft.entity.IMerchant;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.*;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ContainerChest;
+import net.minecraft.inventory.ContainerHorseInventory;
+import net.minecraft.inventory.ContainerMerchant;
+import net.minecraft.inventory.ICrafting;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemMapBase;
@@ -28,7 +38,31 @@ import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.client.C15PacketClientSettings;
-import net.minecraft.network.play.server.*;
+import net.minecraft.network.play.server.S02PacketChat;
+import net.minecraft.network.play.server.S06PacketUpdateHealth;
+import net.minecraft.network.play.server.S0APacketUseBed;
+import net.minecraft.network.play.server.S0BPacketAnimation;
+import net.minecraft.network.play.server.S13PacketDestroyEntities;
+import net.minecraft.network.play.server.S19PacketEntityStatus;
+import net.minecraft.network.play.server.S1BPacketEntityAttach;
+import net.minecraft.network.play.server.S1DPacketEntityEffect;
+import net.minecraft.network.play.server.S1EPacketRemoveEntityEffect;
+import net.minecraft.network.play.server.S1FPacketSetExperience;
+import net.minecraft.network.play.server.S21PacketChunkData;
+import net.minecraft.network.play.server.S26PacketMapChunkBulk;
+import net.minecraft.network.play.server.S29PacketSoundEffect;
+import net.minecraft.network.play.server.S2BPacketChangeGameState;
+import net.minecraft.network.play.server.S2DPacketOpenWindow;
+import net.minecraft.network.play.server.S2EPacketCloseWindow;
+import net.minecraft.network.play.server.S2FPacketSetSlot;
+import net.minecraft.network.play.server.S30PacketWindowItems;
+import net.minecraft.network.play.server.S31PacketWindowProperty;
+import net.minecraft.network.play.server.S36PacketSignEditorOpen;
+import net.minecraft.network.play.server.S39PacketPlayerAbilities;
+import net.minecraft.network.play.server.S3FPacketCustomPayload;
+import net.minecraft.network.play.server.S42PacketCombatEvent;
+import net.minecraft.network.play.server.S43PacketCamera;
+import net.minecraft.network.play.server.S48PacketResourcePackSend;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.scoreboard.IScoreObjectiveCriteria;
 import net.minecraft.scoreboard.Score;
@@ -43,18 +77,24 @@ import net.minecraft.stats.StatList;
 import net.minecraft.stats.StatisticsFile;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntitySign;
-import net.minecraft.util.*;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.JsonSerializableSet;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ReportedException;
 import net.minecraft.village.MerchantRecipeList;
-import net.minecraft.world.*;
+import net.minecraft.world.ChunkCoordIntPair;
+import net.minecraft.world.IInteractionObject;
+import net.minecraft.world.ILockableContainer;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.WorldSettings;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraft.world.chunk.Chunk;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 public class EntityPlayerMP extends EntityPlayer implements ICrafting
 {
@@ -98,7 +138,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
     /** Amount of experience the client was last set to */
     private int lastExperience = -99999999;
     private int respawnInvulnerabilityTicks = 60;
-    private EnumChatVisibility chatVisibility;
+    private EntityPlayer.EnumChatVisibility chatVisibility;
     private boolean chatColours = true;
     private long playerLastActiveTime = System.currentTimeMillis();
 
@@ -621,11 +661,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         this.openContainer.detectAndSendChanges();
     }
 
-    public EnumStatus trySleep(BlockPos bedLocation)
+    public EntityPlayer.EnumStatus trySleep(BlockPos bedLocation)
     {
-        EnumStatus entityplayer$enumstatus = super.trySleep(bedLocation);
+        EntityPlayer.EnumStatus entityplayer$enumstatus = super.trySleep(bedLocation);
 
-        if (entityplayer$enumstatus == EnumStatus.OK)
+        if (entityplayer$enumstatus == EntityPlayer.EnumStatus.OK)
         {
             Packet packet = new S0APacketUseBed(this, bedLocation);
             this.getServerForPlayer().getEntityTracker().sendToAllTrackingEntity(this, packet);
@@ -1142,7 +1182,7 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting
         this.getDataWatcher().updateObject(10, Byte.valueOf((byte)packetIn.getModelPartFlags()));
     }
 
-    public EnumChatVisibility getChatVisibility()
+    public EntityPlayer.EnumChatVisibility getChatVisibility()
     {
         return this.chatVisibility;
     }

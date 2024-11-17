@@ -1,9 +1,8 @@
 package net.minecraft.world.gen.structure;
 
-import net.minecraft.util.MathHelper;
-
 import java.util.Map;
 import java.util.Map.Entry;
+import net.minecraft.util.MathHelper;
 
 public class MapGenMineshaft extends MapGenStructure
 {

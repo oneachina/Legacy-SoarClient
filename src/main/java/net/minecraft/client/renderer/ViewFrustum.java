@@ -14,7 +14,6 @@ public class ViewFrustum
     protected int countChunksX;
     protected int countChunksZ;
     public RenderChunk[] renderChunks;
-    private static final String __OBFID = "CL_00002531";
 
     public ViewFrustum(World worldIn, int renderDistanceChunks, RenderGlobal p_i46246_3_, IRenderChunkFactory renderChunkFactory)
     {
@@ -78,16 +77,11 @@ public class ViewFrustum
                 {
                     int i2 = l1 * 16;
                     RenderChunk renderchunk = this.renderChunks[(j1 * this.countChunksY + l1) * this.countChunksX + l];
-                    BlockPos blockpos = renderchunk.getPosition();
+                    BlockPos blockpos = new BlockPos(i1, i2, k1);
 
-                    if (blockpos.getX() != i1 || blockpos.getY() != i2 || blockpos.getZ() != k1)
+                    if (!blockpos.equals(renderchunk.getPosition()))
                     {
-                        BlockPos blockpos1 = new BlockPos(i1, i2, k1);
-
-                        if (!blockpos1.equals(renderchunk.getPosition()))
-                        {
-                            renderchunk.setPosition(blockpos1);
-                        }
+                        renderchunk.setPosition(blockpos);
                     }
                 }
             }
@@ -151,11 +145,11 @@ public class ViewFrustum
         }
     }
 
-    public RenderChunk getRenderChunk(BlockPos pos)
+    protected RenderChunk getRenderChunk(BlockPos pos)
     {
-        int i = pos.getX() >> 4;
-        int j = pos.getY() >> 4;
-        int k = pos.getZ() >> 4;
+        int i = MathHelper.bucketInt(pos.getX(), 16);
+        int j = MathHelper.bucketInt(pos.getY(), 16);
+        int k = MathHelper.bucketInt(pos.getZ(), 16);
 
         if (j >= 0 && j < this.countChunksY)
         {

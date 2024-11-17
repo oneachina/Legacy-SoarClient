@@ -1,6 +1,7 @@
 package net.minecraft.entity.item;
 
 import com.google.common.collect.Lists;
+import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityHanging;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,11 +12,9 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-import java.util.List;
-
 public class EntityPainting extends EntityHanging
 {
-    public EnumArt art;
+    public EntityPainting.EnumArt art;
 
     public EntityPainting(World worldIn)
     {
@@ -25,9 +24,9 @@ public class EntityPainting extends EntityHanging
     public EntityPainting(World worldIn, BlockPos pos, EnumFacing facing)
     {
         super(worldIn, pos);
-        List<EnumArt> list = Lists.<EnumArt>newArrayList();
+        List<EntityPainting.EnumArt> list = Lists.<EntityPainting.EnumArt>newArrayList();
 
-        for (EnumArt entitypainting$enumart : EnumArt.values())
+        for (EntityPainting.EnumArt entitypainting$enumart : EntityPainting.EnumArt.values())
         {
             this.art = entitypainting$enumart;
             this.updateFacingWithBoundingBox(facing);
@@ -40,7 +39,7 @@ public class EntityPainting extends EntityHanging
 
         if (!list.isEmpty())
         {
-            this.art = (EnumArt)list.get(this.rand.nextInt(list.size()));
+            this.art = (EntityPainting.EnumArt)list.get(this.rand.nextInt(list.size()));
         }
 
         this.updateFacingWithBoundingBox(facing);
@@ -50,7 +49,7 @@ public class EntityPainting extends EntityHanging
     {
         this(worldIn, pos, facing);
 
-        for (EnumArt entitypainting$enumart : EnumArt.values())
+        for (EntityPainting.EnumArt entitypainting$enumart : EntityPainting.EnumArt.values())
         {
             if (entitypainting$enumart.title.equals(title))
             {
@@ -78,7 +77,7 @@ public class EntityPainting extends EntityHanging
     {
         String s = tagCompund.getString("Motive");
 
-        for (EnumArt entitypainting$enumart : EnumArt.values())
+        for (EntityPainting.EnumArt entitypainting$enumart : EntityPainting.EnumArt.values())
         {
             if (entitypainting$enumart.title.equals(s))
             {
@@ -88,7 +87,7 @@ public class EntityPainting extends EntityHanging
 
         if (this.art == null)
         {
-            this.art = EnumArt.KEBAB;
+            this.art = EntityPainting.EnumArt.KEBAB;
         }
 
         super.readEntityFromNBT(tagCompund);

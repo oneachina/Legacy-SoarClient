@@ -1,5 +1,6 @@
 package net.minecraft.entity.item;
 
+import java.util.List;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -14,8 +15,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class EntityMinecartHopper extends EntityMinecartContainer implements IHopper
 {
@@ -34,9 +33,9 @@ public class EntityMinecartHopper extends EntityMinecartContainer implements IHo
         super(worldIn, p_i1721_2_, p_i1721_4_, p_i1721_6_);
     }
 
-    public EnumMinecartType getMinecartType()
+    public EntityMinecart.EnumMinecartType getMinecartType()
     {
-        return EnumMinecartType.HOPPER;
+        return EntityMinecart.EnumMinecartType.HOPPER;
     }
 
     public IBlockState getDefaultDisplayTile()

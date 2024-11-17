@@ -1,12 +1,11 @@
 package net.minecraft.item;
 
+import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
-
-import java.util.List;
 
 public class ItemAppleGold extends ItemFood
 {

@@ -1,14 +1,17 @@
 package net.minecraft.client.resources;
 
 import com.google.common.collect.Lists;
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.List;
+import java.util.Set;
 import net.minecraft.client.resources.data.IMetadataSerializer;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.io.*;
-import java.util.List;
-import java.util.Set;
 
 public class FallbackResourceManager implements IResourceManager
 {
@@ -64,7 +67,7 @@ public class FallbackResourceManager implements IResourceManager
     protected InputStream getInputStream(ResourceLocation location, IResourcePack resourcePack) throws IOException
     {
         InputStream inputstream = resourcePack.getInputStream(location);
-        return (InputStream)(logger.isDebugEnabled() ? new InputStreamLeakedResourceLogger(inputstream, location, resourcePack.getPackName()) : inputstream);
+        return (InputStream)(logger.isDebugEnabled() ? new FallbackResourceManager.InputStreamLeakedResourceLogger(inputstream, location, resourcePack.getPackName()) : inputstream);
     }
 
     public List<IResource> getAllResources(ResourceLocation location) throws IOException

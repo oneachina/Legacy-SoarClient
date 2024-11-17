@@ -1,9 +1,8 @@
 package net.minecraft.world.biome;
 
+import java.util.Random;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.ChunkPrimer;
-
-import java.util.Random;
 
 public class BiomeGenOcean extends BiomeGenBase
 {
@@ -13,9 +12,9 @@ public class BiomeGenOcean extends BiomeGenBase
         this.spawnableCreatureList.clear();
     }
 
-    public TempCategory getTempCategory()
+    public BiomeGenBase.TempCategory getTempCategory()
     {
-        return TempCategory.OCEAN;
+        return BiomeGenBase.TempCategory.OCEAN;
     }
 
     public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int p_180622_4_, int p_180622_5_, double p_180622_6_)

@@ -2,26 +2,25 @@ package net.minecraft.client.resources.model;
 
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Lists;
+import java.util.Collections;
+import java.util.List;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.WeightedRandom;
 
-import java.util.Collections;
-import java.util.List;
-
 public class WeightedBakedModel implements IBakedModel
 {
     private final int totalWeight;
-    private final List<MyWeighedRandomItem> models;
+    private final List<WeightedBakedModel.MyWeighedRandomItem> models;
     private final IBakedModel baseModel;
 
-    public WeightedBakedModel(List<MyWeighedRandomItem> p_i46073_1_)
+    public WeightedBakedModel(List<WeightedBakedModel.MyWeighedRandomItem> p_i46073_1_)
     {
         this.models = p_i46073_1_;
         this.totalWeight = WeightedRandom.getTotalWeight(p_i46073_1_);
-        this.baseModel = ((MyWeighedRandomItem)p_i46073_1_.get(0)).model;
+        this.baseModel = ((WeightedBakedModel.MyWeighedRandomItem)p_i46073_1_.get(0)).model;
     }
 
     public List<BakedQuad> getFaceQuads(EnumFacing p_177551_1_)
@@ -61,16 +60,16 @@ public class WeightedBakedModel implements IBakedModel
 
     public IBakedModel getAlternativeModel(long p_177564_1_)
     {
-        return ((MyWeighedRandomItem)WeightedRandom.getRandomItem(this.models, Math.abs((int)p_177564_1_ >> 16) % this.totalWeight)).model;
+        return ((WeightedBakedModel.MyWeighedRandomItem)WeightedRandom.getRandomItem(this.models, Math.abs((int)p_177564_1_ >> 16) % this.totalWeight)).model;
     }
 
     public static class Builder
     {
-        private List<MyWeighedRandomItem> listItems = Lists.<MyWeighedRandomItem>newArrayList();
+        private List<WeightedBakedModel.MyWeighedRandomItem> listItems = Lists.<WeightedBakedModel.MyWeighedRandomItem>newArrayList();
 
-        public Builder add(IBakedModel p_177677_1_, int p_177677_2_)
+        public WeightedBakedModel.Builder add(IBakedModel p_177677_1_, int p_177677_2_)
         {
-            this.listItems.add(new MyWeighedRandomItem(p_177677_1_, p_177677_2_));
+            this.listItems.add(new WeightedBakedModel.MyWeighedRandomItem(p_177677_1_, p_177677_2_));
             return this;
         }
 
@@ -82,11 +81,11 @@ public class WeightedBakedModel implements IBakedModel
 
         public IBakedModel first()
         {
-            return ((MyWeighedRandomItem)this.listItems.get(0)).model;
+            return ((WeightedBakedModel.MyWeighedRandomItem)this.listItems.get(0)).model;
         }
     }
 
-    static class MyWeighedRandomItem extends WeightedRandom.Item implements Comparable<MyWeighedRandomItem>
+    static class MyWeighedRandomItem extends WeightedRandom.Item implements Comparable<WeightedBakedModel.MyWeighedRandomItem>
     {
         protected final IBakedModel model;
 
@@ -96,7 +95,7 @@ public class WeightedBakedModel implements IBakedModel
             this.model = p_i46072_1_;
         }
 
-        public int compareTo(MyWeighedRandomItem p_compareTo_1_)
+        public int compareTo(WeightedBakedModel.MyWeighedRandomItem p_compareTo_1_)
         {
             return ComparisonChain.start().compare(p_compareTo_1_.itemWeight, this.itemWeight).compare(this.getCountQuads(), p_compareTo_1_.getCountQuads()).result();
         }

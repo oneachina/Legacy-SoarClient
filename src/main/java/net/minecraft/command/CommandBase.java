@@ -388,12 +388,12 @@ public abstract class CommandBase implements ICommand
         return stringbuilder.toString();
     }
 
-    public static CoordinateArg parseCoordinate(double base, String p_175770_2_, boolean centerBlock) throws NumberInvalidException
+    public static CommandBase.CoordinateArg parseCoordinate(double base, String p_175770_2_, boolean centerBlock) throws NumberInvalidException
     {
         return parseCoordinate(base, p_175770_2_, -30000000, 30000000, centerBlock);
     }
 
-    public static CoordinateArg parseCoordinate(double p_175767_0_, String p_175767_2_, int min, int max, boolean centerBlock) throws NumberInvalidException
+    public static CommandBase.CoordinateArg parseCoordinate(double p_175767_0_, String p_175767_2_, int min, int max, boolean centerBlock) throws NumberInvalidException
     {
         boolean flag = p_175767_2_.startsWith("~");
 
@@ -435,7 +435,7 @@ public abstract class CommandBase implements ICommand
                 }
             }
 
-            return new CoordinateArg(d0 + (flag ? p_175767_0_ : 0.0D), d0, flag);
+            return new CommandBase.CoordinateArg(d0 + (flag ? p_175767_0_ : 0.0D), d0, flag);
         }
     }
 

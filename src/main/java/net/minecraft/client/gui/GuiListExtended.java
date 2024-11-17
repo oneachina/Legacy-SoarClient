@@ -80,7 +80,7 @@ public abstract class GuiListExtended extends GuiSlot
     /**
      * Gets the IGuiListEntry object for the given index
      */
-    public abstract IGuiListEntry getListEntry(int index);
+    public abstract GuiListExtended.IGuiListEntry getListEntry(int index);
 
     public interface IGuiListEntry
     {

@@ -1,7 +1,6 @@
 package net.minecraft.scoreboard;
 
 import com.google.common.collect.Maps;
-
 import java.util.Collection;
 import java.util.Map;
 
@@ -26,11 +25,11 @@ public abstract class Team
 
     public abstract boolean getAllowFriendlyFire();
 
-    public abstract EnumVisible getNameTagVisibility();
+    public abstract Team.EnumVisible getNameTagVisibility();
 
     public abstract Collection<String> getMembershipCollection();
 
-    public abstract EnumVisible getDeathMessageVisibility();
+    public abstract Team.EnumVisible getDeathMessageVisibility();
 
     public static enum EnumVisible
     {
@@ -39,7 +38,7 @@ public abstract class Team
         HIDE_FOR_OTHER_TEAMS("hideForOtherTeams", 2),
         HIDE_FOR_OWN_TEAM("hideForOwnTeam", 3);
 
-        private static Map<String, EnumVisible> field_178828_g = Maps.<String, EnumVisible>newHashMap();
+        private static Map<String, Team.EnumVisible> field_178828_g = Maps.<String, Team.EnumVisible>newHashMap();
         public final String field_178830_e;
         public final int field_178827_f;
 
@@ -48,9 +47,9 @@ public abstract class Team
             return (String[])field_178828_g.keySet().toArray(new String[field_178828_g.size()]);
         }
 
-        public static EnumVisible func_178824_a(String p_178824_0_)
+        public static Team.EnumVisible func_178824_a(String p_178824_0_)
         {
-            return (EnumVisible)field_178828_g.get(p_178824_0_);
+            return (Team.EnumVisible)field_178828_g.get(p_178824_0_);
         }
 
         private EnumVisible(String p_i45550_3_, int p_i45550_4_)
@@ -60,7 +59,7 @@ public abstract class Team
         }
 
         static {
-            for (EnumVisible team$enumvisible : values())
+            for (Team.EnumVisible team$enumvisible : values())
             {
                 field_178828_g.put(team$enumvisible.field_178830_e, team$enumvisible);
             }

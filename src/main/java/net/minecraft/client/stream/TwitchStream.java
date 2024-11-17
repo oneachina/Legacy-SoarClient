@@ -5,6 +5,11 @@ import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.mojang.authlib.properties.Property;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Map;
+import java.util.Set;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.stream.GuiTwitchUserMode;
 import net.minecraft.client.renderer.GlStateManager;
@@ -16,7 +21,14 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.event.HoverEvent;
-import net.minecraft.util.*;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.HttpUtil;
+import net.minecraft.util.IChatComponent;
+import net.minecraft.util.JsonUtils;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.Util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
@@ -24,14 +36,18 @@ import org.apache.logging.log4j.MarkerManager;
 import org.lwjgl.opengl.GL11;
 import tv.twitch.AuthToken;
 import tv.twitch.ErrorCode;
-import tv.twitch.broadcast.*;
-import tv.twitch.chat.*;
-
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.Map;
-import java.util.Set;
+import tv.twitch.broadcast.EncodingCpuUsage;
+import tv.twitch.broadcast.FrameBuffer;
+import tv.twitch.broadcast.GameInfo;
+import tv.twitch.broadcast.IngestList;
+import tv.twitch.broadcast.IngestServer;
+import tv.twitch.broadcast.StreamInfo;
+import tv.twitch.broadcast.VideoParams;
+import tv.twitch.chat.ChatRawMessage;
+import tv.twitch.chat.ChatTokenizedMessage;
+import tv.twitch.chat.ChatUserInfo;
+import tv.twitch.chat.ChatUserMode;
+import tv.twitch.chat.ChatUserSubscription;
 
 public class TwitchStream implements BroadcastController.BroadcastListener, ChatController.ChatListener, IngestServerTester.IngestTestListener, IStream
 {
@@ -55,7 +71,7 @@ public class TwitchStream implements BroadcastController.BroadcastListener, Chat
     private boolean loggedIn;
     private boolean field_152962_n;
     private boolean field_152963_o;
-    private AuthFailureReason authFailureReason = AuthFailureReason.ERROR;
+    private IStream.AuthFailureReason authFailureReason = IStream.AuthFailureReason.ERROR;
     private static boolean field_152965_q;
 
     public TwitchStream(Minecraft mcIn, final Property streamProperty)
@@ -103,13 +119,13 @@ public class TwitchStream implements BroadcastController.BroadcastListener, Chat
                         }
                         else
                         {
-                            TwitchStream.this.authFailureReason = AuthFailureReason.INVALID_TOKEN;
+                            TwitchStream.this.authFailureReason = IStream.AuthFailureReason.INVALID_TOKEN;
                             TwitchStream.LOGGER.error(TwitchStream.STREAM_MARKER, "Given twitch access token is invalid");
                         }
                     }
                     catch (IOException ioexception)
                     {
-                        TwitchStream.this.authFailureReason = AuthFailureReason.ERROR;
+                        TwitchStream.this.authFailureReason = IStream.AuthFailureReason.ERROR;
                         TwitchStream.LOGGER.error(TwitchStream.STREAM_MARKER, (String)"Could not authenticate with twitch", (Throwable)ioexception);
                     }
                 }
@@ -720,7 +736,7 @@ public class TwitchStream implements BroadcastController.BroadcastListener, Chat
         return this.field_152962_n || this.mc.gameSettings.streamMicVolume <= 0.0F || flag != this.field_152963_o;
     }
 
-    public AuthFailureReason func_152918_H()
+    public IStream.AuthFailureReason func_152918_H()
     {
         return this.authFailureReason;
     }

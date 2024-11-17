@@ -1,5 +1,7 @@
 package net.minecraft.tileentity;
 
+import java.util.Arrays;
+import java.util.List;
 import net.minecraft.block.BlockBrewingStand;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,9 +19,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHelper;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class TileEntityBrewingStand extends TileEntityLockable implements ITickable, ISidedInventory
 {

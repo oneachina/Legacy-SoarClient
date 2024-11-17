@@ -47,7 +47,7 @@ public class SoundManager
     private final GameSettings options;
 
     /** A reference to the sound system. */
-    private SoundSystemStarterThread sndSystem;
+    private SoundManager.SoundSystemStarterThread sndSystem;
 
     /** Set to true when the SoundManager has been initialised. */
     private boolean loaded;
@@ -93,7 +93,6 @@ public class SoundManager
     /**
      * Tries to add the paulscode library and the relevant codecs. If it fails, the master volume  will be set to zero.
      */
-
     private synchronized void loadSoundSystem()
     {
         if (!this.loaded)

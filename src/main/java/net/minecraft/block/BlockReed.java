@@ -1,5 +1,6 @@
 package net.minecraft.block;
 
+import java.util.Random;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
@@ -14,8 +15,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class BlockReed extends Block
 {
@@ -75,9 +74,9 @@ public class BlockReed extends Block
         }
         else
         {
-            for (Object enumfacing : EnumFacing.Plane.HORIZONTAL)
+            for (EnumFacing enumfacing : EnumFacing.Plane.HORIZONTAL)
             {
-                if (worldIn.getBlockState(pos.offset((EnumFacing) enumfacing).down()).getBlock().getMaterial() == Material.water)
+                if (worldIn.getBlockState(pos.offset(enumfacing).down()).getBlock().getMaterial() == Material.water)
                 {
                     return true;
                 }
